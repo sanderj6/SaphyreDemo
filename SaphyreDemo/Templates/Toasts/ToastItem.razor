@@ -1,0 +1,91 @@
+﻿@inject IJSRuntime _jsRuntime
+@inject NavigationManager _navigationManager
+@implements IDisposable
+
+@using System.Timers
+@using Microsoft.Extensions.Logging
+@using SaphyreDemo.Data;
+
+<div class="toast show">
+    <div class="toast-header d-flex flex-nowrap justify-content-between @background">
+        <div class="fw-bold text-white">
+            @Item.Title
+        </div>
+        <button type="button" class="btn" aria-label="Dismiss" @onclick="@(_=> TimerTick(null, null))">
+            <i class="fa-solid fa-circle-xmark"></i>
+        </button>
+    </div>
+    <div class="toast-body">
+        @Item.Message
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public ToastMessage Item { get; set; }
+    [Parameter]
+    public bool IsLast { get; set; }
+    [Parameter]
+    public Action<ToastMessage> Dismiss { get; set; }
+
+    private string _class = string.Empty;
+    private Timer AutoDismissTimer { get; set; }
+    private Timer RefreshTimer { get; set; }
+    private string background { get; set; } = "bg-info";
+
+    protected override void OnInitialized()
+    {
+        // Refresh the toast every 1 sec
+        RefreshTimer = new Timer(1000) { AutoReset = true };
+        RefreshTimer.Elapsed += Refresh;
+        RefreshTimer.Start();
+
+        //// AutoDismiss after 10sec
+        AutoDismissTimer = new Timer { AutoReset = false, Interval = 6000 };
+        AutoDismissTimer.Elapsed += TimerTick;
+
+        switch (Item.Type)
+        {
+            case ToastType.Success:
+                background = "bg-success";
+                break;
+            case ToastType.Error:
+                background = "bg-danger";
+                break;
+            case ToastType.Warning:
+                background = "bg-warning";
+                break;
+            default:
+                background = "bg-info";
+                break;
+        }
+
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender) AutoDismissTimer?.Start();
+    }
+
+    private async void TimerTick(object src, ElapsedEventArgs args)
+    {
+        _class = "pop-out";
+        await InvokeAsync(StateHasChanged);
+        await Task.Delay(100);
+        Dismiss?.Invoke(Item);
+    }
+
+    private async void Refresh(object sender, ElapsedEventArgs args)
+    {
+        await InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose()
+    {
+        RefreshTimer.Stop();
+        RefreshTimer.Elapsed -= Refresh;
+        if (AutoDismissTimer == null) return;
+        AutoDismissTimer.Stop();
+        AutoDismissTimer.Elapsed -= TimerTick;
+    }
+}

@@ -9,7 +9,7 @@
     [Parameter] public bool IsValidation { get; set; } = true;
     [Parameter] public bool IsReadOnly { get; set; } = false;
     [Parameter] public Expression<Func<TItem>> FieldExpression { get; set; }
-    [Parameter] public EventCallback<TItem> ValueUpdated { get; set; }
+    [Parameter] public EventCallback<TItem> ValueChanged { get; set; }
 
     private string labelText;
 
@@ -35,6 +35,12 @@
             }
         }
         set => labelText = value;
+    }
+
+    public async Task OnInputValueChanged(TItem newValue)
+    {
+        InputValue = newValue;
+        await ValueChanged.InvokeAsync(newValue);
     }
 
     public int TextLength

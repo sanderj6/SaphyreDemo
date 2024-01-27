@@ -2,9 +2,11 @@
 @using MudBlazor
 @using SaphyreDemo.Pages.Admin.User.Components
 @using SaphyreDemo.Services.Modal
+@using SaphyreDemo.Services.Toast
 @using SaphyreDemo.Templates.Forms
 @inherits PageBase<UserManagement>
 @inject ModalService modalService
+@inject ToastService toastService
 
 <PageTitle>User Management</PageTitle>
 
@@ -13,62 +15,69 @@
     <button class="btn btn-primary mb-2" @onclick="AddUser">Add User</button>
 
     <div class="">
-        <EditForm Model="@Model">
+        <EditForm EditContext="@editContext"
+                  OnValidSubmit="HandleSubmit">
+            <DataAnnotationsValidator />
 
-            <div class="p-4">
+            <MudCard>
+                <div class="p-4">
+                    <div class="row">
+                        <div class="col-md-4 col-12">
+                            <Saphyre_Textbox FieldExpression="@(() => Model.FreeText)" />
+                        </div>
 
-                <div class="row">
-                    <div class="col-md-4 col-12">
-                        <Saphyre_Textbox FieldExpression="@(() => Model.FreeText)" />
+                        <div class="col-md-4 col-12">
+                            <MudTextField Label="Free text" @bind-Value="Model.FreeText" />
+                            <ValidationMessage For="() => Model.FreeText" />
+                        </div>
+
+                        <div class="col-md-4 col-12">
+                            <MudDatePicker Label="Date" @bind-Value="Model.Date" FullWidth />
+                            <ValidationMessage For="() => Model.Date" />
+                        </div>
                     </div>
 
-                    <div class="col-md-4 col-12">
-                        <MudTextField Label="Free text" @bind-Value="Model.FreeText" />
-                        <ValidationMessage For="() => Model.FreeText" />
+                    <div class="row">
+                        <div class="col-md-4 col-12">
+                            <Saphyre_Select FieldExpression="(() => Model.Currency)"
+                                            TItem="Currency"
+                                            Data="currencyList.Currencies"
+                                            ValueSelector="@((Currency c) => c.Code)" />
+                        </div>
+
+                        <div class="col-md-4 col-12">
+                            <MudTextField Label="Amount" @bind-Value="Model.Amount" />
+                            <ValidationMessage For="() => Model.Amount" />
+                        </div>
+
+                        <div class="col-md-4 col-12">
+                            <MudSelect Label="Single select dropdown" @bind-Value="Model.SingleSelect">
+                                <!-- Populate with MudSelectItems -->
+                            </MudSelect>
+                            <ValidationMessage For="() => Model.SingleSelect" />
+                        </div>
                     </div>
 
-                    <div class="col-md-4 col-12">
-                        <MudDatePicker Label="Date" @bind-Value="Model.Date" FullWidth />
-                        <ValidationMessage For="() => Model.Date" />
+                    <div class="row">
+                        <div class="col-md-4 col-12">
+                            <MudTextField Label="Percentage" @bind-Value="Model.Percentage" AdornmentText="%" />
+                            <ValidationMessage For="() => Model.Currency" />
+                        </div>
+
+                        <div class="col-md-4 col-12">
+                            <MudSelect Label="Multiselect dropdown" @bind-Value="Model.MultiSelect" MultiSelection>
+                                <!-- Populate with MudSelectItems -->
+                            </MudSelect>
+                            <ValidationMessage For="() => Model.Amount" />
+                        </div>
+
                     </div>
                 </div>
+            </MudCard>
 
-                <div class="row">
-                    <div class="col-md-4 col-12">
-                        <MudSelect Label="Currency" @bind-Value="Model.Currency">
-                            <!-- Populate with MudSelectItems -->
-                        </MudSelect>
-                        <ValidationMessage For="() => Model.Currency" />
-                    </div>
-
-                    <div class="col-md-4 col-12">
-                        <MudTextField Label="Amount" @bind-Value="Model.Amount" />
-                        <ValidationMessage For="() => Model.Amount" />
-                    </div>
-
-                    <div class="col-md-4 col-12">
-                        <MudSelect Label="Single select dropdown" @bind-Value="Model.SingleSelect">
-                            <!-- Populate with MudSelectItems -->
-                        </MudSelect>
-                        <ValidationMessage For="() => Model.SingleSelect" />
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-4 col-12">
-                        <MudTextField Label="Percentage" @bind-Value="Model.Percentage" AdornmentText="%" />
-                        <ValidationMessage For="() => Model.Currency" />
-                    </div>
-
-                    <div class="col-md-4 col-12">
-                        <MudSelect Label="Multiselect dropdown" @bind-Value="Model.MultiSelect" MultiSelection>
-                            <!-- Populate with MudSelectItems -->
-                        </MudSelect>
-                        <ValidationMessage For="() => Model.Amount" />
-                    </div>
-
-                </div>
-            </div>
+            <button type="submit" class="btn btn-primary">
+                Submit Order
+            </button>
 
         </EditForm>
     </div>
@@ -98,26 +107,16 @@
 </div>
 
 <button @onclick="ShowModal" class="btn btn-primary">SHOW MODAL</button>
+<button @onclick="ShowToast" class="btn btn-primary">SHOW TOAST</button>
 
 
 @code {
     private YourModel Model = new YourModel();
 
-    // Define your model class with properties that correspond to your form fields
-    public class YourModel
-    {
-        public string FreeText { get; set; }
-        public string SingleSelect { get; set; }
-        public decimal Amount { get; set; }
-        public string Currency { get; set; }
-        public IEnumerable<string> MultiSelect { get; set; }
-        public decimal Percentage { get; set; }
-        public DateTime? Date { get; set; }
-    }
-
-
     private UserModel UserModel { get; set; } = new();
     private EditContext editContext { get; set; }
+
+    CurrencyList currencyList = new CurrencyList();
 
     // Dummy list of users
     private List<UserModel> Users = new List<UserModel>();
@@ -157,6 +156,11 @@
 
             }
         });
+    }
+
+    private async Task ShowToast()
+    {
+        toastService.ShowMessage("This is a toast");
     }
 
 }

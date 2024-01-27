@@ -2,7 +2,9 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using MudBlazor.Services;
 using SaphyreDemo.Data;
+using SaphyreDemo.Services.Logging;
 using SaphyreDemo.Services.Modal;
+using SaphyreDemo.Services.Toast;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +14,14 @@ builder.Services.AddServerSideBlazor();
 
 builder.Services.AddMudServices();
 builder.Services.AddScoped<ModalService>();
+
+var toastService = new ToastService();
+builder.Services.AddSingleton(toastService);
+
+//builder.Services.AddLogging(builder =>
+//{
+//    builder.AddProvider(new SaphyreLoggingService(toastService));
+//});
 
 var app = builder.Build();
 

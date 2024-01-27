@@ -1,6 +1,7 @@
 ﻿@inherits LayoutComponentBase
 @using MudBlazor
 @using SaphyreDemo.Templates.Modals
+@using SaphyreDemo.Templates.Toasts
 
 <PageTitle>Saphyre Demo</PageTitle>
 
@@ -23,6 +24,7 @@
 <MudSnackbarProvider/>
 
 <Saphyre_Modal />
+<Saphyre_Toasts />
 
 @code {
     public string CompanyName { get; set; } = "saphyre";

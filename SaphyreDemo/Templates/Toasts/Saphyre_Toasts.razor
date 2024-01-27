@@ -1,0 +1,39 @@
+﻿@inject ToastService _toastService
+@using System.Collections.Specialized
+@using SaphyreDemo.Data
+@using SaphyreDemo.Services
+@using SaphyreDemo.Services.Toast
+
+<div class="toast-container position-fixed top-0 end-0 p-3" style="z-index:2222;">
+    <Virtualize Items="_toastService.Toasts" OverscanCount="5" Context="toast">
+        <ItemContent>
+            <ToastItem @key="toast.GetHashCode()" Item="toast" IsLast="@(_toastService.Toasts.Last().Equals(toast))" Dismiss="Dismiss"></ToastItem>
+        </ItemContent>
+        <Placeholder>
+            Loading...
+        </Placeholder>
+    </Virtualize>
+</div>
+
+@code {
+    protected override void OnInitialized()
+    {
+        _toastService.Toasts.CollectionChanged += ToastsOnCollectionChanged;
+    }
+
+    private void ToastsOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+    {
+        InvokeAsync(StateHasChanged);
+    }
+
+    private void Dismiss(ToastMessage model)
+    {
+        //model.Callback?.Invoke(model);
+        _toastService.Remove(model);
+    }
+
+    public void Dispose()
+    {
+        _toastService.Toasts.CollectionChanged -= ToastsOnCollectionChanged;
+    }
+}
