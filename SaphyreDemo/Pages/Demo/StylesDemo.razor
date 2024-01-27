@@ -1,0 +1,127 @@
+﻿@page "/styles"
+@using MudBlazor
+@using SaphyreDemo.Pages.Admin.User.Components
+@using SaphyreDemo.Services.Modal
+@inherits PageBase<StylesDemo>
+@inject ModalService modalService
+
+<PageTitle>User Management</PageTitle>
+
+<div class="container mt-3">
+    <h2>Style Demo</h2>
+
+    <div class="">
+        <EditForm Model="@Model">
+
+            <div class="p-4">
+
+                <div class="row">
+                    <div class="col-md-4 col-12">
+                        <MudTextField Label="Free text" @bind-Value="Model.FreeText" />
+                        <ValidationMessage For="() => Model.FreeText" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 col-12">
+                        <MudTextField Label="Free text" @bind-Value="Model.FreeText" />
+                        <ValidationMessage For="() => Model.FreeText" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 col-12">
+                        <MudDatePicker Label="Date" @bind-Value="Model.Date" FullWidth />
+                        <ValidationMessage For="() => Model.Date" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 col-12">
+                        <MudSelect Label="Currency" @bind-Value="Model.Currency">
+                            <!-- Populate with MudSelectItems -->
+                        </MudSelect>
+                        <ValidationMessage For="() => Model.Currency" />
+                    </div>
+
+                    <div class="col-md-4 col-12">
+                        <MudTextField Label="Amount" @bind-Value="Model.Amount" />
+                        <ValidationMessage For="() => Model.Amount" />
+                    </div>
+
+                    <div class="col-md-4 col-12">
+                        <MudSelect Label="Single select dropdown" @bind-Value="Model.SingleSelect">
+                            <!-- Populate with MudSelectItems -->
+                        </MudSelect>
+                        <ValidationMessage For="() => Model.SingleSelect" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 col-12">
+                        <MudTextField Label="Percentage" @bind-Value="Model.Percentage" AdornmentText="%" />
+                        <ValidationMessage For="() => Model.Currency" />
+                    </div>
+
+                    <div class="col-md-4 col-12">
+                        <MudSelect Label="Multiselect dropdown" @bind-Value="Model.MultiSelect" MultiSelection>
+                            <!-- Populate with MudSelectItems -->
+                        </MudSelect>
+                        <ValidationMessage For="() => Model.Amount" />
+                    </div>
+
+                </div>
+            </div>
+
+        </EditForm>
+    </div>
+
+</div>
+
+<button @onclick="ShowModal" class="btn btn-primary">SHOW MODAL</button>
+
+
+@code {
+    private YourModel Model = new YourModel();
+
+    // Define your model class with properties that correspond to your form fields
+    public class YourModel
+    {
+        public string FreeText { get; set; }
+        public string SingleSelect { get; set; }
+        public decimal Amount { get; set; }
+        public string Currency { get; set; }
+        public IEnumerable<string> MultiSelect { get; set; }
+        public decimal Percentage { get; set; }
+        public DateTime? Date { get; set; }
+    }
+
+    private UserModel UserModel { get; set; } = new();
+    private EditContext editContext { get; set; }
+
+    // Dummy list of users
+    private List<UserModel> Users = new List<UserModel>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Model ??= new();
+        editContext = new EditContext(Model);
+    }
+
+    public async Task HandleSubmit()
+    {
+
+    }
+
+    private async Task ShowModal()
+    {
+        modalService.Show<UserModel, bool>("Success!", "modal-md", typeof(UserSuccessModal), UserModel, ModalService.ModalOperation.Add, result =>
+        {
+            if (result)
+            {
+
+            }
+        });
+    }
+
+}

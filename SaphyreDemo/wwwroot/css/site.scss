@@ -1,54 +1,151 @@
 @import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
 // Define base colors for each company
-$company1-base-color: #123456;
-$company2-base-color: #789abc;
-$company3-base-color: #def012;
+$saphyre-base-color: #123456;
+$bnp-base-color: #789abc;
+$chase-base-color: #def012;
 
-// Define light and dark theme variations
-$light-theme-background: #ffffff;
-$dark-theme-background: #000000;
+// Saphyre Colors
+$saphyre-dark-blue: #0C4564;
+/*$saphyre-black: #010513;*/
+$saphyre-black: #211E1E;
+$saphyre-teal: #55C0C6;
+$saphyre-button: #00B7DF;
+$saphyre-submit-button: #0C5394;
 
-// Company 1 Themes
-.company1-light {
-    background-color: $light-theme-background;
-    color: $company1-base-color;
+// BNP Paribas Colors
+$bnp-dark-blue: #117ACA;
+$bnp-black: #211E1E;
+$bnp-light-gray: #F0F0F0;
+
+// Chase Bank Colors
+$chase-navy-blue: #117ACA;
+$chase-black: #211E1E;
+$chase-light-gray: #F0F0F0;
+
+// Common Colors for Dark and Light Modes
+$dark-background: #010513;
+$dark-text: #FFFFFF;
+$light-background: #FFFFFF;
+$light-text: #000000;
+
+@mixin button-style($bg-color, $text-color: $light-text) {
+    background-color: $bg-color;
+    color: $text-color;
+    // Add other button styles like padding, border, etc.
 }
 
-.company1-dark {
-    background-color: $dark-theme-background;
-    color: $company1-base-color;
+.btn-primary {
+    @include button-style($saphyre-button);
 }
 
-// Company 2 Themes
-.company2-light {
-    background-color: $light-theme-background;
-    color: $company2-base-color;
+form {
+    background: $light-background;
 }
 
-.company2-dark {
-    background-color: $dark-theme-background;
-    color: $company2-base-color;
+// Saphyre Theme
+.saphyre-light {
+    //background-color: $light-background;
+    background: fixed linear-gradient(220deg,#0caedd 10%,#183a6b 90%);
+    color: $saphyre-dark-blue;
+
+    .btn-primary {
+        background-color: $saphyre-teal;
+        border: 1px solid $saphyre-teal;
+        color: $dark-text;
+    }
 }
 
-// Company 3 Themes
-.company3-light {
-    background-color: $light-theme-background;
-    color: $company3-base-color;
+.saphyre-dark {
+    //background-color: $saphyre-black;
+    background: fixed linear-gradient(220deg,#0caedd 10%,#183a6b 90%);
+    //background-color: fixed linear-gradient(220deg,#0caedd 10%,#183a6b 90%);
+    color: $dark-text;
+
+    .btn-primary {
+        background-color: $saphyre-black;
+        border: 1px solid $saphyre-teal;
+        color: $dark-text;
+    }
+
+    .btn-primary:hover {
+        background-color: $saphyre-teal;
+        border: 1px solid $saphyre-teal;
+        color: $dark-text;
+    }
 }
 
-.company3-dark {
-    background-color: $dark-theme-background;
-    color: $company3-base-color;
+// BNP Paribas Theme
+.bnp-light {
+    background-color: $bnp-light-gray;
+    color: $bnp-dark-blue;
+
+    .button {
+        @include button-style($bnp-dark-blue);
+    }
+}
+
+.bnp-dark {
+    background-color: $bnp-black;
+    color: $dark-text;
+
+    .button {
+        @include button-style($bnp-dark-blue);
+    }
+}
+
+// Chase Theme
+.chase-light {
+    background-color: $chase-light-gray;
+    color: $chase-navy-blue;
+
+    .button {
+        @include button-style($chase-navy-blue);
+    }
+}
+
+.chase-dark {
+    background-color: $chase-black;
+    color: $dark-text;
+
+    .button {
+        @include button-style($chase-navy-blue);
+    }
 }
 
 
-html, body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+// Base styles
+
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 20px;
+    margin: 0;
+    padding: 0;
+}
+
+.header, .footer {
+    padding: 1rem;
+    text-align: center;
+}
+
+.content {
+    padding: 1rem;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+
+    th, td {
+        border: 1px solid $light-text;
+        padding: 0.5rem;
+        text-align: left;
+    }
 }
 
 
-
+// Default Styles
 h1:focus {
     outline: none;
 }
@@ -91,12 +188,12 @@ a, .btn-link {
     z-index: 1000;
 }
 
-    #blazor-error-ui .dismiss {
-        cursor: pointer;
-        position: absolute;
-        right: 0.75rem;
-        top: 0.5rem;
-    }
+#blazor-error-ui .dismiss {
+    cursor: pointer;
+    position: absolute;
+    right: 0.75rem;
+    top: 0.5rem;
+}
 
 .blazor-error-boundary {
     background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTYiIGhlaWdodD0iNDkiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIG92ZXJmbG93PSJoaWRkZW4iPjxkZWZzPjxjbGlwUGF0aCBpZD0iY2xpcDAiPjxyZWN0IHg9IjIzNSIgeT0iNTEiIHdpZHRoPSI1NiIgaGVpZ2h0PSI0OSIvPjwvY2xpcFBhdGg+PC9kZWZzPjxnIGNsaXAtcGF0aD0idXJsKCNjbGlwMCkiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0yMzUgLTUxKSI+PHBhdGggZD0iTTI2My41MDYgNTFDMjY0LjcxNyA1MSAyNjUuODEzIDUxLjQ4MzcgMjY2LjYwNiA1Mi4yNjU4TDI2Ny4wNTIgNTIuNzk4NyAyNjcuNTM5IDUzLjYyODMgMjkwLjE4NSA5Mi4xODMxIDI5MC41NDUgOTIuNzk1IDI5MC42NTYgOTIuOTk2QzI5MC44NzcgOTMuNTEzIDI5MSA5NC4wODE1IDI5MSA5NC42NzgyIDI5MSA5Ny4wNjUxIDI4OS4wMzggOTkgMjg2LjYxNyA5OUwyNDAuMzgzIDk5QzIzNy45NjMgOTkgMjM2IDk3LjA2NTEgMjM2IDk0LjY3ODIgMjM2IDk0LjM3OTkgMjM2LjAzMSA5NC4wODg2IDIzNi4wODkgOTMuODA3MkwyMzYuMzM4IDkzLjAxNjIgMjM2Ljg1OCA5Mi4xMzE0IDI1OS40NzMgNTMuNjI5NCAyNTkuOTYxIDUyLjc5ODUgMjYwLjQwNyA1Mi4yNjU4QzI2MS4yIDUxLjQ4MzcgMjYyLjI5NiA1MSAyNjMuNTA2IDUxWk0yNjMuNTg2IDY2LjAxODNDMjYwLjczNyA2Ni4wMTgzIDI1OS4zMTMgNjcuMTI0NSAyNTkuMzEzIDY5LjMzNyAyNTkuMzEzIDY5LjYxMDIgMjU5LjMzMiA2OS44NjA4IDI1OS4zNzEgNzAuMDg4N0wyNjEuNzk1IDg0LjAxNjEgMjY1LjM4IDg0LjAxNjEgMjY3LjgyMSA2OS43NDc1QzI2Ny44NiA2OS43MzA5IDI2Ny44NzkgNjkuNTg3NyAyNjcuODc5IDY5LjMxNzkgMjY3Ljg3OSA2Ny4xMTgyIDI2Ni40NDggNjYuMDE4MyAyNjMuNTg2IDY2LjAxODNaTTI2My41NzYgODYuMDU0N0MyNjEuMDQ5IDg2LjA1NDcgMjU5Ljc4NiA4Ny4zMDA1IDI1OS43ODYgODkuNzkyMSAyNTkuNzg2IDkyLjI4MzcgMjYxLjA0OSA5My41Mjk1IDI2My41NzYgOTMuNTI5NSAyNjYuMTE2IDkzLjUyOTUgMjY3LjM4NyA5Mi4yODM3IDI2Ny4zODcgODkuNzkyMSAyNjcuMzg3IDg3LjMwMDUgMjY2LjExNiA4Ni4wNTQ3IDI2My41NzYgODYuMDU0N1oiIGZpbGw9IiNGRkU1MDAiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPjwvZz48L3N2Zz4=) no-repeat 1rem/1.8rem, #b32121;
@@ -104,6 +201,117 @@ a, .btn-link {
     color: white;
 }
 
-    .blazor-error-boundary::after {
-        content: "An error has occurred."
+.blazor-error-boundary::after {
+    content: "An error has occurred."
+}
+
+
+// Modals
+.saphyre-modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: none; /* modal hidden by default */
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(2px);
+    z-index: 1000; /* Ensure modal is on top of other content */
+}
+
+.saphyre-modal-container.active {
+    display: flex; /* Display modal when active */
+}
+
+.saphyre-modal-dialog {
+    background: white;
+    border-radius: 4px;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3), 0px 4px 8px 3px rgba(0, 0, 0, 0.15);
+    width: 50%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.saphyre-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.saphyre-modal-title {
+    font-family: "Roboto";
+    font-weight: 700;
+    font-size: 16px;
+    color: #132048;
+    margin: 0;
+}
+
+.saphyre-modal-close {
+    cursor: pointer;
+    border: none;
+    background: none;
+}
+
+.saphyre-modal-close:hover {
+    opacity: 0.7;
+}
+
+.saphyre-modal-body {
+
+}
+
+.saphyre-modal-container.active .saphyre-modal-dialog {
+    animation: slideUpFadeIn 0.25s ease-out;
+}
+
+@keyframes slideUpFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
     }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .saphyre-modal-dialog {
+        width: 80%;
+    }
+}
+
+@media (max-width: 480px) {
+    .saphyre-modal-dialog {
+        width: 95%; 
+        padding: 10px; 
+    }
+}
+
+@media (min-width: 476px) {
+    .modal-dialog {
+        max-width: 900px;
+        margin: 1.75rem auto;
+    }
+
+    .modal-sm {
+        max-width: 300px !important;
+    }
+}
+
+@media (min-width: 750px) {
+    .modal-lg,
+    .modal-xl {
+        max-width: 800px !important;
+    }
+}
+
+@media (min-width: 900px) {
+    .modal-xl {
+        max-width: 1140px !important;
+    }
+}

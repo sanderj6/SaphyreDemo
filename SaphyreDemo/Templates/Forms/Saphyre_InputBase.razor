@@ -1,0 +1,54 @@
+﻿@typeparam TItem
+@using System.Linq.Expressions
+@using SaphyreDemo.Helpers.Extensions
+
+@code {
+    [Parameter] public TItem InputValue { get; set; }
+    [Parameter] public string CSSClass { get; set; }
+    [Parameter] public string ControlCSSClass { get; set; } = "saphyre-textbox";
+    [Parameter] public bool IsValidation { get; set; } = true;
+    [Parameter] public bool IsReadOnly { get; set; } = false;
+    [Parameter] public Expression<Func<TItem>> FieldExpression { get; set; }
+    [Parameter] public EventCallback<TItem> ValueUpdated { get; set; }
+
+    private string labelText;
+
+    [Parameter]
+    public string LabelText
+    {
+        get
+        {
+            if (IsValidation)
+            {
+                if (string.IsNullOrEmpty(labelText) && FieldExpression != null)
+                {
+                    var memberExpression = FieldExpression.Body as MemberExpression;
+                    var propName = memberExpression?.Member.Name;
+                    labelText = StringExtensions.FromCamelCase(propName);
+                }
+
+                return labelText;
+            }
+            else
+            {
+                return labelText;
+            }
+        }
+        set => labelText = value;
+    }
+
+    public int TextLength
+    {
+        get
+        {
+            if (InputValue == null) return 0;
+
+            if (InputValue is string strVal)
+            {
+                return strVal.Length;
+            }
+
+            return InputValue.ToString().Length;
+        }
+    }
+}

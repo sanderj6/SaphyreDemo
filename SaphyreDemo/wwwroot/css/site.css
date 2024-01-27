@@ -1,36 +1,99 @@
 ﻿@import url("open-iconic/font/css/open-iconic-bootstrap.min.css");
-.company1-light {
-  background-color: #ffffff;
-  color: #123456;
+/*$saphyre-black: #010513;*/
+.btn-primary {
+  background-color: #00B7DF;
+  color: #000000;
 }
 
-.company1-dark {
-  background-color: #000000;
-  color: #123456;
+form {
+  background: #FFFFFF;
 }
 
-.company2-light {
-  background-color: #ffffff;
-  color: #789abc;
+.saphyre-light {
+  background: fixed linear-gradient(220deg, #0caedd 10%, #183a6b 90%);
+  color: #0C4564;
+}
+.saphyre-light .btn-primary {
+  background-color: #55C0C6;
+  border: 1px solid #55C0C6;
+  color: #FFFFFF;
 }
 
-.company2-dark {
-  background-color: #000000;
-  color: #789abc;
+.saphyre-dark {
+  background: fixed linear-gradient(220deg, #0caedd 10%, #183a6b 90%);
+  color: #FFFFFF;
+}
+.saphyre-dark .btn-primary {
+  background-color: #211E1E;
+  border: 1px solid #55C0C6;
+  color: #FFFFFF;
+}
+.saphyre-dark .btn-primary:hover {
+  background-color: #55C0C6;
+  border: 1px solid #55C0C6;
+  color: #FFFFFF;
 }
 
-.company3-light {
-  background-color: #ffffff;
-  color: #def012;
+.bnp-light {
+  background-color: #F0F0F0;
+  color: #117ACA;
+}
+.bnp-light .button {
+  background-color: #117ACA;
+  color: #000000;
 }
 
-.company3-dark {
-  background-color: #000000;
-  color: #def012;
+.bnp-dark {
+  background-color: #211E1E;
+  color: #FFFFFF;
+}
+.bnp-dark .button {
+  background-color: #117ACA;
+  color: #000000;
 }
 
-html, body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+.chase-light {
+  background-color: #F0F0F0;
+  color: #117ACA;
+}
+.chase-light .button {
+  background-color: #117ACA;
+  color: #000000;
+}
+
+.chase-dark {
+  background-color: #211E1E;
+  color: #FFFFFF;
+}
+.chase-dark .button {
+  background-color: #117ACA;
+  color: #000000;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  line-height: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+.header, .footer {
+  padding: 1rem;
+  text-align: center;
+}
+
+.content {
+  padding: 1rem;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.table th, .table td {
+  border: 1px solid #000000;
+  padding: 0.5rem;
+  text-align: left;
 }
 
 h1:focus {
@@ -90,4 +153,102 @@ a, .btn-link {
 
 .blazor-error-boundary::after {
   content: "An error has occurred.";
+}
+
+.saphyre-modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: none; /* modal hidden by default */
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(2px);
+  z-index: 1000; /* Ensure modal is on top of other content */
+}
+
+.saphyre-modal-container.active {
+  display: flex; /* Display modal when active */
+}
+
+.saphyre-modal-dialog {
+  background: white;
+  border-radius: 4px;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3), 0px 4px 8px 3px rgba(0, 0, 0, 0.15);
+  width: 50%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.saphyre-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.saphyre-modal-title {
+  font-family: "Roboto";
+  font-weight: 700;
+  font-size: 16px;
+  color: #132048;
+  margin: 0;
+}
+
+.saphyre-modal-close {
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+.saphyre-modal-close:hover {
+  opacity: 0.7;
+}
+
+.saphyre-modal-container.active .saphyre-modal-dialog {
+  animation: slideUpFadeIn 0.25s ease-out;
+}
+
+@keyframes slideUpFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media (max-width: 768px) {
+  .saphyre-modal-dialog {
+    width: 80%;
+  }
+}
+@media (max-width: 480px) {
+  .saphyre-modal-dialog {
+    width: 95%;
+    padding: 10px;
+  }
+}
+@media (min-width: 476px) {
+  .modal-dialog {
+    max-width: 900px;
+    margin: 1.75rem auto;
+  }
+  .modal-sm {
+    max-width: 300px !important;
+  }
+}
+@media (min-width: 750px) {
+  .modal-lg,
+  .modal-xl {
+    max-width: 800px !important;
+  }
+}
+@media (min-width: 900px) {
+  .modal-xl {
+    max-width: 1140px !important;
+  }
 }

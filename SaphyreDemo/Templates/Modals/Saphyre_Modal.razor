@@ -1,0 +1,18 @@
+﻿@using SaphyreDemo.Templates.Modal.SaphyreDemo.Templates.Modals
+@inherits ModalBase
+
+<div class="saphyre-modal-container @visibleClass" @onclick="CloseModal">
+    <div class="saphyre-modal-dialog @Class" role="dialog" aria-labelledby="ModalTitle">
+        <div class="saphyre-modal-content bg-white border-0 rounded-0" @onclick:stopPropagation="true">
+
+            <div class="saphyre-modal-header saphyre-pt-60">
+                <div id="ModalTitle" class="saphyre-modal-title mx-auto">@Title</div>
+            </div>
+
+            <div class="saphyre-modal-body saphyre-pb-60 offset-md-3 col-md-6 col-12">
+                @Content
+            </div>
+
+        </div>
+    </div>
+</div>

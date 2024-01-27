@@ -1,0 +1,44 @@
+﻿@using static SaphyreDemo.Services.Modal.ModalService
+
+<div>
+
+    <div class="row text-center justify-content-center mt-4 fw-bold">
+        @Model.FirstName @Model.LastName
+    </div>
+
+    <div class="row text-center justify-content-center mt-2">
+        has been successfully @GetOperationText(CRUDOperation) Users.
+    </div>
+
+    <div class="row mt-4 justify-content-center">
+        <div class="">
+            <button @onclick="(() => {OnOptionClicked(true);})" class="btn w-100 uppercase p-1 btn-primary confirmModalButton">OK</button>
+        </div>
+    </div>
+
+</div>
+
+@code {
+    [Parameter]
+    public UserModel Model { get; set; }
+
+    [Parameter]
+    public ModalOperation CRUDOperation { get; set; } // "added", "edited", "deleted"
+
+    [Parameter]
+    public Action<bool> Callback { get; set; }
+
+    private void OnOptionClicked(bool isDelete)
+    {
+        Callback.Invoke(isDelete);
+    }
+
+    private string GetOperationText(ModalOperation operation) => operation switch
+    {
+        ModalOperation.Add => "added to",
+        ModalOperation.Update => "updated in",
+        ModalOperation.Delete => "deleted from",
+        _ => throw new NotImplementedException()
+    };
+
+}

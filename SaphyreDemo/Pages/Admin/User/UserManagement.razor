@@ -1,0 +1,162 @@
+﻿@page "/"
+@using MudBlazor
+@using SaphyreDemo.Pages.Admin.User.Components
+@using SaphyreDemo.Services.Modal
+@using SaphyreDemo.Templates.Forms
+@inherits PageBase<UserManagement>
+@inject ModalService modalService
+
+<PageTitle>User Management</PageTitle>
+
+<div class="container mt-3">
+    <h2>User Management</h2>
+    <button class="btn btn-primary mb-2" @onclick="AddUser">Add User</button>
+
+    <div class="">
+        <EditForm Model="@Model">
+
+            <div class="p-4">
+
+                <div class="row">
+                    <div class="col-md-4 col-12">
+                        <Saphyre_Textbox FieldExpression="@(() => Model.FreeText)" />
+                    </div>
+
+                    <div class="col-md-4 col-12">
+                        <MudTextField Label="Free text" @bind-Value="Model.FreeText" />
+                        <ValidationMessage For="() => Model.FreeText" />
+                    </div>
+
+                    <div class="col-md-4 col-12">
+                        <MudDatePicker Label="Date" @bind-Value="Model.Date" FullWidth />
+                        <ValidationMessage For="() => Model.Date" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 col-12">
+                        <MudSelect Label="Currency" @bind-Value="Model.Currency">
+                            <!-- Populate with MudSelectItems -->
+                        </MudSelect>
+                        <ValidationMessage For="() => Model.Currency" />
+                    </div>
+
+                    <div class="col-md-4 col-12">
+                        <MudTextField Label="Amount" @bind-Value="Model.Amount" />
+                        <ValidationMessage For="() => Model.Amount" />
+                    </div>
+
+                    <div class="col-md-4 col-12">
+                        <MudSelect Label="Single select dropdown" @bind-Value="Model.SingleSelect">
+                            <!-- Populate with MudSelectItems -->
+                        </MudSelect>
+                        <ValidationMessage For="() => Model.SingleSelect" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 col-12">
+                        <MudTextField Label="Percentage" @bind-Value="Model.Percentage" AdornmentText="%" />
+                        <ValidationMessage For="() => Model.Currency" />
+                    </div>
+
+                    <div class="col-md-4 col-12">
+                        <MudSelect Label="Multiselect dropdown" @bind-Value="Model.MultiSelect" MultiSelection>
+                            <!-- Populate with MudSelectItems -->
+                        </MudSelect>
+                        <ValidationMessage For="() => Model.Amount" />
+                    </div>
+
+                </div>
+            </div>
+
+        </EditForm>
+    </div>
+
+    <table class="table table-hover">
+        <thead class="thead-light">
+            <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Users)
+            {
+                <tr>
+                    <td>@user.Username</td>
+                    <td>@user.Email</td>
+                    <td>
+                        <button class="btn btn-secondary btn-sm" @onclick="() => EditUser(user)">Edit</button>
+                        <button class="btn btn-danger btn-sm" @onclick="() => DeleteUser(user)">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<button @onclick="ShowModal" class="btn btn-primary">SHOW MODAL</button>
+
+
+@code {
+    private YourModel Model = new YourModel();
+
+    // Define your model class with properties that correspond to your form fields
+    public class YourModel
+    {
+        public string FreeText { get; set; }
+        public string SingleSelect { get; set; }
+        public decimal Amount { get; set; }
+        public string Currency { get; set; }
+        public IEnumerable<string> MultiSelect { get; set; }
+        public decimal Percentage { get; set; }
+        public DateTime? Date { get; set; }
+    }
+
+
+    private UserModel UserModel { get; set; } = new();
+    private EditContext editContext { get; set; }
+
+    // Dummy list of users
+    private List<UserModel> Users = new List<UserModel>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Model ??= new();
+        editContext = new EditContext(Model);
+    }
+
+    public async Task HandleSubmit()
+    {
+
+    }
+
+    private void AddUser()
+    {
+        // Logic to add a user
+    }
+
+    private void EditUser(UserModel user)
+    {
+        // Logic to edit a user
+    }
+
+    private void DeleteUser(UserModel user)
+    {
+        // Logic to delete a user
+    }
+
+    private async Task ShowModal()
+    {
+        modalService.Show<UserModel, bool>("Success!", "modal-md", typeof(UserSuccessModal), UserModel, ModalService.ModalOperation.Add, result =>
+        {
+            if (result)
+            {
+
+            }
+        });
+    }
+
+}

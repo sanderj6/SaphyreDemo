@@ -1,21 +1,39 @@
 ﻿@inherits LayoutComponentBase
-@using Telerik.Blazor.Components
+@using MudBlazor
+@using SaphyreDemo.Templates.Modals
 
-<PageTitle>SaphyreDemo</PageTitle>
+<PageTitle>Saphyre Demo</PageTitle>
 
-<TelerikRootComponent>
-    <div class="page">
+<div class="page @ColorScheme">
 
-        @*       <div class="sidebar">
-        <NavMenu />
-        </div> *@
+    <main>
+        <Header Callback="OnColorSchemeChanged" />
 
-        <main>
-            <Header />
-
-            <article class="content px-4">
+        <article class="content px-4">
+            <div class="container">
                 @Body
-            </article>
-        </main>
-    </div>
-</TelerikRootComponent>
+            </div>
+        </article>
+    </main>
+
+</div>
+
+<MudThemeProvider/>
+<MudDialogProvider/>
+<MudSnackbarProvider/>
+
+<Saphyre_Modal />
+
+@code {
+    public string CompanyName { get; set; } = "saphyre";
+    public string LightMode => IsLightMode ? "light" : "dark";
+    public string ColorScheme => $"{CompanyName}-{LightMode}";
+    public bool IsLightMode { get; set; }
+
+    private void OnColorSchemeChanged(string company, bool isLightMode)
+    {
+        CompanyName = company;
+        IsLightMode = isLightMode;
+        InvokeAsync(StateHasChanged);
+    }
+}
