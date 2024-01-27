@@ -2,11 +2,15 @@
 @using MudBlazor
 @using SaphyreDemo.Pages.Admin.User.Components
 @using SaphyreDemo.Services.Modal
+@using SaphyreDemo.Services.Order
 @using SaphyreDemo.Services.Toast
 @using SaphyreDemo.Templates.Forms
+@using SaphyreDemo.Templates.Tables
 @inherits PageBase<UserManagement>
 @inject ModalService modalService
 @inject ToastService toastService
+@inject IOrderService orderService
+@inject DummyOrderService dummyOrderService
 
 <PageTitle>User Management</PageTitle>
 
@@ -16,7 +20,7 @@
         <div class="d-flex justify-content-between">
             <h2>User Management</h2>
 
-            <button class="btn btn-primary mb-2" @onclick="AddUser">Add User</button>
+            <button class="btn btn-primary mb-2" @onclick="AddOrder">Add Order</button>
         </div>
     </div>
 
@@ -91,54 +95,75 @@
         </EditForm>
     </div>
 
-</div>
+    <div class="form-container">
+        <Saphyre_Table TItem="OrderDescription"
+                       DataService="@GetFilteredData">
 
-<style>
-    .form-container {
-        max-width: 800px;
-        margin: 5px auto;
-        padding: 20px;
-        background-color: #f9f9f9;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        border-radius: 8px;
-    }
+            <HeaderTemplate>
+                <MudTh>Description</MudTh>
+                <MudTh>Amount</MudTh>
+                <MudTh>TaxPercentage</MudTh>
+                <MudTh>Date</MudTh>
+            </HeaderTemplate>
 
-    .form-container-header {
-        max-width: 800px;
-        margin: 0px auto;
-    }
+            <RowTemplate>
+                <MudTd DataLabel="Description">@context.Description</MudTd>
+                    <MudTd DataLabel="Amount">@context.Amount</MudTd>
+                    <MudTd DataLabel="TaxPercentage">@context.TaxPercentage</MudTd>
+                    <MudTd DataLabel="Date">@context.Date</MudTd>
+                </RowTemplate>
 
-    .form-group {
-        background-color: #f9f9f9;
-    }
+            </Saphyre_Table>
+        </div>
 
-    .form-input {
-        width: 100%;
-        padding: 8px;
-        margin-top: 5px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        box-sizing: border-box;
-    }
+    </div>
 
-    .form-button {
-        width: 100%;
-        padding: 10px;
-        border: none;
-        border-radius: 4px;
-        background-color: #0056b3;
-        color: white;
-        font-size: 16px;
-        cursor: pointer;
-    }
-
-        .form-button:hover {
-            background-color: #004494;
+    <style>
+        .form-container {
+            max-width: 800px;
+            margin: 5px auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
         }
-</style>
+
+        .form-container-header {
+            max-width: 800px;
+            margin: 0px auto;
+        }
+
+        .form-group {
+            background-color: #f9f9f9;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .form-button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #0056b3;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+            .form-button:hover {
+                background-color: #004494;
+            }
+    </style>
 
 
-@code {
+    @code {
     private YourModel Model = new YourModel();
 
     private UserModel UserModel { get; set; } = new();
@@ -148,6 +173,7 @@
 
     // Dummy list of users
     private List<UserModel> Users = new List<UserModel>();
+    public IEnumerable<OrderDescription> Orders { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
@@ -155,24 +181,44 @@
         editContext = new EditContext(Model);
     }
 
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            Orders = dummyOrderService.GetAllOrders();
+        }
+    }
+
+    private RenderFragment HeaderContent => builder =>
+    {
+        builder.OpenComponent<MudTh>(0);
+        builder.AddContent(1, "Order ID");
+        builder.CloseComponent();
+        // Add more headers as needed
+    };
+
+    private RenderFragment<OrderDescription> RowContent => context => builder =>
+    {
+        builder.OpenComponent<MudTd>(0);
+        builder.AddContent(1, context.Description);
+        builder.CloseComponent();
+        // Add more cells as needed
+    };
+
     public async Task HandleSubmit()
     {
 
     }
 
-    private void AddUser()
+    public void AddOrder()
     {
-        // Logic to add a user
+
     }
 
-    private void EditUser(UserModel user)
+    private async Task<IEnumerable<OrderDescription>> GetFilteredData(string searchString)
     {
-        // Logic to edit a user
-    }
-
-    private void DeleteUser(UserModel user)
-    {
-        // Logic to delete a user
+        // Assume GetFilteredOrdersAsync handles the filtering based on searchString
+        return await dummyOrderService.GetFilteredOrders(searchString);
     }
 
     private async Task ShowModal()

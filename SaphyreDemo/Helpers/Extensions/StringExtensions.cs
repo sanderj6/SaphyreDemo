@@ -15,5 +15,36 @@ namespace SaphyreDemo.Helpers.Extensions
                 @"(\p{Ll})(\P{Ll})", "$1 $2");
         }
 
+        public static async Task<List<T>> SearchModelForValue<T>(List<T> records, string searchTerm)
+        {
+            if (string.IsNullOrWhiteSpace(searchTerm))
+            {
+                return records;
+            }
+
+            List<T> filteredRecords = new();
+            searchTerm = searchTerm.ToUpper().Trim();
+            var properties = typeof(T).GetProperties();
+
+            foreach (var record in records)
+            {
+                foreach (var property in properties)
+                {
+                    var propValue = property.GetValue(record);
+                    if (propValue == null) continue;
+
+                    var value = propValue.ToString();
+
+                    if (value.ToUpper().Contains(searchTerm))
+                    {
+                        filteredRecords.Add(record);
+                        break;
+                    }
+                }
+            }
+
+            return filteredRecords;
+        }
+
     }
 }

@@ -4,6 +4,7 @@ using MudBlazor.Services;
 using SaphyreDemo.Data;
 using SaphyreDemo.Services.Logging;
 using SaphyreDemo.Services.Modal;
+using SaphyreDemo.Services.Order;
 using SaphyreDemo.Services.Toast;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,9 +15,11 @@ builder.Services.AddServerSideBlazor();
 
 builder.Services.AddMudServices();
 builder.Services.AddScoped<ModalService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
 
 var toastService = new ToastService();
 builder.Services.AddSingleton(toastService);
+builder.Services.AddSingleton<DummyOrderService>();
 
 //builder.Services.AddLogging(builder =>
 //{

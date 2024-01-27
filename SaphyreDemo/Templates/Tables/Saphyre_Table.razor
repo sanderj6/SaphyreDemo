@@ -1,0 +1,54 @@
+﻿@typeparam TItem
+@using MudBlazor
+
+<MudTextField @bind-Value="searchString" Placeholder="Search..." OnInternalInputChanged="OnSearchChanged" />
+
+<MudTable @ref="_table" Items="@pagedItems" ServerData="@LoadServerData" Virtualize="true" RowsPerPage="3">
+    <HeaderContent>
+        @HeaderTemplate
+    </HeaderContent>
+    <RowTemplate>
+        @RowTemplate(context)
+    </RowTemplate>
+    <PagerContent>
+        <MudPagination SelectedChanged="PageChanged" Count="@((_table.GetFilteredItemsCount() + _table.RowsPerPage - 1) / _table.RowsPerPage)" Class="pa-4" />
+    </PagerContent>
+</MudTable>
+
+@code {
+    [Parameter] public Func<string, Task<IEnumerable<TItem>>> DataService { get; set; }
+    [Parameter] public RenderFragment HeaderTemplate { get; set; }
+    [Parameter] public RenderFragment<TItem> RowTemplate { get; set; }
+
+    private IEnumerable<TItem> pagedItems;
+    private string searchString = "";
+    private MudTable<TItem> _table;
+
+    private async Task<TableData<TItem>> LoadServerData(TableState state)
+    {
+        var allItems = await DataService(searchString);
+        var totalItems = allItems.Count();
+        var itemsPerPage = state.PageSize;
+        var currentPage = state.Page;
+
+        // Calculate the range of items to display on the current page
+        var pagedItems = allItems.Skip(currentPage * itemsPerPage).Take(itemsPerPage);
+
+        return new TableData<TItem>
+            {
+                Items = pagedItems,
+                TotalItems = totalItems
+            };
+    }
+
+    private void OnSearchChanged(ChangeEventArgs e)
+    {
+        searchString = e.Value.ToString();
+        _table.ReloadServerData();
+    }
+
+    private void PageChanged(int i)
+    {
+        _table.NavigateTo(i - 1);
+    }
+}
