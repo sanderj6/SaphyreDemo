@@ -12,6 +12,6 @@ namespace SaphyreDemo.Data.Models
         public string Currency { get; set; }
         public IEnumerable<string> MultiSelect { get; set; }
         public decimal Percentage { get; set; }
-        public DateTime? Date { get; set; }
+        public DateTime Date { get; set; } = DateTime.Now;
     }
 }

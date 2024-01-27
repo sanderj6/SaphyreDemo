@@ -31,7 +31,9 @@
         color: #797979;
         background-color: #FFFFFF;
         height: 32px;
-        width: 300px;
+        /*  width: 100% !important;
+            max-width: 300px !important;
+            min-width: 100px !important; */
         border: 1px solid #DDDDDD;
         border-radius: 4px;
         padding: 10px 8px !important;
@@ -49,6 +51,11 @@
         color: #797979;
         padding-left: 8px !important;
         padding-right: 8px !important;
+    }
+
+    .mud-input-control {
+        height: 4.5rem !important;
+        padding: 0px 10px;
     }
 
     .mud-input:focus-within ~ label.mud-input-label.mud-input-label-inputcontrol {
@@ -69,9 +76,9 @@
 
     .mud-shrink ~ label.mud-input-label.mud-input-label-inputcontrol, .mud-input:focus-within ~ label.mud-input-label.mud-input-label-inputcontrol {
         /*         transform: translate(0, 1.5px) scale(0.75);
-         */ /* transform: none !important; */
+             */ /* transform: none !important; */
         /*         transform-origin: top left;
-         */
+             */
     }
 
     .mud-input-label {

@@ -12,12 +12,17 @@
                Class=""
                Label="@LabelText"
                Placeholder=""
-               AdornmentIcon="@Icons.Material.Filled.ExpandMore">
+               MultiSelection="@IsMultiSelect"
+               Format="@Format"
+               Disabled="@IsDisabled"
+               ReadOnly="@IsReadOnly"
+               AdornmentIcon="@Icons.Material.Filled.ExpandMore"
+               title="Hello everybody!">
 
         @foreach (var item in Data)
         {
             <MudSelectItem Value="@ValueSelector(item)">
-                @if(ItemTemplate == null)
+                @if (ItemTemplate == null)
                 {
                     @ValueSelector(item)
                 }
@@ -48,6 +53,9 @@
 
     [Parameter]
     public Func<TItem, string> ValueSelector { get; set; } = item => item?.ToString();
+
+    [Parameter]
+    public bool IsMultiSelect { get; set; }
 }
 
 <style>
@@ -58,7 +66,7 @@
         color: #797979;
         background-color: #FFFFFF;
         height: 32px;
-        width: 300px;
+        /* width: 300px; */
         border: 1px solid #DDDDDD;
         border-radius: 4px;
         padding: 10px 8px !important;
@@ -76,6 +84,11 @@
         color: #797979;
         padding-left: 8px !important;
         padding-right: 8px !important;
+    }
+
+    .mud-input-control {
+        height: 4.5rem !important;
+        padding: 0px 10px;
     }
 
     .mud-input:focus-within ~ label.mud-input-label.mud-input-label-inputcontrol {
@@ -96,9 +109,9 @@
 
     .mud-shrink ~ label.mud-input-label.mud-input-label-inputcontrol, .mud-input:focus-within ~ label.mud-input-label.mud-input-label-inputcontrol {
         /*         transform: translate(0, 1.5px) scale(0.75);
-                     */ /* transform: none !important; */
+                             */ /* transform: none !important; */
         /*         transform-origin: top left;
-                     */
+                             */
     }
 
     .mud-input-label {
@@ -110,7 +123,7 @@
         color: #797979;
     }
 
-    .mud-input-adornment{
+    .mud-input-adornment {
         color: #ABABAB;
     }
 

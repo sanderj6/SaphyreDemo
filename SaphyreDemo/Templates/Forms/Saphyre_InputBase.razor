@@ -6,7 +6,9 @@
     [Parameter] public TItem InputValue { get; set; }
     [Parameter] public string CSSClass { get; set; }
     [Parameter] public string ControlCSSClass { get; set; } = "saphyre-textbox";
+    [Parameter] public string Format { get; set; }
     [Parameter] public bool IsValidation { get; set; } = true;
+    [Parameter] public bool IsDisabled { get; set; } = false;
     [Parameter] public bool IsReadOnly { get; set; } = false;
     [Parameter] public Expression<Func<TItem>> FieldExpression { get; set; }
     [Parameter] public EventCallback<TItem> ValueChanged { get; set; }

@@ -31,6 +31,7 @@ namespace SaphyreDemo.Data.Models
                 new Currency("CHF", "Swiss Franc"),
                 new Currency("CNY", "Chinese Yuan"),
                 new Currency("SEK", "Swedish Krona"),
+                new Currency("NZD", "Antidisestablishmentarianism pneumonoultramicroscopicsilicovolcanoconiosis"),
                 new Currency("NZD", "New Zealand Dollar")
             };
         }

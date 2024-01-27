@@ -11,103 +11,132 @@
 <PageTitle>User Management</PageTitle>
 
 <div class="container mt-3">
-    <h2>User Management</h2>
-    <button class="btn btn-primary mb-2" @onclick="AddUser">Add User</button>
 
-    <div class="">
+    <div class="form-container-header">
+        <div class="d-flex justify-content-between">
+            <h2>User Management</h2>
+
+            <button class="btn btn-primary mb-2" @onclick="AddUser">Add User</button>
+        </div>
+    </div>
+
+    <div class="form-container">
         <EditForm EditContext="@editContext"
                   OnValidSubmit="HandleSubmit">
             <DataAnnotationsValidator />
 
-            <MudCard>
-                <div class="p-4">
-                    <div class="row">
-                        <div class="col-md-4 col-12">
-                            <Saphyre_Textbox FieldExpression="@(() => Model.FreeText)" />
-                        </div>
+            <div>
 
-                        <div class="col-md-4 col-12">
-                            <MudTextField Label="Free text" @bind-Value="Model.FreeText" />
-                            <ValidationMessage For="() => Model.FreeText" />
-                        </div>
-
-                        <div class="col-md-4 col-12">
-                            <MudDatePicker Label="Date" @bind-Value="Model.Date" FullWidth />
-                            <ValidationMessage For="() => Model.Date" />
-                        </div>
+                <div class="form-group d-flex flex-md-row flex-column">
+                    <div class="col-md-4 col-12">
+                        <Saphyre_Textbox FieldExpression="@(() => Model.FreeText)" CSSClass="form-input" />
                     </div>
 
-                    <div class="row">
-                        <div class="col-md-4 col-12">
-                            <Saphyre_Select FieldExpression="(() => Model.Currency)"
-                                            TItem="Currency"
-                                            Data="currencyList.Currencies"
-                                            ValueSelector="@((Currency c) => c.Code)" />
-                        </div>
-
-                        <div class="col-md-4 col-12">
-                            <MudTextField Label="Amount" @bind-Value="Model.Amount" />
-                            <ValidationMessage For="() => Model.Amount" />
-                        </div>
-
-                        <div class="col-md-4 col-12">
-                            <MudSelect Label="Single select dropdown" @bind-Value="Model.SingleSelect">
-                                <!-- Populate with MudSelectItems -->
-                            </MudSelect>
-                            <ValidationMessage For="() => Model.SingleSelect" />
-                        </div>
+                    <div class="col-md-4 col-12">
+                        <Saphyre_Textbox FieldExpression="@(() => Model.FreeText)" CSSClass="form-input" />
                     </div>
 
-                    <div class="row">
-                        <div class="col-md-4 col-12">
-                            <MudTextField Label="Percentage" @bind-Value="Model.Percentage" AdornmentText="%" />
-                            <ValidationMessage For="() => Model.Currency" />
-                        </div>
-
-                        <div class="col-md-4 col-12">
-                            <MudSelect Label="Multiselect dropdown" @bind-Value="Model.MultiSelect" MultiSelection>
-                                <!-- Populate with MudSelectItems -->
-                            </MudSelect>
-                            <ValidationMessage For="() => Model.Amount" />
-                        </div>
-
+                    <div class="col-md-4 col-12">
+                        <Saphyre_Date FieldExpression="@(() => Model.Date)" CSSClass="form-input" />
                     </div>
                 </div>
-            </MudCard>
 
-            <button type="submit" class="btn btn-primary">
-                Submit Order
-            </button>
+                <div class="form-group d-flex flex-md-row flex-column">
+                    <div class="col-md-4 col-12">
+                        <Saphyre_Select FieldExpression="(() => Model.Currency)"
+                                        TItem="Currency"
+                                        Data="currencyList.Currencies"
+                                        ValueSelector="@((Currency c) => c.Name)"
+                                        CSSClass="form-input" />
+                    </div>
+
+                    <div class="col-md-4 col-12">
+                        <Saphyre_Textbox FieldExpression="@(() => Model.FreeText)" CSSClass="form-input" />
+                    </div>
+
+                    <div class="col-md-4 col-12">
+                        <Saphyre_Select FieldExpression="(() => Model.Currency)"
+                                        TItem="Currency"
+                                        Data="currencyList.Currencies"
+                                        ValueSelector="@((Currency c) => c.Name)"
+                                        CSSClass="form-input" />
+                    </div>
+                </div>
+
+                <div class="form-group d-flex flex-md-row flex-column">
+                    <div class="col-md-4 col-12">
+                        <Saphyre_Textbox FieldExpression="@(() => Model.FreeText)" CSSClass="form-input" />
+                    </div>
+
+                    <div class="col-md-4 col-12">
+                        <Saphyre_Select FieldExpression="(() => Model.Currency)"
+                                        TItem="Currency"
+                                        Data="currencyList.Currencies"
+                                        ValueSelector="@((Currency c) => c.Name)"
+                                        CSSClass="form-input" />
+                    </div>
+
+                </div>
+
+                <div class="form-group d-flex justify-content-between pt-4 gap-3">
+                    <button @onclick="ShowModal" class="btn btn-primary form-button">MODAL</button>
+                    <button @onclick="ShowToast" class="btn btn-primary form-button">TOAST</button>
+                    <button type="submit" class="btn btn-primary form-button">
+                        Submit Order
+                    </button>
+                </div>
+
+            </div>
 
         </EditForm>
     </div>
 
-    <table class="table table-hover">
-        <thead class="thead-light">
-            <tr>
-                <th>Username</th>
-                <th>Email</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var user in Users)
-            {
-                <tr>
-                    <td>@user.Username</td>
-                    <td>@user.Email</td>
-                    <td>
-                        <button class="btn btn-secondary btn-sm" @onclick="() => EditUser(user)">Edit</button>
-                        <button class="btn btn-danger btn-sm" @onclick="() => DeleteUser(user)">Delete</button>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
 </div>
 
-<button @onclick="ShowModal" class="btn btn-primary">SHOW MODAL</button>
-<button @onclick="ShowToast" class="btn btn-primary">SHOW TOAST</button>
+<style>
+    .form-container {
+        max-width: 800px;
+        margin: 5px auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+    }
+
+    .form-container-header {
+        max-width: 800px;
+        margin: 0px auto;
+        padding: 0px 20px;
+    }
+
+    .form-group {
+        background-color: #f9f9f9;
+    }
+
+    .form-input {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    .form-button {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        background-color: #0056b3;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+        .form-button:hover {
+            background-color: #004494;
+        }
+</style>
 
 
 @code {
@@ -153,8 +182,9 @@
         {
             if (result)
             {
-
             }
+
+            modalService.Close();
         });
     }
 
