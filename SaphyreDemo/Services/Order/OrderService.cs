@@ -4,34 +4,91 @@ namespace SaphyreDemo.Services.Order
 {
     public class OrderService : IOrderService
     {
-        public Task<OrderDescription> CreateOrderAsync(OrderDescription order)
+        private ILogger<OrderService> _logger;
+        private readonly IHttpClientFactory _httpClientFactory;
+        private string baseUrl;
+
+        public OrderService(ILogger<OrderService> logger, IConfiguration configuration, IHttpClientFactory clientFactory)
         {
-            throw new NotImplementedException();
+            _logger = logger;
+            _httpClientFactory = clientFactory;
+
+            baseUrl = configuration.GetValue<string>("OrderAPIURL") ?? string.Empty;
         }
 
-        public Task<bool> DeleteOrderAsync(int orderId)
+        public async Task<OrderDescription> CreateOrderAsync(OrderDescription order)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var client = _httpClientFactory.CreateClient();
+                var response = await client.PostAsJsonAsync($"{baseUrl}/orders", order);
+                response.EnsureSuccessStatusCode();
+                return await response.Content.ReadFromJsonAsync<OrderDescription>();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error deleting order: {ex.Message}");
+                return new OrderDescription();
+            }
         }
 
-        public Task<OrderDescription> GetOrderByIdAsync(int orderId)
+        public async Task<OrderDescription> GetOrderByIdAsync(int orderId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var client = _httpClientFactory.CreateClient();
+                return await client.GetFromJsonAsync<OrderDescription>($"{baseUrl}/orders/{orderId}");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error deleting order: {ex.Message}");
+                return new OrderDescription();
+            }
         }
 
-        public Task<IEnumerable<OrderDescription>> ListAllOrdersAsync()
+        public async Task<IEnumerable<OrderDescription>> ListAllOrdersAsync()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var client = _httpClientFactory.CreateClient();
+                return await client.GetFromJsonAsync<IEnumerable<OrderDescription>>($"{baseUrl}/orders");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error deleting order: {ex.Message}");
+                return new List<OrderDescription>();
+            }
         }
 
-        public Task<IEnumerable<OrderDescription>> SearchOrdersAsync(string query)
+        public async Task<OrderDescription> UpdateOrderAsync(OrderDescription order)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var client = _httpClientFactory.CreateClient();
+                var response = await client.PutAsJsonAsync($"{baseUrl}/orders/{order.Id}", order);
+                response.EnsureSuccessStatusCode();
+                return await response.Content.ReadFromJsonAsync<OrderDescription>();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error deleting order: {ex.Message}");
+                return new OrderDescription();
+            }
         }
 
-        public Task<OrderDescription> UpdateOrderAsync(OrderDescription order)
+        public async Task<bool> DeleteOrderAsync(int orderId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var client = _httpClientFactory.CreateClient();
+                var response = await client.DeleteAsync($"{baseUrl}/orders/{orderId}");
+                return response.IsSuccessStatusCode;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error deleting order: {ex.Message}");
+                return false;
+            }
         }
     }
 

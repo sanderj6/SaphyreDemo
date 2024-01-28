@@ -9,7 +9,6 @@ namespace SaphyreDemo.Services.Order
         Task<OrderDescription> UpdateOrderAsync(OrderDescription order);
         Task<bool> DeleteOrderAsync(int orderId);
         Task<IEnumerable<OrderDescription>> ListAllOrdersAsync();
-        Task<IEnumerable<OrderDescription>> SearchOrdersAsync(string query);
     }
 
 }
