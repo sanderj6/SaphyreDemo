@@ -1,0 +1,94 @@
+﻿@using SaphyreDemo.Data.Enums
+<div class="block block-rounded d-flex flex-column">
+    <div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center w-100">
+        <div class="d-flex flex-wrap">
+            <div class="flex-item-first fs-3 fw-bold header-color">@Value</div>
+            <div class="flex-item item item-rounded-lg bg-body-light">
+                @switch (Type)
+                {
+                    case BlockType.Pending:
+                        <i class="fa-regular fa-hourglass-half flex-icon text-danger"></i>
+                        break;
+                    case BlockType.Shipped:
+                        <i class="fa-solid fa-truck-fast flex-icon text-warning"></i>
+                        break;
+                    case BlockType.Customers:
+                        <i class="fa-solid fa-person flex-icon text-info"></i>
+                        break;
+                    case BlockType.Fullfillment:
+                        <i class="fa-solid fa-check-to-slot flex-icon text-success"></i>
+                        break;
+                    default:
+                        <i class="fa-regular fa-exclamation flex-icon text-info"></i>
+                        break;
+                }
+            </div>
+            <div class="flex-item full-width fw-medium fs-sm text-muted mb-0">@Title</div>
+        </div>
+    </div>
+    <div class="bg-body-light rounded-bottom">
+        <a @onclick="OnNavigationClicked" class="w-100 link-no-decoration block-content block-content-full block-content-sm fs-sm fw-medium d-flex align-items-center justify-content-between" href="javascript:void(0)">
+            <span role="button">@NavigationText</span>
+            <i class="fa fa-arrow-alt-circle-right ms-1 opacity-25 fs-base"></i>
+        </a>
+    </div>
+</div>
+
+<style>
+    .flex-container {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .flex-item-first {
+        flex: 2;
+    }
+
+    .flex-item {
+        flex: 1;
+    }
+
+    .full-width {
+        flex-basis: 100%;
+    }
+
+    .flex-icon {
+        font-size: 1.5rem;
+    }
+</style>
+
+@code {
+    [Parameter]
+    public string Title { get; set; }
+
+    [Parameter]
+    public string Value { get; set; }
+
+    [Parameter]
+    public MudIcon Icon { get; set; }
+
+    [Parameter]
+    public BlockType Type { get; set; }
+
+    [Parameter]
+    public Action<string> Callback { get; set; }
+
+    private string NavigationText { get; set; } = "View";
+
+    protected override void OnInitialized()
+    {
+        NavigationText = Type switch
+        {
+            BlockType.Pending => "View Pending",
+            BlockType.Shipped => "View Orders",
+            BlockType.Customers => "View Customers",
+            BlockType.Fullfillment => "View Fullfillment",
+            _ => "View All"
+        };
+    }
+
+    private void OnNavigationClicked()
+    {
+        Callback?.Invoke(Title);
+    }
+}

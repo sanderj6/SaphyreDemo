@@ -1,0 +1,104 @@
+﻿@using MudBlazor
+@using SaphyreDemo.Pages.Admin.User.Components
+@using SaphyreDemo.Services.Modal
+@using SaphyreDemo.Services.Order
+@using SaphyreDemo.Services.Toast
+@using SaphyreDemo.Templates.Forms
+@using SaphyreDemo.Templates.Tables
+@using SaphyreDemo.Templates.Misc
+@using Data.Enums
+
+<div class="container">
+    <EditForm EditContext="@editContext"
+              OnValidSubmit="HandleSubmit">
+        <DataAnnotationsValidator />
+
+        <div>
+
+            <div class=" d-flex flex-md-row flex-column">
+                <div class="col-md-4 col-12">
+                    <Saphyre_Textbox FieldExpression="@(() => Model.Description)" CSSClass="form-input" />
+                </div>
+
+                <div class="col-md-4 col-12">
+                    <Saphyre_Textbox FieldExpression="@(() => Model.Description)" CSSClass="form-input" />
+                </div>
+
+                <div class="col-md-4 col-12">
+                    <Saphyre_Date FieldExpression="@(() => Model.Date)" CSSClass="form-input" />
+                </div>
+            </div>
+
+            <div class=" d-flex flex-md-row flex-column">
+                <div class="col-md-4 col-12">
+                    <Saphyre_Select FieldExpression="(() => Model.Currency.Name)"
+                                    TItem="Currency"
+                                    Data="currencyList.Currencies"
+                                    ValueSelector="@((Currency c) => c.Name)"
+                                    CSSClass="form-input" />
+                </div>
+
+                <div class="col-md-4 col-12">
+                    <Saphyre_Textbox FieldExpression="@(() => Model.Description)" CSSClass="form-input" />
+                </div>
+
+            </div>
+
+            <div class=" d-flex flex-md-row flex-column">
+                <div class="col-md-4 col-12">
+                    <Saphyre_Textbox FieldExpression="@(() => Model.Description)" CSSClass="form-input" />
+                </div>
+
+     @*            <div class="col-md-4 col-12">
+                    <Saphyre_Select FieldExpression="(() => Model.Products)"
+                                    TItem="Currency"
+                                    Data="currencyList.Currencies"
+                                    ValueSelector="@((Currency c) => c.Name)"
+                                    CSSClass="form-input" />
+                </div> *@
+
+            </div>
+
+            <div class=" d-flex justify-content-end pt-4 gap-3">
+                <button type="submit" class="btn btn-secondary modalButton">
+                    Cancel
+                </button>
+                <button type="submit" class="btn btn-primary modalButton">
+                    Submit Order
+                </button>
+            </div>
+
+        </div>
+
+    </EditForm>
+</div>
+
+<style>
+    .modalButton{
+        width:8rem;
+    }
+    </style>
+
+@code {
+    [Parameter]
+    public OrderDescription Model { get; set; }
+
+    [Parameter]
+    public Action<bool> Callback { get; set; }
+
+    private EditContext editContext { get; set; }
+
+    private CurrencyList currencyList = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Model ??= new();
+        editContext = new EditContext(Model);
+    }
+
+
+    public async Task HandleSubmit()
+    {
+
+    }
+}

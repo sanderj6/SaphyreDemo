@@ -1,9 +1,15 @@
 ﻿@typeparam TItem
 @using MudBlazor
+@using SaphyreDemo.Templates.Forms
 
-<MudTextField @bind-Value="searchString" Placeholder="Search..." OnInternalInputChanged="OnSearchChanged" />
 
-<MudTable @ref="_table" Items="@pagedItems" ServerData="@LoadServerData" Virtualize="true" RowsPerPage="3">
+<div class="form-group d-flex flex-md-row flex-column">
+    <div class="col-12 mb-2">
+        <MudTextField @bind-Value="searchString" Placeholder="Search..." OnInternalInputChanged="OnSearchChanged" Class="form-input" />
+    </div>
+</div>
+
+<MudTable @ref="_table" Items="@pagedItems" ServerData="@LoadServerData" Virtualize="true" RowsPerPage="5">
     <HeaderContent>
         @HeaderTemplate
     </HeaderContent>
