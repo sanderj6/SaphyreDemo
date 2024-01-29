@@ -30,7 +30,6 @@ namespace SaphyreDemo.Services.Toast
             Toasts.Add(newToast);
         }
 
-
         public void ShowError(string errorMessage)
         {
             ToastMessage newToast = new()

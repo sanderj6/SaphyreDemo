@@ -20,4 +20,5 @@ namespace SaphyreDemo.Data.Models
             DateCreated = DateTime.UtcNow;
         }
     }
+    	
 }

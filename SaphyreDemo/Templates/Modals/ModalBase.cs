@@ -48,6 +48,13 @@
                 ModalService.OnClose -= CloseModal;
             }
         }
-    }
+
+		public enum ModalOperation
+		{
+			Add,
+			Update,
+			Delete
+		}
+	}
 
 }

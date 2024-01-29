@@ -19,6 +19,5 @@ namespace SaphyreDemo.Services.Logging
             _toastService.ShowError(message);
         }
 
-        // Add other logging methods as needed
     }
 }

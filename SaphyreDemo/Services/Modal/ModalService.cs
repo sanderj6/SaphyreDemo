@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
+using SaphyreDemo.Data.Models;
+using SaphyreDemo.Templates.Modal.SaphyreDemo.Templates.Modals;
 
 namespace SaphyreDemo.Services.Modal
 {
@@ -13,13 +15,7 @@ namespace SaphyreDemo.Services.Modal
         // Actions for Show/Close Events
         public event Action<string, RenderFragment, string> OnShow;
         public event Action OnClose;
-        public enum ModalOperation
-        {
-            Add,
-            Update,
-            Delete
-        }
-
+ 
         // Show Methods
         /// <summary>
         /// Launches a Modal with a <paramref name="contentType"/> and <paramref name="callback"/>.

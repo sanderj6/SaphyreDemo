@@ -10,7 +10,7 @@ namespace SaphyreDemo.Services.Order
 
         public DummyOrderService()
         {
-            GenerateOrders(20); // Generate 50,000 orders
+            GenerateOrders(20); // Generate dummy orders
         }
 
         private void GenerateOrders(int numberOfOrders)

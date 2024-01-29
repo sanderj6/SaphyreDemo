@@ -40,7 +40,7 @@
         RefreshTimer.Elapsed += Refresh;
         RefreshTimer.Start();
 
-        //// AutoDismiss after 10sec
+        // AutoDismiss after 10sec
         AutoDismissTimer = new Timer { AutoReset = false, Interval = 6000 };
         AutoDismissTimer.Elapsed += TimerTick;
 

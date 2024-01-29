@@ -30,13 +30,7 @@
 @code {
 
 	[Parameter]
-	public string CurrentPage { get; set; } = "Home";
-
-	[Parameter]
 	public Action<string, bool> Callback { get; set; }
-
-	[Parameter]
-	public Action NavBtnCallback { get; set; }
 
 	private string SelectedCompany { get; set; } = "saphyre";
 	private string SelectedLightMode => IsDarkMode ? "light" : "dark";
