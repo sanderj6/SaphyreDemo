@@ -1,6 +1,6 @@
 ﻿@page "/"
 @using MudBlazor
-@using SaphyreDemo.Pages.Admin.User.Components
+@using SaphyreDemo.Pages.Admin.Orders.Components
 @using SaphyreDemo.Services.Modal
 @using SaphyreDemo.Services.Order
 @using SaphyreDemo.Services.Toast
@@ -8,13 +8,13 @@
 @using SaphyreDemo.Templates.Tables
 @using SaphyreDemo.Templates.Misc
 @using Data.Enums
-@inherits PageBase<UserManagement>
+@inherits PageBase<OrderManagement>
 @inject ModalService modalService
 @inject ToastService toastService
 @inject IOrderService orderService
 @inject DummyOrderService dummyOrderService
 
-<PageTitle>User Management</PageTitle>
+<PageTitle>Order Management</PageTitle>
 
 <div class="container mt-3">
 
@@ -51,6 +51,7 @@
                 <MudTh>Description</MudTh>
                 <MudTh>Amount</MudTh>
                 <MudTh>TaxPercentage</MudTh>
+                <MudTh Class="hide-on-mobile">ID</MudTh>
                 <MudTh>Date</MudTh>
             </HeaderTemplate>
 
@@ -58,7 +59,8 @@
                 <MudTd DataLabel="Description">@context.Description</MudTd>
                     <MudTd DataLabel="Amount">@context.Amount</MudTd>
                     <MudTd DataLabel="TaxPercentage">@context.TaxPercentage</MudTd>
-                    <MudTd DataLabel="Date">@context.Date</MudTd>
+                    <MudTd Class="hide-on-mobile" DataLabel="ID">@context.Id</MudTd>
+                    <MudTd DataLabel="Date">@context.Date.ToString("MM/dd/yyyy")</MudTd>
                 </RowTemplate>
 
             </Saphyre_Table>

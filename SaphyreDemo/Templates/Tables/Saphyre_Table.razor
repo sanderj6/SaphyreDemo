@@ -4,57 +4,63 @@
 
 
 <div class="form-group d-flex flex-md-row flex-column">
-    <div class="col-12 mb-2">
-        <MudTextField @bind-Value="searchString" Placeholder="Search..." OnInternalInputChanged="OnSearchChanged" Class="form-input" />
-    </div>
+	<div class="col-12 mb-2">
+		<MudTextField @bind-Value="searchString"
+					  Placeholder="Search..."
+					  OnInternalInputChanged="OnSearchChanged"
+					  Adornment="Adornment.End"
+					  AdornmentColor="Color.Dark"
+					  AdornmentIcon="@Icons.Material.Filled.Search"
+					  Class="form-control form-input" />
+	</div>
 </div>
 
 <MudTable @ref="_table" Items="@pagedItems" ServerData="@LoadServerData" Virtualize="true" RowsPerPage="5">
-    <HeaderContent>
-        @HeaderTemplate
-    </HeaderContent>
-    <RowTemplate>
-        @RowTemplate(context)
-    </RowTemplate>
-    <PagerContent>
-        <MudPagination SelectedChanged="PageChanged" Count="@((_table.GetFilteredItemsCount() + _table.RowsPerPage - 1) / _table.RowsPerPage)" Class="pa-4" />
-    </PagerContent>
+	<HeaderContent>
+		@HeaderTemplate
+	</HeaderContent>
+	<RowTemplate>
+		@RowTemplate(context)
+	</RowTemplate>
+	<PagerContent>
+		<MudPagination SelectedChanged="PageChanged" Count="@((_table.GetFilteredItemsCount() + _table.RowsPerPage - 1) / _table.RowsPerPage)" Class="pa-4" />
+	</PagerContent>
 </MudTable>
 
 @code {
-    [Parameter] public Func<string, Task<IEnumerable<TItem>>> DataService { get; set; }
-    [Parameter] public RenderFragment HeaderTemplate { get; set; }
-    [Parameter] public RenderFragment<TItem> RowTemplate { get; set; }
+	[Parameter] public Func<string, Task<IEnumerable<TItem>>> DataService { get; set; }
+	[Parameter] public RenderFragment HeaderTemplate { get; set; }
+	[Parameter] public RenderFragment<TItem> RowTemplate { get; set; }
 
-    private IEnumerable<TItem> pagedItems;
-    private string searchString = "";
-    private MudTable<TItem> _table;
+	private IEnumerable<TItem> pagedItems;
+	private string searchString = "";
+	private MudTable<TItem> _table;
 
-    private async Task<TableData<TItem>> LoadServerData(TableState state)
-    {
-        var allItems = await DataService(searchString);
-        var totalItems = allItems.Count();
-        var itemsPerPage = state.PageSize;
-        var currentPage = state.Page;
+	private async Task<TableData<TItem>> LoadServerData(TableState state)
+	{
+		var allItems = await DataService(searchString);
+		var totalItems = allItems.Count();
+		var itemsPerPage = state.PageSize;
+		var currentPage = state.Page;
 
-        // Calculate the range of items to display on the current page
-        var pagedItems = allItems.Skip(currentPage * itemsPerPage).Take(itemsPerPage);
+		// Calculate the range of items to display on the current page
+		var pagedItems = allItems.Skip(currentPage * itemsPerPage).Take(itemsPerPage);
 
-        return new TableData<TItem>
-            {
-                Items = pagedItems,
-                TotalItems = totalItems
-            };
-    }
+		return new TableData<TItem>
+			{
+				Items = pagedItems,
+				TotalItems = totalItems
+			};
+	}
 
-    private void OnSearchChanged(ChangeEventArgs e)
-    {
-        searchString = e.Value.ToString();
-        _table.ReloadServerData();
-    }
+	private void OnSearchChanged(ChangeEventArgs e)
+	{
+		searchString = e.Value.ToString();
+		_table.ReloadServerData();
+	}
 
-    private void PageChanged(int i)
-    {
-        _table.NavigateTo(i - 1);
-    }
+	private void PageChanged(int i)
+	{
+		_table.NavigateTo(i - 1);
+	}
 }

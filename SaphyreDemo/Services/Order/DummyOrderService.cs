@@ -25,10 +25,11 @@ namespace SaphyreDemo.Services.Order
         {
             return new OrderDescription
             {
-                Description = $"Order {Guid.NewGuid()}",
+                Id = Guid.NewGuid(),
+                Description = $"Order {_random.Next(100, 10000)}",
                 ShippingType = new DropDownItem { Id = Guid.NewGuid(), Name = $"Shipping {_random.Next(1, 5)}" },
                 Amount = _random.Next(100, 10000),
-                Currency = new Currency { Id = Guid.NewGuid(), ISOCode = $"USD", Name = "US Dollar" },
+                Currency = new Currency (Guid.NewGuid(),$"USD","US Dollar"),
                 Products = GenerateRandomProducts(),
                 TaxPercentage = _random.Next(5, 20),
                 Date = RandomDay()

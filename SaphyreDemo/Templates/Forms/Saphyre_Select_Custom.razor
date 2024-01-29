@@ -1,0 +1,151 @@
+﻿<div class="multiselect-dropdown">
+	<div class="selected-items">
+		@if (selectedItems.Count == items.Count)
+		{
+			<div class="all-selected">All Selected (@items.Count/@items.Count)</div>
+		}
+		else if (selectedItems.Count > 3)
+		{
+			@for (int i = 0; i < 2; i++)
+			{
+				<div class="selected-tag">
+					@selectedItems[i] <span class="remove-tag" @onclick="() => RemoveItem(selectedItems[i])">&times;</span>
+				</div>
+			}
+			<div class="additional-items">(+@(selectedItems.Count - 2))</div>
+		}
+		else
+		{
+			@foreach (var item in selectedItems)
+			{
+				<div class="selected-tag">
+					@item <span class="remove-tag" @onclick="() => RemoveItem(item)">&times;</span>
+				</div>
+			}
+		}
+		<button class="button-dropdown" @onclick="ToggleDropdown">
+			<i class="fas fa-chevron-down"></i>
+		</button>
+	</div>
+	@if (IsDropdownOpen)
+	{
+		<div class="dropdown-content">
+			<div class="dropdown-header">
+				<input value="@IsAllItemsChecked" @onclick="OnAllItemsChecked" type="checkbox" id="selectAll" />
+				<div class="header-title">Item</div>
+				<div class="header-title">Sub-item</div>
+			</div>
+			<div class="dropdown-grid">
+				@foreach (var item in items)
+				{
+					<div class="dropdown-row">
+						<input type="checkbox" id="@item" @onchange="() => CheckboxChanged(item)">
+						<label for="@item">@item</label>
+						<label class="sub-item">Sub-@item</label>
+					</div>
+				}
+				@if (IsGridEditable)
+				{
+					@if (IsEditMode)
+					{
+						<div class="edit-row">
+							<input class="editCheckItem" type="checkbox" id="newItem" disabled>
+							<input @bind-value="@Title" class="editTextItem" type="text" placeholder="New Item" />
+							<div class="d-flex justify-content-between">
+								<input @bind-value="@SubTitle" class="editSubItem" type="text" placeholder="New Sub-item" />
+								<div class="">
+									<button @onclick="AddItem" disabled="@IsSubmitDisabled" class="editModeSubmitBtn">
+										<i class="fas fa-arrow-right"></i>
+									</button>
+									<button @onclick="ToggleEditMode" class="editModeCancelBtn">
+										<i class="fas fa-times"></i>
+									</button>
+								</div>
+							</div>
+						</div>
+					}
+					else
+					{
+						<div class="dropdown-row">
+							<div></div>
+							@if (!items.Any())
+							{
+								<div class="dropdownNoResults">No results found</div>
+							}
+							<div @onclick="ToggleEditMode" type="button" class="dropdownAddNew">+ Add New</div>
+						</div>
+					}
+				}
+			</div>
+		</div>
+	}
+</div>
+
+@code {
+
+	[Parameter]
+	public bool IsGridEditable { get; set; }
+
+	public bool IsEditMode { get; set; }
+	public bool IsDropdownOpen = false;
+
+	List<string> items = new List<string> { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7" };
+	List<string> selectedItems = new List<string>();
+	private bool IsAllItemsChecked { get; set; }
+
+	private string Title { get; set; }
+	private string SubTitle { get; set; }
+	private bool IsSubmitDisabled => string.IsNullOrEmpty(Title) || string.IsNullOrEmpty(SubTitle);
+
+	private void ToggleDropdown()
+	{
+		IsDropdownOpen = !IsDropdownOpen;
+		StateHasChanged();
+	}
+
+	private void ToggleEditMode()
+	{
+		IsEditMode = !IsEditMode;
+		StateHasChanged();
+	}
+
+	private void CheckboxChanged(string item)
+	{
+		if (selectedItems.Contains(item))
+		{
+			selectedItems.Remove(item);
+		}
+		else
+		{
+			selectedItems.Add(item);
+		}
+	}
+
+	private void AddItem()
+	{
+		items.Add(Title);
+
+		Title = string.Empty;
+		SubTitle = string.Empty;
+
+		ToggleEditMode();
+	}
+
+	private void RemoveItem(string item)
+	{
+		selectedItems.Remove(item);
+	}
+
+	private void OnAllItemsChecked()
+	{
+		if (IsAllItemsChecked)
+		{
+			selectedItems = items;
+		}
+		else
+		{
+			selectedItems = new();
+		}
+	}
+
+}

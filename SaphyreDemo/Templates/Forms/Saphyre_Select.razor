@@ -6,126 +6,229 @@
 
 <div class="">
 
-    <MudSelect Value="InputValue"
-               ValueChanged="OnInputValueChanged"
-               T="string"
-               Class=""
-               Label="@LabelText"
-               Placeholder=""
-               MultiSelection="@IsMultiSelect"
-               Format="@Format"
-               Disabled="@IsDisabled"
-               ReadOnly="@IsReadOnly"
-               AdornmentIcon="@Icons.Material.Filled.ExpandMore"
-               title="Hello everybody!">
 
-        @foreach (var item in Data)
-        {
-            <MudSelectItem Value="@ValueSelector(item)">
-                @if (ItemTemplate == null)
-                {
-                    @ValueSelector(item)
-                }
-                else
-                {
-                    @ItemTemplate(item)
-                }
-            </MudSelectItem>
-        }
+	<MudSelect Value="InputValue"
+			   ValueChanged="OnInputValueChanged"
+			   T="string"
+			   Class="@CSSClass"
+			   Label="@LabelText"
+			   Placeholder="Test"
+			   MultiSelection="@IsMultiSelect"
+			   SelectedValues="SelectedItems"
+			   SelectedValuesChanged="OnValueSelected"
+			   Format="@Format"
+			   Disabled="@IsDisabled"
+			   ReadOnly="@IsReadOnly"
+			   Clearable="@IsClearable"
+			   AdornmentIcon="@Icons.Material.Filled.ExpandMore"
+			   OnOpen="(() => HandleDropdownOpened())"
+			   OnClose="(() => HandleDropdownClosed(false))"
+			   OnClearButtonClick="(() => HandleDropdownClosed(true))"
+			   FullWidth>
 
+		@if (IsGridMode)
+		{
+			<MudSelectItem Value="string.Empty">
+				@if (IsDisplayItems)
+				{
+					<MudGrid>
+						<MudItem xs="6">@Header_Primary</MudItem>
+							<MudItem xs="3">@Header_Secondary</MudItem>
+						</MudGrid>
+				}
+				else
+				{
+					<div></div>
+				}
+			</MudSelectItem>
+		}
 
-    </MudSelect>
+		@foreach (var item in Data)
+		{
+			<MudSelectItem Value="@Value_Primary(item)">
+				@if (Value_Secondary(item) == null)
+				{
+					@Value_Primary(item)
+				}
+				else
+				{
+					<MudGrid>
+						<MudItem xs="6">@Value_Primary(item)</MudItem>
+							<MudItem xs="3">@Value_Secondary(item)</MudItem>
+						</MudGrid>
+				}
+			</MudSelectItem>
+		}
 
-    @if (IsValidation)
-    {
-        <ValidationMessage For="() => InputValue" />
-    }
+	</MudSelect>
+
+	@if (IsValidation)
+	{
+		<ValidationMessage For="() => InputValue" />
+	}
 
 </div>
 
-
 @code {
-    [Parameter]
-    public List<TItem> Data { get; set; } = new();
+	[Parameter]
+	public List<TItem> Data { get; set; } = new();
 
-    [Parameter]
-    public RenderFragment<TItem> ItemTemplate { get; set; }
+	private IEnumerable<string> SelectedItems { get; set; } = Enumerable.Empty<string>();
 
-    [Parameter]
-    public Func<TItem, string> ValueSelector { get; set; } = item => item?.ToString();
+	[Parameter]
+	public RenderFragment<TItem> ItemTemplate { get; set; }
 
-    [Parameter]
-    public bool IsMultiSelect { get; set; }
+	[Parameter]
+	public Func<TItem, string> Value_Primary { get; set; }
+
+	[Parameter]
+	public Func<TItem, string> Value_Secondary { get; set; }
+
+	[Parameter]
+	public bool IsComboBox { get; set; } = false;
+
+	[Parameter]
+	public bool IsMultiSelect { get; set; }
+
+	[Parameter]
+	public bool IsGridMode { get; set; }
+
+	[Parameter]
+	public string Header_Primary { get; set; } = "Title";
+
+	[Parameter]
+	public string Header_Secondary { get; set; } = "Sub-title";
+
+	private bool IsClearable => IsMultiSelect;
+	private bool IsAllSelected { get; set; }
+	private bool IsDisplayItems { get; set; }
+	private bool IsFirstOpen { get; set; } = true;
+
+	private void OnValueSelected(IEnumerable<string> newItems)
+	{
+		// Check if any item is an empty string or null and filter them out
+		if (newItems.Any(x => string.IsNullOrEmpty(x)))
+		{
+			CheckAllValues();
+			//SelectedItems = newItems.Where(x => !string.IsNullOrEmpty(x));
+		}
+		else
+		{
+			SelectedItems = newItems;
+		}
+		StateHasChanged();
+	}
+
+	private void CheckAllValues()
+	{
+		if (IsAllSelected)
+		{
+			SelectedItems = Enumerable.Empty<string>();
+		}
+		else
+		{
+			// Set Selected Items to ALL
+			// Exclude faux header
+			var selected = Data.Select(item => Value_Primary(item));
+			// SelectedItems = Data.Select(item => Value_Primary(item))
+			// 									.Where(value => !string.IsNullOrEmpty(value));
+
+			SelectedItems = selected.Concat(new[] { string.Empty });
+		}
+	}
+
+	private void HandleDropdownOpened()
+	{
+		IsDisplayItems = true;
+		StateHasChanged();
+	}
+
+	private void HandleDropdownClosed(bool isCleared)
+	{
+		if (isCleared)
+		{
+			SelectedItems = Enumerable.Empty<string>();
+		}
+		else
+		{
+			SelectedItems = Data.Select(item => Value_Primary(item))
+													.Where(value => !string.IsNullOrEmpty(value));
+		}
+
+		IsDisplayItems = !isCleared && SelectedItems.Any();
+
+		StateHasChanged();
+	}
 }
 
 <style>
-    /********************************/
-    .mud-input {
-        font-family: 'Roboto';
-        font-size: 14px;
-        color: #797979;
-        background-color: #FFFFFF;
-        height: 32px;
-        /* width: 300px; */
-        border: 1px solid #DDDDDD;
-        border-radius: 4px;
-        padding: 10px 8px !important;
-    }
+	/********************************/
+	.mud-input {
+		font-family: 'Roboto';
+		font-size: 14px;
+		color: #797979;
+		background-color: #FFFFFF;
+		height: 32px;
+		/* width: 300px; */
+		border: 1px solid #DDDDDD;
+		border-radius: 4px;
+		padding: 10px 8px !important;
+	}
 
-        .mud-input:focus {
-            border-radius: 4px;
-            border: 1px solid #00A4D7;
-            background: rgba(0, 164, 215, 0.05);
-        }
+		.mud-input:focus {
+			border-radius: 4px;
+			border: 1px solid #00A4D7;
+			background: rgba(0, 164, 215, 0.05);
+		}
 
-    .mud-input-label {
-        font-family: 'Roboto';
-        font-size: 14px;
-        color: #797979;
-        padding-left: 8px !important;
-        padding-right: 8px !important;
-    }
+	.mud-input-label {
+		font-family: 'Roboto';
+		font-size: 14px;
+		color: #797979;
+		padding-left: 8px !important;
+		padding-right: 8px !important;
+	}
 
-    .mud-input-control {
-        height: 4.5rem !important;
-        padding: 0px 10px;
-    }
+	.mud-input-control {
+		height: 4.5rem !important;
+		padding: 0px 10px;
+	}
 
-    .mud-input:focus-within ~ label.mud-input-label.mud-input-label-inputcontrol {
-        color: #797979;
-    }
+	.mud-input:focus-within ~ label.mud-input-label.mud-input-label-inputcontrol {
+		color: #797979;
+	}
 
-    .mud-input.mud-input-underline:hover:not(.mud-disabled):before {
-        border-bottom: none;
-    }
+	.mud-input.mud-input-underline:hover:not(.mud-disabled):before {
+		border-bottom: none;
+	}
 
-    .mud-input.mud-input-underline:before {
-        border-bottom: none;
-    }
+	.mud-input.mud-input-underline:before {
+		border-bottom: none;
+	}
 
-    .mud-input.mud-input-underline:after {
-        border-bottom: none;
-    }
+	.mud-input.mud-input-underline:after {
+		border-bottom: none;
+	}
 
-    .mud-shrink ~ label.mud-input-label.mud-input-label-inputcontrol, .mud-input:focus-within ~ label.mud-input-label.mud-input-label-inputcontrol {
-        /*         transform: translate(0, 1.5px) scale(0.75);
-                             */ /* transform: none !important; */
-        /*         transform-origin: top left;
-                             */
-    }
+	.mud-shrink ~ label.mud-input-label.mud-input-label-inputcontrol, .mud-input:focus-within ~ label.mud-input-label.mud-input-label-inputcontrol {
+		/*         transform: translate(0, 1.5px) scale(0.75);
+																											 */ /* transform: none !important; */
+		/*         transform-origin: top left;
+																											 */
+	}
 
-    .mud-input-label {
-        color: #797979;
-        transform: translate(0,0) scale(0.75) !important;
-    }
+	.mud-input-label {
+		color: #797979;
+		transform: translate(0,0) scale(0.75) !important;
+	}
 
-    .mud-shrink ~ label.mud-input-label.mud-input-label-inputcontrol {
-        color: #797979;
-    }
+	.mud-shrink ~ label.mud-input-label.mud-input-label-inputcontrol {
+		color: #797979;
+	}
 
-    .mud-input-adornment {
-        color: #ABABAB;
-    }
+	.mud-input-adornment {
+		color: #ABABAB;
+	}
 
 </style>
 

@@ -1,16 +1,21 @@
-﻿@inherits Saphyre_InputBase<DateTime>
+﻿@typeparam T
+@inherits Saphyre_InputBase<T>
 @using System.Linq.Expressions
 @using System.Reflection
 @using MudBlazor
 
 <div class="">
 
-	<MudDatePicker @bind-Value="InputValue"
-				   Required="true"
-				   Class=""
-				   DateFormat="dd-MMM-yyyy"
-				   Label="@LabelText"
-				   Placeholder="" />
+	<MudNumericField @bind-Value="@InputValue"
+					 Required="true"
+					 Class=""
+					 Format="@Format"
+					 HideSpinButtons="true"
+					 Label="@LabelText"
+					 Adornment="@Adornment"
+					 AdornmentColor="Color.Dark"
+					 AdornmentIcon="@AdornmentIcon"
+					 Placeholder="" />
 
 	@if (IsValidation)
 	{
@@ -21,6 +26,12 @@
 
 
 @code {
+	[Parameter]
+	public bool IsPercentage { get; set; }
+
+	private string Format => IsPercentage ? "N2" : "N2";
+	private Adornment Adornment => IsPercentage ? Adornment.End : Adornment.None;
+	private string AdornmentIcon => IsPercentage ? Icons.Material.Filled.Percent : string.Empty;
 
 }
 
@@ -93,11 +104,6 @@
 
 	.mud-input.mud-input-error {
 		border: 1px solid #C16458;
-	}
-
-	.mud-icon-size-medium {
-		font-size: 1rem;
-		color: #797979;
 	}
 
 </style>
