@@ -1,4 +1,7 @@
-﻿<div class="multiselect-dropdown">
+﻿
+<div class="multiselect-dropdown">
+	<label class="multiselect-label">@LabelText</label>
+
 	<div class="selected-items">
 		@if (selectedItems.Count == items.Count)
 		{
@@ -82,6 +85,9 @@
 </div>
 
 @code {
+
+	[Parameter]
+	public string LabelText { get; set; } = "Dropdown";
 
 	[Parameter]
 	public bool IsGridEditable { get; set; }

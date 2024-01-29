@@ -9,7 +9,7 @@ $light-colors-chase: ( 'btnBackground': #48B1EA,'primary': #48B1EA, 'primary-var
 $light-colors-bnp: ( 'btnBackground': #03A776,'primary': #03A776, 'primary-variant': #027563, 'secondary': #82ffec, 'secondary-variant': #82ffec, 'error': #C16458, 'background-light': #F4F4F4,'background': fixed linear-gradient(220deg,#5FFCCD 10%,#027563 90%), 'text':#252525, 'surface': #FFFFFF, 'onprimary': #FFFFFF, 'onsecondary': #FFFFFF, 'onbackground': #000000, 'onsurface': #000000, 'onerror': #FFFFFF );
 
 // Dark Theme Colors
-$dark-colors-saphyre: ( 'btnBackground': #252525,'primary': #48B1EA, 'primary-variant': #0285A6, 'secondary': #55C0C6, 'secondary-variant': #55C0C6, 'error': #BD594C, 'background-light': #4D4D4D,'background': #252525, 'text':#e3e3e3, 'surface': #121212, 'onprimary': #000000, 'onsecondary': #e3e3e3, 'onbackground': #FFFFFF, 'onsurface': #FFFFFF, 'onerror': #000000 );
+$dark-colors-saphyre: ( 'btnBackground': #010513,'primary': #48B1EA, 'primary-variant': #0285A6, 'secondary': #55C0C6, 'secondary-variant': #55C0C6, 'error': #BD594C, 'background-light': #0C4564,'background': fixed linear-gradient(220deg,#183a6b 10%,#010513 90%), 'text':#e3e3e3, 'surface': #121212, 'onprimary': #000000, 'onsecondary': #e3e3e3, 'onbackground': #FFFFFF, 'onsurface': #FFFFFF, 'onerror': #000000 );
 
 $dark-colors-chase: ( 'btnBackground': #252525,'primary': #005EB8, 'primary-variant': #005EB8, 'secondary': #126BC5, 'secondary-variant': #126BC5, 'error': #BD594C, 'background-light': #4D4D4D,'background': #252525, 'text':#e3e3e3, 'surface': #121212, 'onprimary': #000000, 'onsecondary': #e3e3e3, 'onbackground': #FFFFFF, 'onsurface': #FFFFFF, 'onerror': #000000);
 
@@ -58,6 +58,14 @@ $dark-colors-bnp: ( 'btnBackground': #252525,'primary': #027563, 'primary-varian
         box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);
     }
 
+    .searchBox .mud-input > input.mud-input-root, div.mud-input-slot.mud-input-root {
+        color: $text-color !important;
+    }
+
+    .mud-input > input.mud-input-root, div.mud-input-slot.mud-input-root {
+        color: black !important;
+    }
+
     .mud-input-control, .mud-input-control > .mud-input-control-input-container {
         background-color: $background-light !important;
         color: $text-color !important;
@@ -68,6 +76,10 @@ $dark-colors-bnp: ( 'btnBackground': #252525,'primary': #027563, 'primary-varian
     }
 
     .block-content {
+        background-color: $onprimary !important;
+    }
+
+    .item-rounded-lg.block-highlight {
         background-color: $onprimary !important;
     }
 
@@ -101,7 +113,7 @@ $dark-colors-bnp: ( 'btnBackground': #252525,'primary': #027563, 'primary-varian
     }
 
     .mud-input.mud-input-underline:hover {
-        border-bottom: 1px solid $primary !important;
+        border-bottom: none;
     }
 
     .mud-input.mud-input-underline:after {
@@ -110,6 +122,16 @@ $dark-colors-bnp: ( 'btnBackground': #252525,'primary': #027563, 'primary-varian
 
     .mud-theme-primary {
         background-color: $primary !important;
+    }
+
+    .dropdown-row, toast-body {
+        color: $background-light !important;
+    }
+
+    .multiselect-label {
+        color: $text-color !important;
+        position: absolute;
+        transform: translate(-18px, -20px) scale(.85);
     }
 }
 // Assuming you have a class on the body for each company and theme
@@ -577,12 +599,14 @@ a:hover {
     width: 300px;
     height: 32px;
     padding: 0px 10px;
+    margin: 20px;
     display: inline-block;
 }
 
 .selected-items {
     display: flex;
     align-items: center;
+    background: #FFFFFF;
     flex-wrap: wrap;
     height: 100%;
     border: 1px solid #ccc;
