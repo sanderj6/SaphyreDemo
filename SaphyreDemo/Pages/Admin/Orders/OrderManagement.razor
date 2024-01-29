@@ -18,140 +18,136 @@
 
 <div class="container mt-3">
 
-    <div class="form-container-header">
-        <div class="d-flex justify-content-between">
-            <h2>Order Management</h2>
+	<div class="form-container-header">
+		<div class="d-flex justify-content-between">
+			<h2>Order Management</h2>
 
-            <button class="btn btn-primary mb-2" @onclick="(() => AddUpdateOrder(true))">Start New Order</button>
-        </div>
-    </div>
+			<button class="btn btn-primary mb-2" @onclick="(() => AddUpdateOrder(true))">Start New Order</button>
+		</div>
+	</div>
 
-    <div class="form-container-header">
-        <div class="row">
-            <div class="col-md-3 col-6">
-                <Saphyre_InfoBlock Title="Pending Orders" Value="17" Type="BlockType.Pending" />
-            </div>
-            <div class="col-md-3 col-6">
-                <Saphyre_InfoBlock Title="Shipped Today" Value="34" Type="BlockType.Shipped" />
-            </div>
-            <div class="col-md-3 col-6">
-                <Saphyre_InfoBlock Title="New Customers" Value="120" Type="BlockType.Customers" />
-            </div>
-            <div class="col-md-3 col-6">
-                <Saphyre_InfoBlock Title="Fullfillment Rate" Value="98%" Type="BlockType.Fullfillment" />
-            </div>
-        </div>
-    </div>
+	<div class="form-container-header">
+		<div class="row">
+			<div class="col-md-3 col-6">
+				<Saphyre_InfoBlock Title="Pending Orders" Value="17" Type="BlockType.Pending" />
+			</div>
+			<div class="col-md-3 col-6">
+				<Saphyre_InfoBlock Title="Shipped Today" Value="34" Type="BlockType.Shipped" />
+			</div>
+			<div class="col-md-3 col-6">
+				<Saphyre_InfoBlock Title="New Customers" Value="120" Type="BlockType.Customers" />
+			</div>
+			<div class="col-md-3 col-6">
+				<Saphyre_InfoBlock Title="Fullfillment Rate" Value="98%" Type="BlockType.Fullfillment" />
+			</div>
+		</div>
+	</div>
 
-    <div class="form-container">
-        <Saphyre_Table TItem="OrderDescription"
-                       DataService="@GetFilteredData">
+	<div class="form-container">
+		<Saphyre_Table TItem="OrderDescription"
+					   DataService="@GetFilteredData">
 
-            <HeaderTemplate>
-                <MudTh>Description</MudTh>
-                <MudTh>Amount</MudTh>
-                <MudTh>TaxPercentage</MudTh>
-                <MudTh Class="hide-on-mobile">ID</MudTh>
-                <MudTh>Date</MudTh>
-            </HeaderTemplate>
+			<HeaderTemplate>
+				<MudTh>Description</MudTh>
+				<MudTh>Amount</MudTh>
+				<MudTh>TaxPercentage</MudTh>
+				<MudTh Class="hide-on-mobile">ID</MudTh>
+				<MudTh>Date</MudTh>
+			</HeaderTemplate>
 
-            <RowTemplate>
-                <MudTd DataLabel="Description">@context.Description</MudTd>
-                    <MudTd DataLabel="Amount">@context.Amount</MudTd>
-                    <MudTd DataLabel="TaxPercentage">@context.TaxPercentage</MudTd>
-                    <MudTd Class="hide-on-mobile" DataLabel="ID">@context.Id</MudTd>
-                    <MudTd DataLabel="Date">@context.Date.ToString("MM/dd/yyyy")</MudTd>
-                </RowTemplate>
+			<RowTemplate>
+				<MudTd DataLabel="Description">@context.Description</MudTd>
+					<MudTd DataLabel="Amount">@context.Amount</MudTd>
+					<MudTd DataLabel="TaxPercentage">@context.TaxPercentage</MudTd>
+					<MudTd Class="hide-on-mobile" DataLabel="ID">@context.Id</MudTd>
+					<MudTd DataLabel="Date">@context.Date.ToString("MM/dd/yyyy")</MudTd>
+				</RowTemplate>
 
-            </Saphyre_Table>
-        </div>
+			</Saphyre_Table>
+		</div>
 
-    </div>
+	</div>
 
-    <style>
-        .form-container {
-            max-width: 800px;
-            margin: 5px auto;
-            padding: 20px;
-            background-color: #f9f9f9;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 4px;
-        }
+	<style>
+		.form-container {
+			max-width: 800px;
+			margin: 5px auto;
+			padding: 20px;
+			background-color: #f9f9f9;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+			border-radius: 4px;
+		}
 
-        .form-container-header {
-            max-width: 800px;
-            margin: 0px auto;
-        }
+		.form-container-header {
+			max-width: 800px;
+			margin: 0px auto;
+		}
 
-        .form-group {
-            background-color: #f9f9f9;
-        }
+		.form-group {
+			background-color: #f9f9f9;
+		}
 
-        .form-input {
-            width: 100%;
-            padding: 8px;
-            margin-top: 5px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
+		.form-input {
+			width: 100%;
+			padding: 8px;
+			margin-top: 5px;
+			border: 1px solid #ddd;
+			border-radius: 4px;
+			box-sizing: border-box;
+		}
 
-        .form-button {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            border-radius: 4px;
-            background-color: #0056b3;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-        }
+		.form-button {
+			width: 100%;
+			padding: 10px;
+			border: none;
+			border-radius: 4px;
+			background-color: #0056b3;
+			color: white;
+			font-size: 16px;
+			cursor: pointer;
+		}
 
-            .form-button:hover {
-                background-color: #004494;
-            }
-    </style>
+			.form-button:hover {
+				background-color: #004494;
+			}
+	</style>
 
 
-    @code {
+	@code {
 
-    // Dummy list of users
-    public IEnumerable<OrderDescription> Orders { get; set; }
-    public OrderDescription SelectedOrder { get; set; } = new();
-    public bool IsNewOrder { get; set; }
+	// Dummy list of users
+	public IEnumerable<OrderDescription> Orders { get; set; }
+	public OrderDescription SelectedOrder { get; set; } = new();
+	public bool IsNewOrder { get; set; }
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            Orders = dummyOrderService.GetAllOrders();
-        }
-    }
+	protected override async Task OnAfterRenderAsync(bool firstRender)
+	{
+		if (firstRender)
+		{
+			Orders = dummyOrderService.GetAllOrders();
+		}
+	}
 
-    private async Task<IEnumerable<OrderDescription>> GetFilteredData(string searchString)
-    {
-        // Assume GetFilteredOrdersAsync handles the filtering based on searchString
-        return await dummyOrderService.GetFilteredOrders(searchString);
-    }
+	private async Task<IEnumerable<OrderDescription>> GetFilteredData(string searchString)
+	{
+		// Assume GetFilteredOrdersAsync handles the filtering based on searchString
+		return await dummyOrderService.GetFilteredOrders(searchString);
+	}
 
-    private async Task AddUpdateOrder(bool IsNewOrder = false)
-    {
-        var OrderText = IsNewOrder ? "Create Order" : "Manage Order"; // Set Title text
-        SelectedOrder = IsNewOrder ? new() : SelectedOrder;           // Clear SelectedOrder when submitting new
+	private async Task AddUpdateOrder(bool IsNewOrder = false)
+	{
+		var OrderText = IsNewOrder ? "Create Order" : "Manage Order"; // Set Title text
+		SelectedOrder = IsNewOrder ? new() : SelectedOrder;           // Clear SelectedOrder when submitting new
 
-        modalService.Show<OrderDescription, bool>(OrderText, "modal-md", typeof(OrderDetailsModal), SelectedOrder, result =>
-        {
-            if (result)
-            {
-            }
+		modalService.Show<OrderDescription, bool>(OrderText, "modal-md", typeof(OrderDetailsModal), SelectedOrder, result =>
+		{
+			if (result)
+			{
+				toastService.ShowMessage("Order has been successfully submitted!");
+			}
 
-            modalService.Close();
-        });
-    }
-
-    private async Task ShowToast()
-    {
-        toastService.ShowMessage("Order has been successfully submitted!");
-    }
+			modalService.Close();
+		});
+	}
 
 }
