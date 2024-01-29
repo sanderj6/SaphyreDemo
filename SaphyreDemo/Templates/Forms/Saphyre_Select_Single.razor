@@ -4,7 +4,7 @@
 @using System.Reflection
 @using MudBlazor
 
-<div class="">
+<div class="saphyre_selectbox">
 
 
 	<MudSelect Value="InputValue"
@@ -110,7 +110,6 @@
 		if (newItems.Any(x => string.IsNullOrEmpty(x)))
 		{
 			CheckAllValues();
-			//SelectedItems = newItems.Where(x => !string.IsNullOrEmpty(x));
 		}
 		else
 		{
@@ -160,75 +159,4 @@
 		StateHasChanged();
 	}
 }
-
-<style>
-	/********************************/
-	.mud-input {
-		font-family: 'Roboto';
-		font-size: 14px;
-		color: #797979;
-		background-color: #FFFFFF;
-		height: 32px;
-		/* width: 300px; */
-		border: 1px solid #DDDDDD;
-		border-radius: 4px;
-		padding: 10px 8px !important;
-	}
-
-		.mud-input:focus {
-			border-radius: 4px;
-			border: 1px solid #00A4D7;
-			background: rgba(0, 164, 215, 0.05);
-		}
-
-	.mud-input-label {
-		font-family: 'Roboto';
-		font-size: 14px;
-		color: #797979;
-		padding-left: 8px !important;
-		padding-right: 8px !important;
-	}
-
-	.mud-input-control {
-		height: 4.5rem !important;
-		padding: 0px 10px;
-	}
-
-	.mud-input:focus-within ~ label.mud-input-label.mud-input-label-inputcontrol {
-		color: #797979;
-	}
-
-	.mud-input.mud-input-underline:hover:not(.mud-disabled):before {
-		border-bottom: none;
-	}
-
-	.mud-input.mud-input-underline:before {
-		border-bottom: none;
-	}
-
-	.mud-input.mud-input-underline:after {
-		border-bottom: none;
-	}
-
-	.mud-shrink ~ label.mud-input-label.mud-input-label-inputcontrol, .mud-input:focus-within ~ label.mud-input-label.mud-input-label-inputcontrol {
-		/*         transform: translate(0, 1.5px) scale(0.75);
-																											 */ /* transform: none !important; */
-		/*         transform-origin: top left;
-																											 */
-	}
-
-	.mud-input-label {
-		color: #797979;
-		transform: translate(0,0) scale(0.75) !important;
-	}
-
-	.mud-shrink ~ label.mud-input-label.mud-input-label-inputcontrol {
-		color: #797979;
-	}
-
-	.mud-input-adornment {
-		color: #ABABAB;
-	}
-
-</style>
 

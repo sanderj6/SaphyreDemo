@@ -2,5 +2,17 @@
   {
     "outputFile": "wwwroot/css/site.css",
     "inputFile": "wwwroot/css/site.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/Modals.css",
+    "inputFile": "wwwroot/css/Modals.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/Forms.css",
+    "inputFile": "wwwroot/css/Forms.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/Dropdown.css",
+    "inputFile": "wwwroot/css/Dropdown.scss"
   }
 ]

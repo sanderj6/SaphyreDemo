@@ -1,0 +1,107 @@
+@import 'site.scss';
+
+// Modals
+.saphyre-modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: none; /* modal hidden by default */
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(2px);
+    z-index: 1000; /* Ensure modal is on top of other content */
+}
+
+.saphyre-modal-container.active {
+    display: flex; /* Display modal when active */
+}
+
+.saphyre-modal-dialog {
+    background: white;
+    border-radius: 4px;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3), 0px 4px 8px 3px rgba(0, 0, 0, 0.15);
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.saphyre-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid lightgrey;
+}
+
+.saphyre-modal-title {
+    font-family: "Roboto";
+    font-weight: 700;
+    font-size: 16px;
+    color: #132048;
+    margin: 0;
+}
+
+.saphyre-modal-close {
+    cursor: pointer;
+    border: none;
+    background: none;
+}
+
+.saphyre-modal-close:hover {
+    opacity: 0.7;
+}
+
+.saphyre-modal-container.active .saphyre-modal-dialog {
+    animation: slideUpFadeIn 0.25s ease-out;
+}
+
+@keyframes slideUpFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .saphyre-modal-dialog {
+        width: 80%;
+    }
+}
+
+@media (max-width: 480px) {
+    .saphyre-modal-dialog {
+        width: 95%;
+        padding: 10px;
+    }
+}
+
+@media (min-width: 476px) {
+    .modal-dialog {
+        max-width: 900px;
+        margin: 1.75rem auto;
+    }
+
+    .modal-sm {
+        max-width: 300px !important;
+    }
+}
+
+@media (min-width: 750px) {
+    .modal-lg,
+    .modal-xl {
+        max-width: 800px !important;
+    }
+}
+
+@media (min-width: 900px) {
+    .modal-xl {
+        max-width: 1140px !important;
+    }
+}

@@ -3,7 +3,6 @@
 @using SaphyreDemo.Pages.Admin.Orders.Components
 @using SaphyreDemo.Services.Modal
 @inherits PageBase<StylesDemo>
-@inject ModalService modalService
 
 <PageTitle>Styles</PageTitle>
 
@@ -78,9 +77,6 @@
 
 </div>
 
-<button @onclick="ShowModal" class="btn btn-primary">SHOW MODAL</button>
-
-
 @code {
     private YourModel Model = new YourModel();
 
@@ -111,17 +107,6 @@
     public async Task HandleSubmit()
     {
 
-    }
-
-    private async Task ShowModal()
-    {
-        modalService.Show<UserModel, bool>("Success!", "modal-md", typeof(UserSuccessModal), UserModel, ModalService.ModalOperation.Add, result =>
-        {
-            if (result)
-            {
-
-            }
-        });
     }
 
 }

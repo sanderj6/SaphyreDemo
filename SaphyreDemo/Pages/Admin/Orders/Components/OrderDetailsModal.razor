@@ -16,59 +16,41 @@
 		<div>
 
 			<div class="saphyre-form d-flex flex-md-row flex-column">
-				<div class="col-md-4 col-12">
+				<div class="col-md-6 col-12">
 					<Saphyre_Textbox FieldExpression="@(() => Model.Description)" CSSClass="form-input" />
 				</div>
 
-				<div class="col-md-4 col-12">
-					<Saphyre_Numberbox FieldExpression="@(() => Model.Amount)" CSSClass="form-input" />
-				</div>
-
-				<div class="col-md-4 col-12">
-					<Saphyre_Date FieldExpression="@(() => Model.Date)" CSSClass="form-input" />
+				<div class="col-md-6 col-12">
+					<Saphyre_Select_Single FieldExpression="(() => Model.ShippingType.Name)"
+										   Data="shippingOptions" />
 				</div>
 			</div>
 
 			<div class="saphyre-form d-flex flex-md-row flex-column align-items-center">
 				<div class="col-md-6 col-12">
-					@* 					<Saphyre_Select FieldExpression="(() => Model.Currency.Name)"
-					TItem="Currency"
-					Data="currencyList.Currencies"
-					IsGridMode="true"
-					IsMultiSelect="true"
-					Value_Primary="@((Currency c) => c.Name)"
-					Value_Secondary="@((Currency c) => c.ISOCode)" /> *@
+					<div class="col-md-4 col-12">
+						<Saphyre_Numberbox FieldExpression="@(() => Model.Amount)" CSSClass="form-input" />
+					</div>
 
-					<Saphyre_Select_Custom IsGridEditable="true" />
+					<Saphyre_Select_Single FieldExpression="(() => Model.ShippingType.Name)"
+										   Data="shippingOptions" />
 				</div>
+			</div>
 
-				<div class="col-md-4 col-12">
-					<Saphyre_Numberbox InputValue="Model.TaxPercentage" IsPercentage="true" CSSClass="form-input" />
+			<div class="saphyre-form d-flex flex-md-row flex-column">
+				<div class="col-12">
+					<Saphyre_Select_Grid IsGridEditable="true" />
 				</div>
-
 			</div>
 
 			<div class="saphyre-form d-flex flex-md-row flex-column">
 				<div class="col-md-4 col-12">
-					@* <Saphyre_Select FieldExpression="(() => Model.Currency)"
-					TItem="Currency"
-					Data="currencyList.Currencies"
-					IsMultiSelect="true"
-					ItemTemplate="@CurrencyItemTemplate"
-					ValueSelector="@((Currency c) => c.Name)"
-					CSSClass="form-input">
-
-					</Saphyre_Select> *@
+					<Saphyre_Numberbox InputValue="Model.TaxPercentage" IsPercentage="true" CSSClass="form-input" />
 				</div>
 
-				@*            <div class="col-md-4 col-12">
-				<Saphyre_Select FieldExpression="(() => Model.Products)"
-				TItem="Currency"
-				Data="currencyList.Currencies"
-				ValueSelector="@((Currency c) => c.Name)"
-				CSSClass="form-input" />
-				</div> *@
-
+				<div class="col-md-4 col-12">
+					<Saphyre_Date FieldExpression="@(() => Model.Date)" CSSClass="form-input" />
+				</div>
 			</div>
 
 			<div class="saphyre-form d-flex justify-content-end pt-4 gap-3">
@@ -85,12 +67,6 @@
 	</EditForm>
 </div>
 
-<style>
-	.modalButton {
-		width: 8rem;
-	}
-</style>
-
 @code {
 	[Parameter]
 	public OrderDescription Model { get; set; }
@@ -101,6 +77,29 @@
 	private EditContext editContext { get; set; }
 
 	private CurrencyList currencyList = new();
+	private List<DropDownItem> shippingOptions = new()
+					{
+		new DropDownItem()
+		{
+			Id = Guid.NewGuid(),
+			Name = "Expedited"
+		},
+		new DropDownItem()
+		{
+			Id = Guid.NewGuid(),
+			Name = "Overnight"
+		},
+		new DropDownItem()
+		{
+			Id = Guid.NewGuid(),
+			Name = "Priority"
+		},
+		new DropDownItem()
+		{
+			Id = Guid.NewGuid(),
+			Name = "Standard"
+		}
+					};
 
 	protected override async Task OnInitializedAsync()
 	{
@@ -121,7 +120,7 @@
 	}
 
 	private RenderFragment<Currency> CurrencyItemTemplate => item => builder =>
-			{
+					{
 	builder.OpenComponent<MudSelectItem<Currency>>(0); // Specify the type argument here
 	builder.AddAttribute(1, "Value", item.Name);
 	builder.AddContent(2,
@@ -130,6 +129,6 @@
 		<div class="column2">@item.Name</div>
 	</div>);
 	builder.CloseComponent();
-		};
+				};
 
 }
