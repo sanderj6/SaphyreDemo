@@ -2,6 +2,7 @@
 @using MudBlazor
 @using SaphyreDemo.Templates.Modals
 @using SaphyreDemo.Templates.Toasts
+@inject IJSRuntime JSRuntime
 
 <PageTitle>Saphyre Demo</PageTitle>
 
@@ -32,10 +33,21 @@
     public string ColorScheme => $"{CompanyName}-{LightMode}";
     public bool IsLightMode { get; set; }
 
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JSRuntime.InvokeVoidAsync("setBodyClass", ColorScheme);
+        }
+    }
+
     private void OnColorSchemeChanged(string company, bool isLightMode)
     {
         CompanyName = company;
         IsLightMode = isLightMode;
+
+        JSRuntime.InvokeVoidAsync("setBodyClass", ColorScheme);
+
         InvokeAsync(StateHasChanged);
     }
 }

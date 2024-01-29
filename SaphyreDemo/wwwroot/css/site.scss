@@ -1,5 +1,142 @@
 @import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
+// Light Theme Colors
+//$light-colors-saphyre: ( 'primary': #0C4564, 'primary-variant': #157EB7, 'secondary': #55C0C6, 'secondary-variant': #55C0C6, 'error': #C16458, 'background': #FFFFFF, 'text':#252525, 'surface': #FFFFFF, 'onprimary': #FFFFFF, 'onsecondary': #000000, 'onbackground': #000000, 'onsurface': #000000, 'onerror': #FFFFFF );
+$light-colors-saphyre: ( 'btnBackground': #157EB7, 'primary': #157EB7, 'primary-variant': #157EB7, 'secondary': #55C0C6, 'secondary-variant': #55C0C6, 'error': #C16458,'background-light': #f9f9f9, 'background': fixed linear-gradient(220deg,#0caedd 10%,#183a6b 90%), 'text':#252525, 'surface': #FFFFFF, 'onprimary': #FFFFFF, 'onsecondary': #FFFFFF, 'onbackground': #000000, 'onsurface': #000000, 'onerror': #FFFFFF );
+
+$light-colors-chase: ( 'btnBackground': #48B1EA,'primary': #48B1EA, 'primary-variant': #005EB8, 'secondary': #126BC5, 'secondary-variant': #126BC5, 'error': #C16458, 'background-light': #F4F4F4,'background': fixed linear-gradient(220deg,#126BC5 10%,#183a6b 90%), 'text':#252525, 'surface': #FFFFFF, 'onprimary': #FFFFFF, 'onsecondary': #FFFFFF, 'onbackground': #000000, 'onsurface': #000000, 'onerror': #FFFFFF );
+
+$light-colors-bnp: ( 'btnBackground': #03A776,'primary': #03A776, 'primary-variant': #027563, 'secondary': #82ffec, 'secondary-variant': #82ffec, 'error': #C16458, 'background-light': #F4F4F4,'background': fixed linear-gradient(220deg,#5FFCCD 10%,#027563 90%), 'text':#252525, 'surface': #FFFFFF, 'onprimary': #FFFFFF, 'onsecondary': #FFFFFF, 'onbackground': #000000, 'onsurface': #000000, 'onerror': #FFFFFF );
+
+// Dark Theme Colors
+$dark-colors-saphyre: ( 'btnBackground': #252525,'primary': #48B1EA, 'primary-variant': #0285A6, 'secondary': #55C0C6, 'secondary-variant': #55C0C6, 'error': #BD594C, 'background-light': #4D4D4D,'background': #252525, 'text':#e3e3e3, 'surface': #121212, 'onprimary': #000000, 'onsecondary': #e3e3e3, 'onbackground': #FFFFFF, 'onsurface': #FFFFFF, 'onerror': #000000 );
+
+$dark-colors-chase: ( 'btnBackground': #252525,'primary': #005EB8, 'primary-variant': #005EB8, 'secondary': #126BC5, 'secondary-variant': #126BC5, 'error': #BD594C, 'background-light': #4D4D4D,'background': #252525, 'text':#e3e3e3, 'surface': #121212, 'onprimary': #000000, 'onsecondary': #e3e3e3, 'onbackground': #FFFFFF, 'onsurface': #FFFFFF, 'onerror': #000000);
+
+$dark-colors-bnp: ( 'btnBackground': #252525,'primary': #027563, 'primary-variant': #027563, 'secondary': #82ffec, 'secondary-variant': #82ffec, 'error': #BD594C, 'background-light': #4D4D4D,'background': #252525, 'text':#e3e3e3, 'surface': #121212, 'onprimary': #000000, 'onsecondary': #e3e3e3, 'onbackground': #FFFFFF, 'onsurface': #FFFFFF, 'onerror': #000000);
+
+// Function to get color from the current color map
+@function get-color($color-map, $color-key) {
+    @return map-get($color-map, $color-key);
+}
+
+// Mixin to set theme colors
+@mixin set-theme($btnBackground, $onsecondary, $background-color, $background-light, $text-color, $primary, $primary-variant, $secondary, $secondary-variant, $onprimary) {
+    background: $background-color !important;
+    color: $onsecondary !important;
+
+    .btn {
+        background-color: $btnBackground !important;
+        border: 2px solid $primary !important;
+        color: $onprimary !important;
+        box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);
+    }
+
+    .btn:hover {
+        background-color: $primary !important;
+    }
+
+    .btn-outline-secondary {
+        background-color: $primary !important;
+        border: 2px solid $primary !important;
+        color: $onprimary !important;
+        min-width: 5rem;
+    }
+
+    .form-container, .form-group, .saphyre-modal-content, .saphyre-modal-dialog {
+        background-color: $background-light !important;
+    }
+
+    .mud-table {
+        background-color: $onprimary !important;
+        color: $onprimary !important;
+    }
+
+    .searchBox .mud-input-control > .mud-input-control-input-container {
+        background-color: $onprimary !important;
+        border-radius: 4px;
+        box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);
+    }
+
+    .mud-input-control, .mud-input-control > .mud-input-control-input-container {
+        background-color: $background-light !important;
+        color: $text-color !important;
+    }
+
+    .mud-input-label {
+        color: $text-color !important;
+    }
+
+    .block-content {
+        background-color: $onprimary !important;
+    }
+
+    .block-highlight .block-content {
+        background-color: $background-light !important;
+        color: $text-color !important;
+    }
+
+    .mud-button-filled {
+        background-color: $primary-variant !important;
+    }
+
+    .saphyre-modal-title {
+        color: $text-color !important;
+    }
+
+    .mud-icon-root.mud-svg-icon {
+        fill: $primary-variant !important;
+    }
+
+    .saphyre-form {
+        background-color: $background-light !important;
+    }
+
+    .modalButton {
+        background-color: $primary !important;
+    }
+
+    .mud-input-slot {
+        color: $text-color !important;
+    }
+
+    .mud-input.mud-input-underline:hover {
+        border-bottom: 1px solid $primary !important;
+    }
+
+    .mud-input.mud-input-underline:after {
+        border-bottom: 1px solid $primary !important;
+    }
+
+    .mud-theme-primary {
+        background-color: $primary !important;
+    }
+}
+// Assuming you have a class on the body for each company and theme
+// Apply the mixin to each theme class
+.saphyre-light {
+    @include set-theme(map-get($light-colors-saphyre, 'btnBackground'), map-get($light-colors-saphyre, 'onsecondary'), map-get($light-colors-saphyre, 'background'), map-get($light-colors-saphyre, 'background-light'), map-get($light-colors-saphyre, 'text'), map-get($light-colors-saphyre, 'primary'), map-get($light-colors-saphyre, 'primary-variant'), map-get($light-colors-saphyre, 'secondary'), map-get($light-colors-saphyre, 'secondary-variant'), map-get($light-colors-saphyre, 'onprimary'));
+}
+
+.saphyre-dark {
+    @include set-theme(map-get($dark-colors-saphyre, 'btnBackground'), map-get($dark-colors-saphyre, 'onsecondary'),map-get($dark-colors-saphyre, 'background'), map-get($dark-colors-saphyre, 'background-light'),map-get($dark-colors-saphyre, 'text'), map-get($dark-colors-saphyre, 'primary'), map-get($dark-colors-saphyre, 'primary-variant'), map-get($dark-colors-saphyre, 'secondary'), map-get($dark-colors-saphyre, 'secondary-variant'), map-get($light-colors-saphyre, 'onprimary'));
+}
+
+.chase-light {
+    @include set-theme(map-get($light-colors-chase, 'btnBackground'), map-get($light-colors-chase, 'onsecondary'),map-get($light-colors-chase, 'background'), map-get($light-colors-chase, 'background-light'),map-get($light-colors-chase, 'text'), map-get($light-colors-chase, 'primary'), map-get($light-colors-chase, 'primary-variant'), map-get($light-colors-chase, 'secondary'), map-get($light-colors-chase, 'secondary-variant'), map-get($light-colors-saphyre, 'onprimary'));
+}
+
+.chase-dark {
+    @include set-theme(map-get($dark-colors-chase, 'btnBackground'), map-get($dark-colors-chase, 'onsecondary'),map-get($dark-colors-chase, 'background'), map-get($dark-colors-chase, 'background-light'),map-get($dark-colors-chase, 'text'), map-get($dark-colors-chase, 'primary'), map-get($dark-colors-chase, 'primary-variant'), map-get($dark-colors-chase, 'secondary'), map-get($dark-colors-chase, 'secondary-variant'), map-get($light-colors-saphyre, 'onprimary'));
+}
+
+.bnp-light {
+    @include set-theme(map-get($light-colors-bnp, 'btnBackground'), map-get($light-colors-bnp, 'onsecondary'),map-get($light-colors-bnp, 'background'), map-get($light-colors-bnp, 'background-light'),map-get($light-colors-bnp, 'text'), map-get($light-colors-bnp, 'primary'), map-get($light-colors-bnp, 'primary-variant'), map-get($light-colors-bnp, 'secondary'), map-get($light-colors-bnp, 'secondary-variant'), map-get($light-colors-saphyre, 'onprimary'));
+}
+
+.bnp-dark {
+    @include set-theme(map-get($dark-colors-bnp, 'btnBackground'), map-get($dark-colors-bnp, 'onsecondary'),map-get($dark-colors-bnp, 'background'), map-get($dark-colors-bnp, 'background-light'),map-get($dark-colors-bnp, 'text'), map-get($dark-colors-bnp, 'primary'), map-get($dark-colors-bnp, 'primary-variant'), map-get($dark-colors-bnp, 'secondary'), map-get($dark-colors-bnp, 'secondary-variant'), map-get($light-colors-saphyre, 'onprimary'));
+}
 // Define base colors for each company
 $saphyre-base-color: #123456;
 $bnp-base-color: #789abc;
@@ -42,11 +179,10 @@ $light-text: #000000;
 form {
     background: $light-background;
 }
-
-// Saphyre Theme
+/*// Saphyre Theme
 .saphyre-light {
     //background-color: $light-background;
-    background: fixed linear-gradient(220deg,#0caedd 10%,#183a6b 90%);
+    //background: fixed linear-gradient(220deg,#0caedd 10%,#183a6b 90%);
     color: $saphyre-dark-blue;
 
     .btn-primary {
@@ -58,7 +194,7 @@ form {
 
 .saphyre-dark {
     //background-color: $saphyre-black;
-    background: fixed linear-gradient(220deg,#0caedd 10%,#183a6b 90%);
+    //background: fixed linear-gradient(220deg,#0caedd 10%,#183a6b 90%);
     //background-color: fixed linear-gradient(220deg,#0caedd 10%,#183a6b 90%);
     color: $dark-text;
 
@@ -77,7 +213,7 @@ form {
 
 // BNP Paribas Theme
 .bnp-light {
-    background-color: $bnp-light-gray;
+    //background-color: $bnp-light-gray;
     color: $bnp-dark-blue;
 
     .button {
@@ -86,7 +222,7 @@ form {
 }
 
 .bnp-dark {
-    background-color: $bnp-black;
+    //background-color: $bnp-black;
     color: $dark-text;
 
     .button {
@@ -96,7 +232,7 @@ form {
 
 // Chase Theme
 .chase-light {
-    background-color: $chase-light-gray;
+    //background-color: $chase-light-gray;
     color: $chase-navy-blue;
 
     .button {
@@ -111,10 +247,7 @@ form {
     .button {
         @include button-style($chase-navy-blue);
     }
-}
-
-
-
+}*/
 // Base styles
 
 body {
@@ -143,8 +276,6 @@ body {
         text-align: left;
     }
 }
-
-
 // Default Styles
 h1:focus {
     outline: none;
@@ -204,8 +335,6 @@ a, .btn-link {
 .blazor-error-boundary::after {
     content: "An error has occurred."
 }
-
-
 // Modals
 .saphyre-modal-container {
     position: fixed;
@@ -314,7 +443,6 @@ a, .btn-link {
         max-width: 1140px !important;
     }
 }
-
 // Forms
 
 .validation-message {
@@ -325,7 +453,6 @@ a, .btn-link {
     font-weight: 500;
     line-height: normal;
 }
-
 // Info Block
 
 .section-spacing {
@@ -443,7 +570,6 @@ a:hover {
         width: 9rem;
     }
 }
-
 // Dropdown
 
 .multiselect-dropdown {
@@ -499,12 +625,10 @@ a:hover {
     font-size: 16px;
     outline: none;
 }
-
 /* Position the button to the right */
 .button-dropdown {
     margin-left: auto;
 }
-
 /* Dropdown Content Styling */
 .dropdown-content {
     display: block;
@@ -562,12 +686,10 @@ a:hover {
 .dropdown-row label {
     margin-right: 10px;
 }
-
 /* Additional styling for checked items or hover states */
 .dropdown-row:hover {
     background-color: #f1f1f1;
 }
-
 /* Show the dropdown menu on button click */
 .multiselect-dropdown .selected-items .button-dropdown:focus + .dropdown-content,
 .multiselect-dropdown .selected-items .button-dropdown:active + .dropdown-content,
@@ -633,7 +755,7 @@ a:hover {
     width: 8rem;
     border: 1px solid black;
     border-radius: 4px;
-    padding: 5px;    
+    padding: 5px;
 }
 
 .editSubItem {
@@ -641,4 +763,135 @@ a:hover {
     border: 1px solid black;
     border-radius: 4px;
     padding: 5px;
+}
+// FORMS
+
+.form-container {
+    max-width: 800px;
+    margin: 5px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+.form-container-header {
+    max-width: 800px;
+    margin: 0px auto;
+}
+
+.form-group {
+    background-color: #f9f9f9;
+}
+
+.form-input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.form-button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #0056b3;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.form-button:hover {
+    background-color: #004494;
+}
+// TOP ROW
+
+.page {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+}
+
+.sidebar {
+    background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
+}
+
+.top-row {
+    background-color: #f7f7f7;
+    border-bottom: 1px solid #d6d5d5;
+    justify-content: flex-end;
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.top-row ::deep a, .top-row .btn-link {
+    white-space: nowrap;
+    margin-left: 1.5rem;
+}
+
+.top-row a:first-child {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@media (max-width: 640.98px) {
+    .top-row:not(.auth) {
+        display: none;
+    }
+
+    .top-row.auth {
+        justify-content: space-between;
+    }
+
+    .top-row a, .top-row .btn-link {
+        margin-left: 0;
+    }
+}
+
+@media (min-width: 641px) {
+    .page {
+        flex-direction: row;
+    }
+
+    .sidebar {
+        width: 250px;
+        height: 100vh;
+        position: sticky;
+        top: 0;
+    }
+
+    .top-row {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+    }
+
+    .top-row, article {
+        padding-left: 2rem !important;
+        padding-right: 1.5rem !important;
+    }
+}
+
+.mud-input-control > .mud-input-control-input-container > div.mud-input.mud-input-text {
+    margin: 20px
+}
+
+.mud-table-container {
+    padding: 20px;
+}
+
+.ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 150px;
 }

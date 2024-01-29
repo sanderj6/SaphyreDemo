@@ -6,3 +6,8 @@ window.mobileAndTabletCheck = function () {
     })(navigator.userAgent || navigator.vendor || window.opera);
     return check;
 };
+
+// Color Schema
+function setBodyClass(className) {
+    document.body.className = className;
+}
