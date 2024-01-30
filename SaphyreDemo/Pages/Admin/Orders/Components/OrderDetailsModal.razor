@@ -11,15 +11,16 @@
 
 <div class="container">
 	<EditForm EditContext="@editContext"
-			  OnValidSubmit="HandleSubmit">
+			  OnValidSubmit="HandleSubmit"
+			  OnInvalidSubmit="HandleInvalidSubmit">
 		<DataAnnotationsValidator />
 
 		<div>
 
 			<div class="saphyre-form d-flex flex-md-row flex-column">
 				<div class="col-md-6 col-12">
-					<Saphyre_Textbox FieldExpression="@(() => Model.Description)" 
-						ValueChanged="((string item) => {Model.Description = item; ReValidate();})" />
+					<Saphyre_Textbox FieldExpression="@(() => Model.Description)"
+									 ValueChanged="((string item) => {Model.Description = item; ReValidate();})" />
 				</div>
 
 				<div class="col-md-6 col-12">
@@ -43,18 +44,18 @@
 			</div>
 
 			<div class="saphyre-form d-flex flex-md-row flex-column">
-				<div class="col-md-8 col-12">
+				<div class="col-md-12 col-12">
 					<Saphyre_Select_Grid FieldExpression="(() => Model.ShippingType.Name)" IsGridEditable="true" />
-				</div>
-				<div class="col-md-4 col-12">
-					<Saphyre_Date FieldExpression="@(() => Model.Date)" />
 				</div>
 			</div>
 
 			<div class="saphyre-form d-flex flex-md-row flex-column">
 				<div class="col-md-6 col-12">
 					<Saphyre_Numberbox FieldExpression="@(() => Model.TaxPercentage)" T="decimal" IsPercentage="true"
-						ValueChanged="((decimal item) => {Model.Amount = item; ReValidate();})"/>
+									   ValueChanged="((decimal item) => {Model.TaxPercentage = item; ReValidate();})" />
+				</div>
+				<div class="col-md-6 col-12">
+					<Saphyre_Date FieldExpression="@(() => Model.Date)" />
 				</div>
 			</div>
 
@@ -113,12 +114,9 @@
 
 	private async Task HandleSubmit()
 	{
-		var test = "blah";
-		//ValidateModel();
-		if (!editContext.GetValidationMessages().Any())
-		{
-			// Proceed with the form submission logic
-		}
+		// fake API call
+
+		Callback?.Invoke(true);
 	}
 
 	private async Task ReValidate()
@@ -128,9 +126,9 @@
 
 	public async Task HandleInvalidSubmit()
 	{
-		//var isValid = editContext.Validate();
-		//var test = editContext.GetValidationMessages();
-		//editContext.NotifyValidationStateChanged();
+		var isValid = editContext.Validate();
+		var test = editContext.GetValidationMessages();
+		editContext.NotifyValidationStateChanged();
 	}
 
 	public async Task HandleCancel()
