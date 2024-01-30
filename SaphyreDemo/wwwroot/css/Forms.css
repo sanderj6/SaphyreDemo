@@ -3,6 +3,9 @@
 .saphyre-light {
   background: fixed linear-gradient(220deg, #0caedd 10%, #183a6b 90%) !important;
   color: #FFFFFF !important;
+  /*    .mud-table-body{
+      height:20rem;
+  }*/
 }
 .saphyre-light .btn {
   background-color: #157EB7 !important;
@@ -25,15 +28,19 @@
 .saphyre-light .mud-table {
   background-color: #FFFFFF !important;
   color: #FFFFFF !important;
+  height: 30rem;
 }
-.saphyre-light .searchBox .mud-input-control > .mud-input-control-input-container {
+.saphyre-light .searchBox.mud-input-control > .mud-input-control-input-container {
   background-color: #FFFFFF !important;
   border-radius: 4px;
   color: black !important;
   box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
 }
-.saphyre-light .searchBox .mud-input > input.mud-input-root, .saphyre-light div.mud-input-slot.mud-input-root {
-  color: black !important;
+.saphyre-light .mud-input .mud-input-text .mud-input-adorned-end .mud-input-underline .mud-shrink .searchBox .mud-input > input.mud-input-root, .saphyre-light div.mud-input-slot.mud-input-root {
+  padding: 0;
+}
+.saphyre-light .mud-input.mud-input-text.mud-input-adorned-end.mud-input-underline.mud-shrink {
+  padding: 0;
 }
 .saphyre-light .mud-input > input.mud-input-root, .saphyre-light div.mud-input-slot.mud-input-root {
   color: black !important;
@@ -103,6 +110,9 @@
 .saphyre-dark {
   background: fixed linear-gradient(220deg, #183a6b 10%, #010513 90%) !important;
   color: #e3e3e3 !important;
+  /*    .mud-table-body{
+      height:20rem;
+  }*/
 }
 .saphyre-dark .btn {
   background-color: #010513 !important;
@@ -125,15 +135,19 @@
 .saphyre-dark .mud-table {
   background-color: #FFFFFF !important;
   color: #FFFFFF !important;
+  height: 30rem;
 }
-.saphyre-dark .searchBox .mud-input-control > .mud-input-control-input-container {
+.saphyre-dark .searchBox.mud-input-control > .mud-input-control-input-container {
   background-color: #FFFFFF !important;
   border-radius: 4px;
   color: black !important;
   box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
 }
-.saphyre-dark .searchBox .mud-input > input.mud-input-root, .saphyre-dark div.mud-input-slot.mud-input-root {
-  color: black !important;
+.saphyre-dark .mud-input .mud-input-text .mud-input-adorned-end .mud-input-underline .mud-shrink .searchBox .mud-input > input.mud-input-root, .saphyre-dark div.mud-input-slot.mud-input-root {
+  padding: 0;
+}
+.saphyre-dark .mud-input.mud-input-text.mud-input-adorned-end.mud-input-underline.mud-shrink {
+  padding: 0;
 }
 .saphyre-dark .mud-input > input.mud-input-root, .saphyre-dark div.mud-input-slot.mud-input-root {
   color: black !important;
@@ -203,6 +217,9 @@
 .chase-light {
   background: fixed linear-gradient(220deg, #126BC5 10%, #183a6b 90%) !important;
   color: #FFFFFF !important;
+  /*    .mud-table-body{
+      height:20rem;
+  }*/
 }
 .chase-light .btn {
   background-color: #48B1EA !important;
@@ -225,15 +242,19 @@
 .chase-light .mud-table {
   background-color: #FFFFFF !important;
   color: #FFFFFF !important;
+  height: 30rem;
 }
-.chase-light .searchBox .mud-input-control > .mud-input-control-input-container {
+.chase-light .searchBox.mud-input-control > .mud-input-control-input-container {
   background-color: #FFFFFF !important;
   border-radius: 4px;
   color: black !important;
   box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
 }
-.chase-light .searchBox .mud-input > input.mud-input-root, .chase-light div.mud-input-slot.mud-input-root {
-  color: black !important;
+.chase-light .mud-input .mud-input-text .mud-input-adorned-end .mud-input-underline .mud-shrink .searchBox .mud-input > input.mud-input-root, .chase-light div.mud-input-slot.mud-input-root {
+  padding: 0;
+}
+.chase-light .mud-input.mud-input-text.mud-input-adorned-end.mud-input-underline.mud-shrink {
+  padding: 0;
 }
 .chase-light .mud-input > input.mud-input-root, .chase-light div.mud-input-slot.mud-input-root {
   color: black !important;
@@ -303,6 +324,9 @@
 .chase-dark {
   background: #252525 !important;
   color: #e3e3e3 !important;
+  /*    .mud-table-body{
+      height:20rem;
+  }*/
 }
 .chase-dark .btn {
   background-color: #252525 !important;
@@ -325,15 +349,19 @@
 .chase-dark .mud-table {
   background-color: #FFFFFF !important;
   color: #FFFFFF !important;
+  height: 30rem;
 }
-.chase-dark .searchBox .mud-input-control > .mud-input-control-input-container {
+.chase-dark .searchBox.mud-input-control > .mud-input-control-input-container {
   background-color: #FFFFFF !important;
   border-radius: 4px;
   color: black !important;
   box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
 }
-.chase-dark .searchBox .mud-input > input.mud-input-root, .chase-dark div.mud-input-slot.mud-input-root {
-  color: black !important;
+.chase-dark .mud-input .mud-input-text .mud-input-adorned-end .mud-input-underline .mud-shrink .searchBox .mud-input > input.mud-input-root, .chase-dark div.mud-input-slot.mud-input-root {
+  padding: 0;
+}
+.chase-dark .mud-input.mud-input-text.mud-input-adorned-end.mud-input-underline.mud-shrink {
+  padding: 0;
 }
 .chase-dark .mud-input > input.mud-input-root, .chase-dark div.mud-input-slot.mud-input-root {
   color: black !important;
@@ -403,6 +431,9 @@
 .bnp-light {
   background: fixed linear-gradient(220deg, #5FFCCD 10%, #027563 90%) !important;
   color: #FFFFFF !important;
+  /*    .mud-table-body{
+      height:20rem;
+  }*/
 }
 .bnp-light .btn {
   background-color: #03A776 !important;
@@ -425,15 +456,19 @@
 .bnp-light .mud-table {
   background-color: #FFFFFF !important;
   color: #FFFFFF !important;
+  height: 30rem;
 }
-.bnp-light .searchBox .mud-input-control > .mud-input-control-input-container {
+.bnp-light .searchBox.mud-input-control > .mud-input-control-input-container {
   background-color: #FFFFFF !important;
   border-radius: 4px;
   color: black !important;
   box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
 }
-.bnp-light .searchBox .mud-input > input.mud-input-root, .bnp-light div.mud-input-slot.mud-input-root {
-  color: black !important;
+.bnp-light .mud-input .mud-input-text .mud-input-adorned-end .mud-input-underline .mud-shrink .searchBox .mud-input > input.mud-input-root, .bnp-light div.mud-input-slot.mud-input-root {
+  padding: 0;
+}
+.bnp-light .mud-input.mud-input-text.mud-input-adorned-end.mud-input-underline.mud-shrink {
+  padding: 0;
 }
 .bnp-light .mud-input > input.mud-input-root, .bnp-light div.mud-input-slot.mud-input-root {
   color: black !important;
@@ -503,6 +538,9 @@
 .bnp-dark {
   background: #252525 !important;
   color: #e3e3e3 !important;
+  /*    .mud-table-body{
+      height:20rem;
+  }*/
 }
 .bnp-dark .btn {
   background-color: #252525 !important;
@@ -525,15 +563,19 @@
 .bnp-dark .mud-table {
   background-color: #FFFFFF !important;
   color: #FFFFFF !important;
+  height: 30rem;
 }
-.bnp-dark .searchBox .mud-input-control > .mud-input-control-input-container {
+.bnp-dark .searchBox.mud-input-control > .mud-input-control-input-container {
   background-color: #FFFFFF !important;
   border-radius: 4px;
   color: black !important;
   box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
 }
-.bnp-dark .searchBox .mud-input > input.mud-input-root, .bnp-dark div.mud-input-slot.mud-input-root {
-  color: black !important;
+.bnp-dark .mud-input .mud-input-text .mud-input-adorned-end .mud-input-underline .mud-shrink .searchBox .mud-input > input.mud-input-root, .bnp-dark div.mud-input-slot.mud-input-root {
+  padding: 0;
+}
+.bnp-dark .mud-input.mud-input-text.mud-input-adorned-end.mud-input-underline.mud-shrink {
+  padding: 0;
 }
 .bnp-dark .mud-input > input.mud-input-root, .bnp-dark div.mud-input-slot.mud-input-root {
   color: black !important;
@@ -764,6 +806,9 @@ main {
 .saphyre-light {
   background: fixed linear-gradient(220deg, #0caedd 10%, #183a6b 90%) !important;
   color: #FFFFFF !important;
+  /*    .mud-table-body{
+      height:20rem;
+  }*/
 }
 .saphyre-light .btn {
   background-color: #157EB7 !important;
@@ -786,15 +831,19 @@ main {
 .saphyre-light .mud-table {
   background-color: #FFFFFF !important;
   color: #FFFFFF !important;
+  height: 30rem;
 }
-.saphyre-light .searchBox .mud-input-control > .mud-input-control-input-container {
+.saphyre-light .searchBox.mud-input-control > .mud-input-control-input-container {
   background-color: #FFFFFF !important;
   border-radius: 4px;
   color: black !important;
   box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
 }
-.saphyre-light .searchBox .mud-input > input.mud-input-root, .saphyre-light div.mud-input-slot.mud-input-root {
-  color: black !important;
+.saphyre-light .mud-input .mud-input-text .mud-input-adorned-end .mud-input-underline .mud-shrink .searchBox .mud-input > input.mud-input-root, .saphyre-light div.mud-input-slot.mud-input-root {
+  padding: 0;
+}
+.saphyre-light .mud-input.mud-input-text.mud-input-adorned-end.mud-input-underline.mud-shrink {
+  padding: 0;
 }
 .saphyre-light .mud-input > input.mud-input-root, .saphyre-light div.mud-input-slot.mud-input-root {
   color: black !important;
@@ -864,6 +913,9 @@ main {
 .saphyre-dark {
   background: fixed linear-gradient(220deg, #183a6b 10%, #010513 90%) !important;
   color: #e3e3e3 !important;
+  /*    .mud-table-body{
+      height:20rem;
+  }*/
 }
 .saphyre-dark .btn {
   background-color: #010513 !important;
@@ -886,15 +938,19 @@ main {
 .saphyre-dark .mud-table {
   background-color: #FFFFFF !important;
   color: #FFFFFF !important;
+  height: 30rem;
 }
-.saphyre-dark .searchBox .mud-input-control > .mud-input-control-input-container {
+.saphyre-dark .searchBox.mud-input-control > .mud-input-control-input-container {
   background-color: #FFFFFF !important;
   border-radius: 4px;
   color: black !important;
   box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
 }
-.saphyre-dark .searchBox .mud-input > input.mud-input-root, .saphyre-dark div.mud-input-slot.mud-input-root {
-  color: black !important;
+.saphyre-dark .mud-input .mud-input-text .mud-input-adorned-end .mud-input-underline .mud-shrink .searchBox .mud-input > input.mud-input-root, .saphyre-dark div.mud-input-slot.mud-input-root {
+  padding: 0;
+}
+.saphyre-dark .mud-input.mud-input-text.mud-input-adorned-end.mud-input-underline.mud-shrink {
+  padding: 0;
 }
 .saphyre-dark .mud-input > input.mud-input-root, .saphyre-dark div.mud-input-slot.mud-input-root {
   color: black !important;
@@ -964,6 +1020,9 @@ main {
 .chase-light {
   background: fixed linear-gradient(220deg, #126BC5 10%, #183a6b 90%) !important;
   color: #FFFFFF !important;
+  /*    .mud-table-body{
+      height:20rem;
+  }*/
 }
 .chase-light .btn {
   background-color: #48B1EA !important;
@@ -986,15 +1045,19 @@ main {
 .chase-light .mud-table {
   background-color: #FFFFFF !important;
   color: #FFFFFF !important;
+  height: 30rem;
 }
-.chase-light .searchBox .mud-input-control > .mud-input-control-input-container {
+.chase-light .searchBox.mud-input-control > .mud-input-control-input-container {
   background-color: #FFFFFF !important;
   border-radius: 4px;
   color: black !important;
   box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
 }
-.chase-light .searchBox .mud-input > input.mud-input-root, .chase-light div.mud-input-slot.mud-input-root {
-  color: black !important;
+.chase-light .mud-input .mud-input-text .mud-input-adorned-end .mud-input-underline .mud-shrink .searchBox .mud-input > input.mud-input-root, .chase-light div.mud-input-slot.mud-input-root {
+  padding: 0;
+}
+.chase-light .mud-input.mud-input-text.mud-input-adorned-end.mud-input-underline.mud-shrink {
+  padding: 0;
 }
 .chase-light .mud-input > input.mud-input-root, .chase-light div.mud-input-slot.mud-input-root {
   color: black !important;
@@ -1064,6 +1127,9 @@ main {
 .chase-dark {
   background: #252525 !important;
   color: #e3e3e3 !important;
+  /*    .mud-table-body{
+      height:20rem;
+  }*/
 }
 .chase-dark .btn {
   background-color: #252525 !important;
@@ -1086,15 +1152,19 @@ main {
 .chase-dark .mud-table {
   background-color: #FFFFFF !important;
   color: #FFFFFF !important;
+  height: 30rem;
 }
-.chase-dark .searchBox .mud-input-control > .mud-input-control-input-container {
+.chase-dark .searchBox.mud-input-control > .mud-input-control-input-container {
   background-color: #FFFFFF !important;
   border-radius: 4px;
   color: black !important;
   box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
 }
-.chase-dark .searchBox .mud-input > input.mud-input-root, .chase-dark div.mud-input-slot.mud-input-root {
-  color: black !important;
+.chase-dark .mud-input .mud-input-text .mud-input-adorned-end .mud-input-underline .mud-shrink .searchBox .mud-input > input.mud-input-root, .chase-dark div.mud-input-slot.mud-input-root {
+  padding: 0;
+}
+.chase-dark .mud-input.mud-input-text.mud-input-adorned-end.mud-input-underline.mud-shrink {
+  padding: 0;
 }
 .chase-dark .mud-input > input.mud-input-root, .chase-dark div.mud-input-slot.mud-input-root {
   color: black !important;
@@ -1164,6 +1234,9 @@ main {
 .bnp-light {
   background: fixed linear-gradient(220deg, #5FFCCD 10%, #027563 90%) !important;
   color: #FFFFFF !important;
+  /*    .mud-table-body{
+      height:20rem;
+  }*/
 }
 .bnp-light .btn {
   background-color: #03A776 !important;
@@ -1186,15 +1259,19 @@ main {
 .bnp-light .mud-table {
   background-color: #FFFFFF !important;
   color: #FFFFFF !important;
+  height: 30rem;
 }
-.bnp-light .searchBox .mud-input-control > .mud-input-control-input-container {
+.bnp-light .searchBox.mud-input-control > .mud-input-control-input-container {
   background-color: #FFFFFF !important;
   border-radius: 4px;
   color: black !important;
   box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
 }
-.bnp-light .searchBox .mud-input > input.mud-input-root, .bnp-light div.mud-input-slot.mud-input-root {
-  color: black !important;
+.bnp-light .mud-input .mud-input-text .mud-input-adorned-end .mud-input-underline .mud-shrink .searchBox .mud-input > input.mud-input-root, .bnp-light div.mud-input-slot.mud-input-root {
+  padding: 0;
+}
+.bnp-light .mud-input.mud-input-text.mud-input-adorned-end.mud-input-underline.mud-shrink {
+  padding: 0;
 }
 .bnp-light .mud-input > input.mud-input-root, .bnp-light div.mud-input-slot.mud-input-root {
   color: black !important;
@@ -1264,6 +1341,9 @@ main {
 .bnp-dark {
   background: #252525 !important;
   color: #e3e3e3 !important;
+  /*    .mud-table-body{
+      height:20rem;
+  }*/
 }
 .bnp-dark .btn {
   background-color: #252525 !important;
@@ -1286,15 +1366,19 @@ main {
 .bnp-dark .mud-table {
   background-color: #FFFFFF !important;
   color: #FFFFFF !important;
+  height: 30rem;
 }
-.bnp-dark .searchBox .mud-input-control > .mud-input-control-input-container {
+.bnp-dark .searchBox.mud-input-control > .mud-input-control-input-container {
   background-color: #FFFFFF !important;
   border-radius: 4px;
   color: black !important;
   box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
 }
-.bnp-dark .searchBox .mud-input > input.mud-input-root, .bnp-dark div.mud-input-slot.mud-input-root {
-  color: black !important;
+.bnp-dark .mud-input .mud-input-text .mud-input-adorned-end .mud-input-underline .mud-shrink .searchBox .mud-input > input.mud-input-root, .bnp-dark div.mud-input-slot.mud-input-root {
+  padding: 0;
+}
+.bnp-dark .mud-input.mud-input-text.mud-input-adorned-end.mud-input-underline.mud-shrink {
+  padding: 0;
 }
 .bnp-dark .mud-input > input.mud-input-root, .bnp-dark div.mud-input-slot.mud-input-root {
   color: black !important;

@@ -1,21 +1,33 @@
 ﻿@typeparam TItem
 @using MudBlazor
 @using SaphyreDemo.Templates.Forms
+@implements IDisposable
 
-
-<div class="form-group d-flex flex-md-row flex-column">
+<div class="form-group d-flex flex-md-row flex-column p-0">
 	<div class="col-12 mb-2">
-		<MudTextField @bind-Value="searchString"
+		<MudTextField 
 					  Placeholder="Search..."
-					  OnInternalInputChanged="OnSearchChanged"
+					  Value="@searchString"
+					  T="string"
+					  ValueChanged="((string newVal) => OnSearchChanged(newVal))"
 					  Adornment="Adornment.End"
 					  AdornmentColor="Color.Dark"
 					  AdornmentIcon="@Icons.Material.Filled.Search"
-					  Class="searchBox form-control form-input" />
+					  Immediate="true"
+					  Class="searchBox" />
 	</div>
 </div>
 
-<MudTable @ref="_table" Items="@pagedItems" ServerData="@LoadServerData" Virtualize="true" RowsPerPage="5" SelectOnRowClick="true" T="TItem" OnRowClick="OnRowClicked" Hover="true">
+<MudTable @ref="_table"
+		  Items="@pagedItems"
+		  ServerData="@LoadServerData"
+		  Virtualize="true"
+		  RowsPerPage="5"
+		  SelectOnRowClick="true"
+		  T="TItem"
+		  OnRowClick="OnRowClicked"
+		  Filter="@((item) => TableFilterFunc(item, searchString))"
+		  Hover="true">
 	<HeaderContent>
 		@HeaderTemplate
 	</HeaderContent>
@@ -23,7 +35,7 @@
 		@RowTemplate(context)
 	</RowTemplate>
 	<PagerContent>
-		<MudPagination SelectedChanged="PageChanged" Count="@((_table.GetFilteredItemsCount() + _table.RowsPerPage - 1) / _table.RowsPerPage)" Class="pa-4" />
+		<MudPagination SelectedChanged="PageChanged" Count="@((_table.GetFilteredItemsCount() + _table.RowsPerPage - 1) / _table.RowsPerPage)" LastIcon="true" ShowFirstButton="true" Class="pa-4" />
 	</PagerContent>
 </MudTable>
 
@@ -36,6 +48,22 @@
 	private IEnumerable<TItem> pagedItems;
 	private string searchString = "";
 	private MudTable<TItem> _table;
+	private Timer _searchTimer;
+
+	private bool _TableFilterFunc(TItem element) => TableFilterFunc(element, searchString);
+
+	private bool TableFilterFunc(TItem element, string searchString)
+	{
+		var item = element as OrderDescription;
+
+		if (string.IsNullOrWhiteSpace(searchString))
+			return true;
+		if (item.Description.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+			return true;
+			// if ($"{item.Number} {item.Position} {item.Molar}".Contains(searchString))
+		//     return true;
+		return false;
+	}
 
 	private async Task<TableData<TItem>> LoadServerData(TableState state)
 	{
@@ -54,13 +82,17 @@
 			};
 	}
 
-	private void OnSearchChanged(ChangeEventArgs e)
+	private void OnSearchChanged(string newVal)
 	{
-		searchString = e.Value.ToString();
+		searchString = newVal;
 		_table.ReloadServerData();
+
+		// _searchTimer?.Dispose();
+		// _searchTimer = new Timer(_ => InvokeAsync(() => _table.ReloadServerData()), null, 500, Timeout.Infinite);
 	}
 
-	private void OnRowClicked(TableRowClickEventArgs<TItem> args){
+	private void OnRowClicked(TableRowClickEventArgs<TItem> args)
+	{
 		var item = args.Item;
 		RowClickCallback?.Invoke(item);
 	}
@@ -68,5 +100,10 @@
 	private void PageChanged(int i)
 	{
 		_table.NavigateTo(i - 1);
+	}
+
+	public void Dispose()
+	{
+		_searchTimer?.Dispose();
 	}
 }

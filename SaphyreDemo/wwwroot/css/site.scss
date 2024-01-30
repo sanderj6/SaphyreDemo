@@ -44,17 +44,25 @@ $dark-colors-bnp: ( 'btnBackground': #252525,'primary': #027563, 'primary-varian
     .mud-table {
         background-color: $onprimary !important;
         color: $onprimary !important;
+        height: 30rem;
     }
+    /*    .mud-table-body{
+        height:20rem;
+    }*/
 
-    .searchBox .mud-input-control > .mud-input-control-input-container {
+    .searchBox.mud-input-control > .mud-input-control-input-container {
         background-color: $onprimary !important;
         border-radius: 4px;
         color: black !important;
         box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);
     }
 
-    .searchBox .mud-input > input.mud-input-root, div.mud-input-slot.mud-input-root {
-        color: black !important;
+    .mud-input .mud-input-text .mud-input-adorned-end .mud-input-underline .mud-shrink .searchBox .mud-input > input.mud-input-root, div.mud-input-slot.mud-input-root {
+        padding: 0;
+    }
+
+    .mud-input.mud-input-text.mud-input-adorned-end.mud-input-underline.mud-shrink {
+        padding: 0;
     }
 
     .mud-input > input.mud-input-root, div.mud-input-slot.mud-input-root {

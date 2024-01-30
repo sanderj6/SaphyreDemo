@@ -68,7 +68,7 @@
 			<div class="saphyre-form d-flex flex-md-row flex-column">
 				<div class="col-md-6 col-12">
 					<Saphyre_Numberbox InputValue="@Model.TaxPercentage" FieldExpression="@(() => Model.TaxPercentage)"
-									   ValueChanged="((decimal newVal) => Model.Amount = newVal)" T="decimal" IsPercentage="true" />
+									   ValueChanged="((decimal newVal) => Model.TaxPercentage = newVal)" T="decimal" IsPercentage="true" />
 				</div>
 				<div class="col-md-6 col-12">
 					<Saphyre_Date InputValue="Model.Date" />
