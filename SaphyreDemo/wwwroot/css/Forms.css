@@ -1526,6 +1526,10 @@ main {
   position: relative !important;
 }
 
+.saphyre_selectbox {
+  max-width: 300px;
+}
+
 .mud-input {
   font-family: "Roboto";
   font-size: 14px;
@@ -1569,6 +1573,26 @@ main {
 
 .mud-input:focus-within ~ label.mud-input-label.mud-input-label-inputcontrol {
   color: #797979;
+}
+
+.mud-input:focus-within {
+  border: 1px solid #00A4D7 !important;
+  background: rgba(0, 164, 215, 0.05) !important;
+}
+
+.mud-input:disabled {
+  border: 1px solid #DDD;
+  background: #F0F0F0;
+}
+
+.mud-input.mud-input-text:focus {
+  border: 1px solid #00A4D7 !important;
+  background: rgba(0, 164, 215, 0.05) !important;
+}
+
+.mud-input .mud-input-text .mud-input-underline:focus {
+  border: 1px solid #00A4D7 !important;
+  background: rgba(0, 164, 215, 0.05) !important;
 }
 
 .mud-shrink ~ label.mud-input-label.mud-input-label-inputcontrol, .mud-input:focus-within ~ label.mud-input-label.mud-input-label-inputcontrol {

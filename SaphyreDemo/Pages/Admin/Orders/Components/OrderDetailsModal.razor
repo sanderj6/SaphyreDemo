@@ -8,6 +8,8 @@
 @using SaphyreDemo.Templates.Misc
 @using Data.Enums
 @using FluentValidation
+@inherits PageBase<OrderDetailsModal>
+@inject IOrderService orderService
 
 <div class="container">
 	<EditForm EditContext="@editContext"
@@ -31,15 +33,23 @@
 			</div>
 
 			<div class="saphyre-form d-flex flex-md-row flex-column align-items-center">
+				
+				<div class="col-md-6 col-12">
+					<Saphyre_Select_Single FieldExpression="(() => Model.Currency.Name)"
+										   Data="currencyList.Currencies"
+										   Value_Primary="((Currency item) => item.Name)" />
+				</div>
+
+				@* <div class="col-md-3 col-12">
+					<Saphyre_Select_Single FieldExpression="(() => Model.Currency.ISOCode)"
+										   Data="currencyList.Currencies"
+										   IsDisabled="true"
+										   Value_Primary="((Currency item) => item.ISOCode)"/>
+				</div> *@
+
 				<div class="col-md-6 col-12">
 					<Saphyre_Numberbox FieldExpression="@(() => Model.Amount)" T="decimal"
 									   ValueChanged="((decimal item) => {Model.Amount = item; ReValidate();})" />
-				</div>
-
-				<div class="col-md-3 col-12">
-					<Saphyre_Select_Single FieldExpression="(() => Model.Currency.ISOCode)"
-										   Data="currencyList.Currencies"
-										   Value_Primary="((Currency item) => item.ISOCode)" />
 				</div>
 			</div>
 
@@ -116,11 +126,20 @@
 
 	private async Task HandleSubmit()
 	{
-		// fake API call
-
-		Callback?.Invoke(true);
+		try{
+			// fake API call
+			//var isSuccess = await orderService.UpdateOrderAsync(Model);
+			Callback?.Invoke(true);
+		}
+		catch(Exception ex)
+		{
+			Logger.LogError($"Issue submitting order: {ex}");
+			Callback?.Invoke(false);
+		}
 	}
 
+	// Validation refresh
+	// TODO: temporary until a workaround is found
 	private async Task ReValidate()
 	{
 		editContext.Validate();
@@ -128,6 +147,7 @@
 
 	public async Task HandleInvalidSubmit()
 	{
+		// TODO: testing, delete
 		var isValid = editContext.Validate();
 		var test = editContext.GetValidationMessages();
 		editContext.NotifyValidationStateChanged();
