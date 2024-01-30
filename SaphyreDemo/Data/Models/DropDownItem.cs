@@ -1,8 +1,11 @@
-﻿namespace SaphyreDemo.Data.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace SaphyreDemo.Data.Models
 {
     public class DropDownItem
     {
         public Guid Id { get; set; }
-        public string Name { get; set; } = null!;
+		[Required]
+		public string Name { get; set; } = null!;
     }
 }

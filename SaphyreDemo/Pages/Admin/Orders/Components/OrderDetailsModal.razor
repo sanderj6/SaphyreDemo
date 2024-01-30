@@ -7,49 +7,53 @@
 @using SaphyreDemo.Templates.Tables
 @using SaphyreDemo.Templates.Misc
 @using Data.Enums
+@using FluentValidation
+@inject IValidator<OrderDescription> validator
 
 <div class="container">
 	<EditForm EditContext="@editContext"
-			  OnValidSubmit="HandleSubmit">
+			  OnSubmit="HandleSubmit">
 		<DataAnnotationsValidator />
 
 		<div>
 
 			<div class="saphyre-form d-flex flex-md-row flex-column">
 				<div class="col-md-6 col-12">
-					<Saphyre_Textbox FieldExpression="@(() => Model.Description)" CSSClass="form-input" />
+					<Saphyre_Textbox FieldExpression="@(() => Model.Description)" />
 				</div>
 
 				<div class="col-md-6 col-12">
 					<Saphyre_Select_Single FieldExpression="(() => Model.ShippingType.Name)"
-										   Data="shippingOptions" />
+										   Data="shippingOptions"
+										   Value_Primary="((DropDownItem item) => item.Name)" />
 				</div>
 			</div>
 
 			<div class="saphyre-form d-flex flex-md-row flex-column align-items-center">
 				<div class="col-md-6 col-12">
-					<div class="col-md-4 col-12">
-						<Saphyre_Numberbox FieldExpression="@(() => Model.Amount)" CSSClass="form-input" />
-					</div>
+					<Saphyre_Numberbox FieldExpression="@(() => Model.Amount)" />
+				</div>
 
-					<Saphyre_Select_Single FieldExpression="(() => Model.ShippingType.Name)"
-										   Data="shippingOptions" />
+				<div class="col-md-3 col-12">
+					<Saphyre_Select_Single FieldExpression="(() => Model.Currency.ISOCode)"
+										   Data="currencyList.Currencies"
+										   Value_Primary="((Currency item) => item.ISOCode)" />
 				</div>
 			</div>
 
 			<div class="saphyre-form d-flex flex-md-row flex-column">
-				<div class="col-12">
+				<div class="col-md-6 col-12">
 					<Saphyre_Select_Grid IsGridEditable="true" />
 				</div>
 			</div>
 
 			<div class="saphyre-form d-flex flex-md-row flex-column">
-				<div class="col-md-4 col-12">
-					<Saphyre_Numberbox InputValue="Model.TaxPercentage" IsPercentage="true" CSSClass="form-input" />
+				<div class="col-md-6 col-12">
+					<Saphyre_Numberbox FieldExpression="@(() => Model.TaxPercentage)" IsPercentage="true" />
 				</div>
 
-				<div class="col-md-4 col-12">
-					<Saphyre_Date FieldExpression="@(() => Model.Date)" CSSClass="form-input" />
+				<div class="col-md-6 col-12">
+					<Saphyre_Date FieldExpression="@(() => Model.Date)" />
 				</div>
 			</div>
 
@@ -69,16 +73,17 @@
 
 @code {
 	[Parameter]
-	public OrderDescription Model { get; set; }
+	public OrderDescription Model { get; set; } = new();
 
 	[Parameter]
 	public Action<bool> Callback { get; set; }
 
 	private EditContext editContext { get; set; }
+	private ValidationMessageStore messageStore;
 
 	private CurrencyList currencyList = new();
 	private List<DropDownItem> shippingOptions = new()
-					{
+																																								{
 		new DropDownItem()
 		{
 			Id = Guid.NewGuid(),
@@ -99,20 +104,54 @@
 			Id = Guid.NewGuid(),
 			Name = "Standard"
 		}
-					};
+																																								};
 
-	protected override async Task OnInitializedAsync()
+	protected override void OnInitialized()
 	{
-		Model ??= new();
 		editContext = new EditContext(Model);
+		messageStore = new ValidationMessageStore(editContext);
+
+		editContext.OnValidationRequested += (s, e) => ValidateModel();
+		editContext.OnFieldChanged += (s, e) => ValidateField(e.FieldIdentifier);
 	}
 
-
-	public async Task HandleSubmit()
+	private async Task HandleSubmit()
 	{
-		Callback?.Invoke(true);
+		ValidateModel();
+		if (!editContext.GetValidationMessages().Any())
+		{
+		// Proceed with the form submission logic
+		}
 	}
 
+	private void ValidateModel()
+	{
+		var validationResult = validator.Validate(Model);
+		messageStore.Clear();
+		foreach (var error in validationResult.Errors)
+		{
+			messageStore.Add(editContext.Field(error.PropertyName), error.ErrorMessage);
+		}
+		editContext.NotifyValidationStateChanged();
+	}
+
+	private void ValidateField(FieldIdentifier fieldIdentifier)
+	{
+		var validationResult = validator.Validate(Model, options => options.IncludeProperties(fieldIdentifier.FieldName));
+		messageStore.Clear(fieldIdentifier);
+		foreach (var error in validationResult.Errors.Where(e => e.PropertyName == fieldIdentifier.FieldName))
+		{
+			messageStore.Add(fieldIdentifier, error.ErrorMessage);
+		}
+		editContext.NotifyValidationStateChanged();
+	}
+
+	public async Task HandleInvalidSubmit()
+	{
+		var isValid = editContext.Validate();
+		var test = editContext.GetValidationMessages();
+		editContext.NotifyValidationStateChanged();
+	}
 
 	public async Task HandleCancel()
 	{
@@ -120,7 +159,7 @@
 	}
 
 	private RenderFragment<Currency> CurrencyItemTemplate => item => builder =>
-					{
+										{
 	builder.OpenComponent<MudSelectItem<Currency>>(0); // Specify the type argument here
 	builder.AddAttribute(1, "Value", item.Name);
 	builder.AddContent(2,
@@ -129,6 +168,6 @@
 		<div class="column2">@item.Name</div>
 	</div>);
 	builder.CloseComponent();
-				};
+									};
 
 }

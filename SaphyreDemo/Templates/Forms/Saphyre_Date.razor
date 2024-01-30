@@ -3,18 +3,21 @@
 @using System.Reflection
 @using MudBlazor
 
-<div class="saphyre_datebox">
+<div class="saphyre_datebox position-absolute">
 
 	<MudDatePicker @bind-Value="InputValue"
+				   Class="@CSSClass"
+				   Disabled="@IsDisabled"
+				   ReadOnly="@IsReadOnly"
 				   Required="true"
-				   Class=""
+				   RequiredError="HELLO"
 				   DateFormat="dd-MMM-yyyy"
 				   Label="@LabelText"
 				   Placeholder="" />
 
 	@if (IsValidation)
 	{
-		<ValidationMessage For="() => InputValue" />
+		<ValidationMessage For="@FieldExpression" />
 	}
 
 </div>

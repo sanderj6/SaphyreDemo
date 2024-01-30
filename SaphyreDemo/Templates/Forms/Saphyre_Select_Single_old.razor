@@ -4,33 +4,60 @@
 @using System.Reflection
 @using MudBlazor
 
-<div class="saphyre_selectbox position-absolute">
+<div class="saphyre_selectbox">
+
 	<MudSelect Value="InputValue"
 			   ValueChanged="OnInputValueChanged"
 			   T="string"
 			   Class="@CSSClass"
-				Disabled="@IsDisabled"
-				ReadOnly="@IsReadOnly"
+				   Disabled="@IsDisabled"
+				   ReadOnly="@IsReadOnly"
 			   Label="@LabelText"
-			   Placeholder=""
+			   Placeholder="Test"
 			   MultiSelection="@IsMultiSelect"
+			   SelectedValues="SelectedItems"
+			   SelectedValuesChanged="OnValueSelected"
 			   Format="@Format"
-			   AdornmentIcon="@Icons.Material.Filled.ExpandMore">
+			   Clearable="@IsClearable"
+			   AdornmentIcon="@Icons.Material.Filled.ExpandMore"
+			   OnOpen="(() => HandleDropdownOpened())"
+			   OnClose="(() => HandleDropdownClosed(false))"
+			   OnClearButtonClick="(() => HandleDropdownClosed(true))"
+			   FullWidth>
+
+		@if (IsGridMode)
+		{
+			<MudSelectItem Value="string.Empty">
+				@if (IsDisplayItems)
+				{
+					<MudGrid>
+						<MudItem xs="6">@Header_Primary</MudItem>
+							<MudItem xs="3">@Header_Secondary</MudItem>
+						</MudGrid>
+				}
+				else
+				{
+					<div></div>
+				}
+			</MudSelectItem>
+		}
 
 		@foreach (var item in Data)
 		{
 			<MudSelectItem Value="@Value_Primary(item)">
-				@if (ItemTemplate == null)
+				@if (Value_Secondary(item) == null)
 				{
 					@Value_Primary(item)
 				}
 				else
 				{
-					@ItemTemplate(item)
+					<MudGrid>
+						<MudItem xs="6">@Value_Primary(item)</MudItem>
+							<MudItem xs="3">@Value_Secondary(item)</MudItem>
+						</MudGrid>
 				}
 			</MudSelectItem>
 		}
-
 
 	</MudSelect>
 
@@ -51,7 +78,7 @@
 	public RenderFragment<TItem> ItemTemplate { get; set; }
 
 	[Parameter]
-	public Func<TItem, string> Value_Primary { get; set; } = item => item.ToString();
+	public Func<TItem, string> Value_Primary { get; set; }
 
 	[Parameter]
 	public Func<TItem, string> Value_Secondary { get; set; }
@@ -131,4 +158,5 @@
 		StateHasChanged();
 	}
 }
+
 

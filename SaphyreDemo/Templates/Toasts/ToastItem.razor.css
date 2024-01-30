@@ -35,7 +35,13 @@ body[data-dark='true'] .toast {
 
 .toast-body {
     opacity: 1;
+    color: black;
     max-height: 20vh;
     overflow-x: hidden;
     overflow-y: auto;
+}
+
+.btn.toastBtn {
+    background: transparent !important;
+    border: none !important;
 }

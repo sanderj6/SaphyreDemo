@@ -7,14 +7,6 @@ namespace SaphyreDemo.Data.Models
 		public Guid Id { get; set; }
 		public string ISOCode { get; set; } = null!;
 		public string Name { get; set; } = null!;
-
-		public Currency(Guid id, string code, string name)
-		{
-			Id = id;
-			ISOCode = code;
-			Name = name;
-		}
-
 	}
 
 	public class CurrencyList
@@ -26,17 +18,17 @@ namespace SaphyreDemo.Data.Models
 		{
 			Currencies = new List<Currency>
 			{
-				new Currency(Guid.NewGuid(), "USD", "United States Dollar"),
-				new Currency(Guid.NewGuid(), "EUR", "Euro"),
-				new Currency(Guid.NewGuid(), "JPY", "Japanese Yen"),
-				new Currency(Guid.NewGuid(), "GBP", "British Pound Sterling"),
-				new Currency(Guid.NewGuid(), "AUD", "Australian Dollar"),
-				new Currency(Guid.NewGuid(), "CAD", "Canadian Dollar"),
-				new Currency(Guid.NewGuid(), "CHF", "Swiss Franc"),
-				new Currency(Guid.NewGuid(), "CNY", "Chinese Yuan"),
-				new Currency(Guid.NewGuid(), "SEK", "Swedish Krona"),
-				new Currency(Guid.NewGuid(), "NZD", "Antidisestablishmentarianism pneumonoultramicroscopicsilicovolcanoconiosis"),
-				new Currency(Guid.NewGuid(), "NZD", "New Zealand Dollar")
+				new Currency(){Id = Guid.NewGuid(), ISOCode = "USD", Name = "United States Dollar"},
+				new Currency(){Id = Guid.NewGuid(), ISOCode = "EUR", Name = "Euro"},
+				new Currency(){Id = Guid.NewGuid(), ISOCode = "JPY", Name = "Japanese Yen"},
+				new Currency(){Id = Guid.NewGuid(), ISOCode = "GBP", Name = "British Pound Sterling"},
+				new Currency(){Id = Guid.NewGuid(), ISOCode = "AUD", Name = "Australian Dollar"},
+				new Currency(){Id = Guid.NewGuid(), ISOCode = "CAD", Name = "Canadian Dollar"},
+				new Currency(){Id = Guid.NewGuid(), ISOCode = "CHF", Name = "Swiss Franc"},
+				new Currency(){Id = Guid.NewGuid(), ISOCode = "CNY", Name = "Chinese Yuan"},
+				new Currency(){Id = Guid.NewGuid(), ISOCode = "SEK", Name = "Swedish Krona"},
+				new Currency(){Id = Guid.NewGuid(), ISOCode = "JOSH", Name = "Antidisestablishmentarianism pneumonoultramicroscopicsilicovolcanoconiosis"},
+				new Currency(){Id = Guid.NewGuid(), ISOCode = "NZD", Name = "New Zealand Dollar"}
 			};
 		}
 	}

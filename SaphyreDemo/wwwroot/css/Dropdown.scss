@@ -6,9 +6,8 @@
 
 .multiselect-dropdown {
     position: relative;
-    width: 300px;
-    height: 32px;
-    padding: 0px 10px;
+    width: -webkit-fill-available;
+    height: 2rem;
     margin: 20px;
     display: inline-block;
 }
@@ -17,6 +16,7 @@
     display: flex;
     align-items: center;
     background: #FFFFFF;
+    color: black;
     flex-wrap: wrap;
     height: 100%;
     border: 1px solid #ccc;
@@ -54,10 +54,10 @@
     background: transparent;
     border: none;
     cursor: pointer;
-    color: #333; /* Change this to match your design */
-    padding: 0 5px;
-    font-size: 16px;
+    color: #C9C9C9 !important;
+    flex-shrink: 0;
     outline: none;
+    padding: 0 8px;
 }
 /* Position the button to the right */
 .button-dropdown {
@@ -95,6 +95,7 @@
 .dropdown-grid {
     max-height: 200px;
     overflow-y: auto;
+    padding-bottom: 2rem;
     background-color: #fff;
 }
 

@@ -3,18 +3,19 @@
 @using System.Reflection
 @using MudBlazor
 
-<div class="saphyre_textbox">
+<div class="saphyre_textbox position-absolute">
 
-    <MudTextField @bind-Value="InputValue"
-                  Required="true"
-                  Class=""
-                  Label="@LabelText"
-                  Placeholder="" />
+	<MudTextField @bind-Value="InputValue"
+				  Class="@CSSClass"
+				  Disabled="@IsDisabled"
+				  ReadOnly="@IsReadOnly"
+				  Label="@LabelText"
+				  Placeholder="" />
 
-    @if (IsValidation)
-    {
-        <ValidationMessage For="() => InputValue" />
-    }
+	@if (IsValidation)
+	{
+		<ValidationMessage For="@FieldExpression" />
+	}
 
 </div>
 

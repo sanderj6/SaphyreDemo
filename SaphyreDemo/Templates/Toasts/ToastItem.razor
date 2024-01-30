@@ -11,7 +11,7 @@
         <div class="fw-bold text-white">
             @Item.Title
         </div>
-        <button type="button" class="btn" aria-label="Dismiss" @onclick="@(_=> TimerTick(null, null))">
+        <button type="button" class="btn toastBtn" aria-label="Dismiss" @onclick="@(_=> TimerTick(null, null))">
             <i class="fa-solid fa-circle-xmark"></i>
         </button>
     </div>
@@ -41,7 +41,7 @@
         RefreshTimer.Start();
 
         // AutoDismiss after 10sec
-        AutoDismissTimer = new Timer { AutoReset = false, Interval = 6000 };
+        AutoDismissTimer = new Timer { AutoReset = false, Interval = 60000 };
         AutoDismissTimer.Elapsed += TimerTick;
 
         switch (Item.Type)

@@ -6,6 +6,8 @@ using SaphyreDemo.Services.Logging;
 using SaphyreDemo.Services.Modal;
 using SaphyreDemo.Services.Order;
 using SaphyreDemo.Services.Toast;
+using FluentValidation;
+using SaphyreDemo.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +23,11 @@ builder.Services.AddScoped<IOrderService, OrderService>();
 var toastService = new ToastService();
 builder.Services.AddSingleton(toastService);
 builder.Services.AddSingleton<DummyOrderService>();
+
+builder.Services.AddValidatorsFromAssemblyContaining<OrderDescriptionValidator>();
+
+//builder.Services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<YourModelValidator>());
+//builder.Services.AddValidatorsFromAssemblyContaining<AnyValidator>() // register validators
 
 //builder.Services.AddLogging(builder =>
 //{

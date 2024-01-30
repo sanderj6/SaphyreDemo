@@ -1,11 +1,26 @@
 ﻿using System;
+using System.Collections;
 using System.ComponentModel.DataAnnotations;
-
+using FluentValidation;
+using SaphyreDemo.Data.Models;
+using static SaphyreDemo.Pages.Demo.StylesDemo;
 
 namespace SaphyreDemo.Helpers
 {
+	public class OrderDescriptionValidator : AbstractValidator<OrderDescription>
+	{
+		public OrderDescriptionValidator()
+		{
+			RuleFor(x => x.Amount).GreaterThan(0);
+			RuleFor(x => x.TaxPercentage).GreaterThan(0);
+			RuleFor(x => x.Products).Must(list => list != null && list.Count() > 0).WithMessage("The list must contain at least one object.");
+			//RuleFor(x => x.YourGuidProperty).NotEmpty().WithMessage("GUID must not be empty.");
+			//RuleFor(x => x.ComplexProperty).SetValidator(new ComplexTypeValidator());
+			//RuleFor(x => x.YourDateProperty).Must(date => date > DateTime.MinValue).WithMessage("Date must not be minimum date.");
+		}
+	}
 
-    public class CustomDateValidation : ValidationAttribute
+	public class CustomDateValidation : ValidationAttribute
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
@@ -24,5 +39,18 @@ namespace SaphyreDemo.Helpers
             return ValidationResult.Success;
         }
     }
+
+	public class EnsureOneElementAttribute : ValidationAttribute
+	{
+		protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+		{
+			var list = value as IList;
+			if (list != null && list.Count > 0)
+				return ValidationResult.Success;
+			else
+				return new ValidationResult("The list must contain at least one element.");
+		}
+	}
+
 
 }

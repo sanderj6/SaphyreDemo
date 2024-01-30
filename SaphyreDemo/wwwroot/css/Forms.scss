@@ -4,12 +4,15 @@
 // Forms
 
 .validation-message {
-    color: #C16458;
-    font-family: Roboto;
-    font-size: 11px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
+    color: #C16458 !important;
+    font-family: Roboto !important;
+    font-size: 11px !important;
+    font-style: normal !important;
+    font-weight: 500 !important;
+    line-height: normal !important;
+    position: absolute;
+    bottom: 8px;
+    left: 20px;
 }
 
 .form-container {

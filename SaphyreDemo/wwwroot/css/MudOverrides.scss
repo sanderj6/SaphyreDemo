@@ -1,10 +1,14 @@
 @import 'site.scss';
 
+.saphyre_textbox, .saphyre_numbox, .saphyre_datebox, .saphyre_selectbox {
+    position: relative !important;
+}
+
 .saphyre_textbox {
 
 }
 
-.saphyre_numbox{
+.saphyre_numbox {
 
 }
 
@@ -35,10 +39,21 @@
 
 .mud-input-label {
     font-family: 'Roboto';
-    font-size: 14px;
+    padding-left: 25px !important;
     color: #797979;
-    padding-left: 8px !important;
-    padding-right: 8px !important;
+    font-family: Roboto;
+    font-size: 0.6875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.mud-input-text {
+    color: #989898 !important;
+    font-family: Roboto !important;
+    font-size: 0.875rem !important;
+    font-weight: 400 !important;
+    line-height: normal !important;
 }
 
 .mud-input-control {
@@ -51,15 +66,23 @@
 }
 
 .mud-input.mud-input-underline:hover:not(.mud-disabled):before {
-    border-bottom: none;
+    //border-bottom: none !important;
 }
 
 .mud-input.mud-input-underline:before {
-    border-bottom: none;
+    //border-bottom: none !important;
 }
 
 .mud-input.mud-input-underline:after {
-    border-bottom: none;
+    //border-bottom: none !important;
+}
+
+.mud-input.mud-input-underline:hover {
+    //border-bottom: none;
+}
+
+.mud-input.mud-input-underline:after {
+    //border-bottom: 1px solid $primary !important;
 }
 
 .mud-shrink ~ label.mud-input-label.mud-input-label-inputcontrol, .mud-input:focus-within ~ label.mud-input-label.mud-input-label-inputcontrol {
@@ -79,7 +102,7 @@
 }
 
 .mud-input.mud-input-error {
-    border: 1px solid #C16458;
+    border: 1px solid #C16458 !important;
 }
 
 .mud-icon-size-medium {

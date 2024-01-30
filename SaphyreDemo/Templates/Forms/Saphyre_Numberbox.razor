@@ -4,14 +4,15 @@
 @using System.Reflection
 @using MudBlazor
 
-<div class="saphyre_numbox">
+<div class="saphyre_numbox position-absolute">
 
 	<MudNumericField @bind-Value="@InputValue"
-					 Required="true"
-					 Class=""
+					 Class="@CSSClass"
+					 Disabled="@IsDisabled"
+					 ReadOnly="@IsReadOnly"
 					 Format="@Format"
-					 HideSpinButtons="true"
 					 Label="@LabelText"
+					 HideSpinButtons="true"
 					 Adornment="@Adornment"
 					 AdornmentColor="Color.Dark"
 					 AdornmentIcon="@AdornmentIcon"
@@ -19,7 +20,7 @@
 
 	@if (IsValidation)
 	{
-		<ValidationMessage For="() => InputValue" />
+		<ValidationMessage For="@FieldExpression" />
 	}
 
 </div>
