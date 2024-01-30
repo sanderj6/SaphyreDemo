@@ -15,7 +15,7 @@
 	</div>
 </div>
 
-<MudTable @ref="_table" Items="@pagedItems" ServerData="@LoadServerData" Virtualize="true" RowsPerPage="5" >
+<MudTable @ref="_table" Items="@pagedItems" ServerData="@LoadServerData" Virtualize="true" RowsPerPage="5" SelectOnRowClick="true" T="TItem" OnRowClick="OnRowClicked" Hover="true">
 	<HeaderContent>
 		@HeaderTemplate
 	</HeaderContent>
@@ -61,8 +61,8 @@
 	}
 
 	private void OnRowClicked(TableRowClickEventArgs<TItem> args){
-		//var item = args.Item as TItem;
-		//RowClickCallback?.Invoke(item);
+		var item = args.Item;
+		RowClickCallback?.Invoke(item);
 	}
 
 	private void PageChanged(int i)

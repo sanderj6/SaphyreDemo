@@ -19,11 +19,12 @@
 
 			<div class="saphyre-form d-flex flex-md-row flex-column">
 				<div class="col-md-6 col-12">
-					<Saphyre_Textbox FieldExpression="@(() => Model.Description)" ValueChanged="((string newVal) => {Model.Description = newVal;})" />
+					<Saphyre_Textbox InputValue="@Model.Description" FieldExpression="@(() => Model.Description)" ValueChanged="((string newVal) => {Model.Description = newVal;})" />
 				</div>
 
 				<div class="col-md-6 col-12">
-					<Saphyre_Select_Single FieldExpression="(() => Model.ShippingType.Name)"
+					<Saphyre_Select_Single InputValue="@Model.ShippingType.Name"
+										   FieldExpression="(() => Model.ShippingType.Name)"
 										   ValueChanged="((string newVal) => SetShippingType(newVal))"
 										   Data="shippingOptions"
 										   Value_Primary="((DropDownItem item) => item.Name)" />
@@ -33,7 +34,8 @@
 			<div class="saphyre-form d-flex flex-md-row flex-column align-items-center">
 
 				<div class="col-md-6 col-12">
-					<Saphyre_Select_Single FieldExpression="(() => Model.Currency.Name)"
+					<Saphyre_Select_Single InputValue="@Model.Currency.Name"
+										   FieldExpression="(() => Model.Currency.Name)"
 										   ValueChanged="((string newVal) => SetCurrencyType(newVal))"
 										   Data="currencyList.Currencies"
 										   Value_Primary="((Currency item) => item.Name)" />
@@ -41,7 +43,8 @@
 
 
 				<div class="col-md-3 col-12">
-					<Saphyre_Numberbox FieldExpression="@(() => Model.Amount)"
+					<Saphyre_Numberbox InputValue="@Model.Amount"
+									   FieldExpression="@(() => Model.Amount)"
 									   ValueChanged="((decimal newVal) => Model.Amount = newVal)" T="decimal" />
 				</div>
 
@@ -64,7 +67,7 @@
 
 			<div class="saphyre-form d-flex flex-md-row flex-column">
 				<div class="col-md-6 col-12">
-					<Saphyre_Numberbox FieldExpression="@(() => Model.TaxPercentage)"
+					<Saphyre_Numberbox InputValue="@Model.TaxPercentage" FieldExpression="@(() => Model.TaxPercentage)"
 									   ValueChanged="((decimal newVal) => Model.Amount = newVal)" T="decimal" IsPercentage="true" />
 				</div>
 				<div class="col-md-6 col-12">
@@ -78,7 +81,7 @@
 
 @code {
 	[Parameter]
-	public OrderDescription Model { get; set; } = new();
+	public OrderDescription Model { get; set; }
 
 	[Parameter]
 	public Action<bool> Callback { get; set; }
@@ -114,7 +117,6 @@
 	protected override void OnInitialized()
 	{
 		Model ??= new();
-		Model.Date = DateTime.Now; // Test
 		editContext = new EditContext(Model);
 	}
 
