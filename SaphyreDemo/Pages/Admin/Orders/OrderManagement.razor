@@ -45,7 +45,8 @@
 
 	<div class="form-container saphyreTable">
 		<Saphyre_Table TItem="OrderDescription"
-					   DataService="@GetFilteredData">
+					   DataService="@GetFilteredData"
+					   RowClickCallback="((OrderDescription item) => {SelectedOrder = item; AddUpdateOrder();})">
 
 			<HeaderTemplate>
 				<MudTh>Description</MudTh>
@@ -85,7 +86,6 @@
 
 	private async Task<IEnumerable<OrderDescription>> GetFilteredData(string searchString)
 	{
-		// Assume GetFilteredOrdersAsync handles the filtering based on searchString
 		return await dummyOrderService.GetFilteredOrders(searchString);
 	}
 

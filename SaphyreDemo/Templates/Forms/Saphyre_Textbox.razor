@@ -1,11 +1,14 @@
 ﻿@inherits Saphyre_InputBase<string>
 @using System.Linq.Expressions
 @using System.Reflection
+@using FluentValidation
 @using MudBlazor
+@using SaphyreDemo.Helpers
 
 <div class="saphyre_textbox position-absolute">
 
-	<MudTextField @bind-Value="InputValue"
+	<MudTextField Value="@InputValue"
+				  ValueChanged="(async(string newValue) => {await OnInputValueChanged(newValue);})"
 				  Class="@CSSClass"
 				  Disabled="@IsDisabled"
 				  ReadOnly="@IsReadOnly"
@@ -22,5 +25,7 @@
 
 @code {
 
+	FluentValueValidator<string> textBoxValidator = new FluentValueValidator<string>(x =>
+		x.NotEmpty().WithMessage("The field must not be empty"));
 }
 

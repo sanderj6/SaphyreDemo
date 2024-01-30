@@ -1,15 +1,19 @@
 ﻿@typeparam T
-@inherits Saphyre_InputBase<T>
+@inherits Saphyre_InputBase<decimal>
 @using System.Linq.Expressions
 @using System.Reflection
 @using MudBlazor
+@using FluentValidation
+@using SaphyreDemo.Helpers
 
 <div class="saphyre_numbox position-absolute">
 
-	<MudNumericField @bind-Value="@InputValue"
+	<MudNumericField Value="@InputValue"
+					 ValueChanged="(async(decimal newValue) => {await OnInputValueChanged(newValue);})"
 					 Class="@CSSClass"
 					 Disabled="@IsDisabled"
 					 ReadOnly="@IsReadOnly"
+					 Immediate="true"
 					 Format="@Format"
 					 Label="@LabelText"
 					 HideSpinButtons="true"
@@ -18,9 +22,9 @@
 					 AdornmentIcon="@AdornmentIcon"
 					 Placeholder="" />
 
-	@if (IsValidation)
+		@if (IsValidation)
 	{
-		<ValidationMessage For="@FieldExpression" />
+	<ValidationMessage For="@FieldExpression" />
 	}
 
 </div>
@@ -34,4 +38,6 @@
 	private Adornment Adornment => IsPercentage ? Adornment.End : Adornment.None;
 	private string AdornmentIcon => IsPercentage ? Icons.Material.Filled.Percent : string.Empty;
 
+	FluentValueValidator<decimal> numBoxValidator = new FluentValueValidator<decimal>(x => 
+		x.GreaterThan(0));
 }

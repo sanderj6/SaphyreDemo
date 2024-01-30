@@ -24,8 +24,6 @@ var toastService = new ToastService();
 builder.Services.AddSingleton(toastService);
 builder.Services.AddSingleton<DummyOrderService>();
 
-builder.Services.AddValidatorsFromAssemblyContaining<OrderDescriptionValidator>();
-
 //builder.Services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<YourModelValidator>());
 //builder.Services.AddValidatorsFromAssemblyContaining<AnyValidator>() // register validators
 

@@ -2,24 +2,34 @@
 @using System.Linq.Expressions
 @using System.Reflection
 @using MudBlazor
+@using FluentValidation
+@using SaphyreDemo.Helpers
 
 <div class="saphyre_datebox position-absolute">
 
-	<MudDatePicker @bind-Value="InputValue"
+	<MudDatePicker Date="@InputValue"
+				   DateChanged="OnDateChanged"
 				   Class="@CSSClass"
 				   Disabled="@IsDisabled"
 				   ReadOnly="@IsReadOnly"
-				   Required="true"
-				   RequiredError="HELLO"
 				   DateFormat="dd-MMM-yyyy"
 				   Label="@LabelText"
 				   Placeholder="" />
 
-	@if (IsValidation)
+		@if (IsValidation)
 	{
-		<ValidationMessage For="@FieldExpression" />
+	<ValidationMessage For="@FieldExpression" />
 	}
 
 </div>
 
+@code{
+	FluentValueValidator<DateTime> dateBoxValidator = new FluentValueValidator<DateTime>(x =>
+	x.Must(date => date > DateTime.MinValue || date > DateTime.UtcNow).WithMessage("Date is invalid."));
+
+	private void OnDateChanged(DateTime? date){
+		InputValue = date.Value;
+		OnInputValueChanged(InputValue);
+	}
+}
 

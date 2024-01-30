@@ -3,14 +3,16 @@
 @using System.Linq.Expressions
 @using System.Reflection
 @using MudBlazor
+@using FluentValidation
+@using SaphyreDemo.Helpers
 
 <div class="saphyre_selectbox position-absolute">
 	<MudSelect Value="InputValue"
 			   ValueChanged="OnInputValueChanged"
 			   T="string"
 			   Class="@CSSClass"
-				Disabled="@IsDisabled"
-				ReadOnly="@IsReadOnly"
+			   Disabled="@IsDisabled"
+			   ReadOnly="@IsReadOnly"
 			   Label="@LabelText"
 			   Placeholder=""
 			   MultiSelection="@IsMultiSelect"
@@ -75,6 +77,9 @@
 	private bool IsAllSelected { get; set; }
 	private bool IsDisplayItems { get; set; }
 	private bool IsFirstOpen { get; set; } = true;
+
+	FluentValueValidator<List<string>> selectBoxValidator = new FluentValueValidator<List<string>>(x =>
+	x.Must(list => list != null && list.Count() > 0).WithMessage("The list must contain at least one object."));
 
 	private void OnValueSelected(IEnumerable<string> newItems)
 	{

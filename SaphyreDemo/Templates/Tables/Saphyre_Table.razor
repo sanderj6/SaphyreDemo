@@ -15,7 +15,7 @@
 	</div>
 </div>
 
-<MudTable @ref="_table" Items="@pagedItems" ServerData="@LoadServerData" Virtualize="true" RowsPerPage="5">
+<MudTable @ref="_table" Items="@pagedItems" ServerData="@LoadServerData" Virtualize="true" RowsPerPage="5" >
 	<HeaderContent>
 		@HeaderTemplate
 	</HeaderContent>
@@ -31,6 +31,7 @@
 	[Parameter] public Func<string, Task<IEnumerable<TItem>>> DataService { get; set; }
 	[Parameter] public RenderFragment HeaderTemplate { get; set; }
 	[Parameter] public RenderFragment<TItem> RowTemplate { get; set; }
+	[Parameter] public Action<TItem> RowClickCallback { get; set; }
 
 	private IEnumerable<TItem> pagedItems;
 	private string searchString = "";
@@ -57,6 +58,11 @@
 	{
 		searchString = e.Value.ToString();
 		_table.ReloadServerData();
+	}
+
+	private void OnRowClicked(TableRowClickEventArgs<TItem> args){
+		//var item = args.Item as TItem;
+		//RowClickCallback?.Invoke(item);
 	}
 
 	private void PageChanged(int i)
