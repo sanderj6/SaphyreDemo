@@ -62,7 +62,7 @@
 							<div class="d-flex justify-content-between">
 								<input @bind-value="@SubTitle" class="editSubItem" type="text" placeholder="New Sub-item" />
 								<div class="">
-									<button @onclick="AddItem" disabled="@IsSubmitDisabled" class="editModeSubmitBtn">
+									<button @onclick="AddItem" disabled="@IsSubmitDisabled" class="editModeSubmitBtn @EditBtnValidCSS">
 										<i class="fas fa-arrow-right"></i>
 									</button>
 									<button @onclick="ToggleEditMode" class="editModeCancelBtn">
@@ -99,22 +99,24 @@
 	List<string> items = new List<string> { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7" };
 	List<string> selectedItems = new List<string>();
 
-    private bool _isAllItemsChecked;
-    private bool IsAllItemsChecked
-    {
-        get => _isAllItemsChecked;
-        set
-        {
-            if (_isAllItemsChecked != value)
-            {
-                _isAllItemsChecked = value;
+	private bool _isAllItemsChecked;
+	private bool IsAllItemsChecked
+	{
+		get => _isAllItemsChecked;
+		set
+		{
+			if (_isAllItemsChecked != value)
+			{
+				_isAllItemsChecked = value;
 				OnAllItemsChecked();
-            }
-        }
-    }
+			}
+		}
+	}
 	private string Title { get; set; }
 	private string SubTitle { get; set; }
+
 	private bool IsSubmitDisabled => string.IsNullOrEmpty(Title) || string.IsNullOrEmpty(SubTitle);
+	private string EditBtnValidCSS => IsSubmitDisabled ? "" : "valid";
 
 	private void ToggleDropdown()
 	{

@@ -3570,12 +3570,20 @@ main {
   margin-right: 1px;
 }
 
+.editModeSubmitBtn.valid {
+  background: #1671A7;
+}
+
+.editModeSubmitBtn.valid:hover {
+  background: #086298;
+}
+
 .editModeCancelBtn {
   width: 2rem;
   height: 2rem;
   flex-shrink: 0;
   border-radius: 0.25rem;
-  background: rgba(193, 100, 88, 0.1);
+  background: rgb(193, 100, 88);
 }
 
 .editCheckItem {
