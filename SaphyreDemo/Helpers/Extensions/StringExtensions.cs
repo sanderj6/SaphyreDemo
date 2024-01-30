@@ -10,6 +10,8 @@ namespace SaphyreDemo.Helpers.Extensions
         /// <returns>The string split into words</returns>
         public static string FromCamelCase(this string value)
         {
+            if (string.IsNullOrEmpty(value)) return string.Empty;
+
             return Regex.Replace(
                 Regex.Replace(value, @"(\P{Ll})(\P{Ll}\p{Ll})", "$1 $2"),
                 @"(\p{Ll})(\P{Ll})", "$1 $2");

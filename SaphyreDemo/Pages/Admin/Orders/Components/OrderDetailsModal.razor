@@ -55,7 +55,7 @@
 									   ValueChanged="((decimal item) => {Model.TaxPercentage = item; ReValidate();})" />
 				</div>
 				<div class="col-md-6 col-12">
-					<Saphyre_Date FieldExpression="@(() => Model.Date)" />
+					<Saphyre_Date InputValue="Model.Date" />
 				</div>
 			</div>
 
@@ -109,6 +109,8 @@
 
 	protected override void OnInitialized()
 	{
+		Model ??= new();
+		Model.Date = DateTime.Now; // Test
 		editContext = new EditContext(Model);
 	}
 
