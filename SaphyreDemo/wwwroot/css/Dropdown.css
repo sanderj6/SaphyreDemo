@@ -644,6 +644,10 @@
   line-height: normal;
 }
 
+:root {
+  --mud-palette-error: #C16458 !important;
+}
+
 body {
   font-family: "Roboto", sans-serif;
   line-height: 20px;
@@ -1447,6 +1451,10 @@ main {
   line-height: normal;
 }
 
+:root {
+  --mud-palette-error: #C16458 !important;
+}
+
 body {
   font-family: "Roboto", sans-serif;
   line-height: 20px;
@@ -2248,6 +2256,10 @@ main {
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+}
+
+:root {
+  --mud-palette-error: #C16458 !important;
 }
 
 body {
@@ -3354,6 +3366,10 @@ a:hover {
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+}
+
+:root {
+  --mud-palette-error: #C16458 !important;
 }
 
 body {

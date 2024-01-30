@@ -170,6 +170,10 @@ $dark-colors-bnp: ( 'btnBackground': #252525,'primary': #027563, 'primary-varian
     @include set-theme(map-get($dark-colors-bnp, 'btnBackground'), map-get($dark-colors-bnp, 'onsecondary'),map-get($dark-colors-bnp, 'background'), map-get($dark-colors-bnp, 'background-light'),map-get($dark-colors-bnp, 'text'), map-get($dark-colors-bnp, 'primary'), map-get($dark-colors-bnp, 'primary-variant'), map-get($dark-colors-bnp, 'secondary'), map-get($dark-colors-bnp, 'secondary-variant'), map-get($light-colors-saphyre, 'onprimary'));
 }
 
+:root {
+    --mud-palette-error: #C16458 !important;
+}
+
 body {
     font-family: 'Roboto', sans-serif;
     line-height: 20px;
