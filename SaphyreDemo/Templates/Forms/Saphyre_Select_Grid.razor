@@ -39,7 +39,7 @@
 	{
 		<div class="dropdown-content">
 			<div class="dropdown-header">
-				<input value="@IsAllItemsChecked" @onclick="OnAllItemsChecked" type="checkbox" id="selectAll" />
+				<input @bind-value="IsAllItemsChecked" @bind-value:event="onchange" type="checkbox" id="selectAll" />
 				<div class="header-title">Item</div>
 				<div class="header-title">Sub-item</div>
 			</div>
@@ -47,7 +47,7 @@
 				@foreach (var item in items)
 				{
 					<div class="dropdown-row">
-						<input type="checkbox" id="@item" @onchange="() => CheckboxChanged(item)">
+						<input type="checkbox" id="@item" checked="@selectedItems.Contains(item)" @onchange="() => CheckboxChanged(item)">
 						<label for="@item">@item</label>
 						<label class="sub-item">Sub-@item</label>
 					</div>
@@ -98,8 +98,20 @@
 
 	List<string> items = new List<string> { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7" };
 	List<string> selectedItems = new List<string>();
-	private bool IsAllItemsChecked { get; set; }
 
+    private bool _isAllItemsChecked;
+    private bool IsAllItemsChecked
+    {
+        get => _isAllItemsChecked;
+        set
+        {
+            if (_isAllItemsChecked != value)
+            {
+                _isAllItemsChecked = value;
+				OnAllItemsChecked();
+            }
+        }
+    }
 	private string Title { get; set; }
 	private string SubTitle { get; set; }
 	private bool IsSubmitDisabled => string.IsNullOrEmpty(Title) || string.IsNullOrEmpty(SubTitle);
@@ -147,7 +159,7 @@
 	{
 		if (IsAllItemsChecked)
 		{
-			selectedItems = items;
+			selectedItems = new List<string>(items);
 		}
 		else
 		{
