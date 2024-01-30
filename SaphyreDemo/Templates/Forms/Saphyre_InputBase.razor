@@ -1,6 +1,7 @@
 ﻿@typeparam TItem
 @using System.Linq.Expressions
 @using SaphyreDemo.Helpers.Extensions
+@using System.Reflection
 
 @code {
     [Parameter] public TItem InputValue { get; set; }
@@ -43,6 +44,7 @@
     {
         InputValue = newValue;
         await ValueChanged.InvokeAsync(newValue);
+
     }
 
     public int TextLength

@@ -12,48 +12,45 @@
 @inject IOrderService orderService
 
 <div class="container">
-	<Saphyre_Form Model="Model"
-				  OnSubmit="((OrderDescription order) => HandleSubmit(order))"
-				  OnClose="HandleCancel">
-		<FormContent>
+	<EditForm EditContext="@editContext"
+			  OnValidSubmit="HandleSubmit"
+			  OnInvalidSubmit="HandleInvalidSubmit">
+		<DataAnnotationsValidator />
+
+		<div>
 
 			<div class="saphyre-form d-flex flex-md-row flex-column">
 				<div class="col-md-6 col-12">
-					<Saphyre_Textbox FieldExpression="@(() => Model.Description)" ValueChanged="((string newVal) => {Model.Description = newVal;})" />
+					<Saphyre_Textbox FieldExpression="@(() => Model.Description)"
+									 ValueChanged="((string item) => {Model.Description = item; ReValidate();})" />
 				</div>
 
 				<div class="col-md-6 col-12">
 					<Saphyre_Select_Single FieldExpression="(() => Model.ShippingType.Name)"
-										   ValueChanged="((string newVal) => SetShippingType(newVal))"
 										   Data="shippingOptions"
 										   Value_Primary="((DropDownItem item) => item.Name)" />
 				</div>
 			</div>
 
 			<div class="saphyre-form d-flex flex-md-row flex-column align-items-center">
-
+				
 				<div class="col-md-6 col-12">
 					<Saphyre_Select_Single FieldExpression="(() => Model.Currency.Name)"
-										   ValueChanged="((string newVal) => SetCurrencyType(newVal))"
 										   Data="currencyList.Currencies"
 										   Value_Primary="((Currency item) => item.Name)" />
 				</div>
 
-
-				<div class="col-md-3 col-12">
-					<Saphyre_Numberbox FieldExpression="@(() => Model.Amount)"
-									   ValueChanged="((decimal newVal) => Model.Amount = newVal)" T="decimal" />
-				</div>
-
-				<div class="col-md-3 col-12">
-					<Saphyre_Select_Single InputValue="@Model.Currency.ISOCode"
-										   FieldExpression="(() => Model.Currency.ISOCode)"
+				@* <div class="col-md-3 col-12">
+					<Saphyre_Select_Single FieldExpression="(() => Model.Currency.ISOCode)"
 										   Data="currencyList.Currencies"
 										   IsDisabled="true"
-										   IsValidation="false"
-										   Value_Primary="((Currency item) => item.ISOCode)" />
-				</div>
+										   Value_Primary="((Currency item) => item.ISOCode)"/>
+				</div> *@
 
+				<div class="col-md-6 col-12">
+					<Saphyre_Numberbox FieldExpression="@(() => Model.Amount)" T="decimal"
+									   ValueChanged="((decimal item) => {Model.Amount = item; ReValidate();})" />
+				</div>
 			</div>
 
 			<div class="saphyre-form d-flex flex-md-row flex-column">
@@ -64,16 +61,26 @@
 
 			<div class="saphyre-form d-flex flex-md-row flex-column">
 				<div class="col-md-6 col-12">
-					<Saphyre_Numberbox FieldExpression="@(() => Model.TaxPercentage)"
-									   ValueChanged="((decimal newVal) => Model.Amount = newVal)" T="decimal" IsPercentage="true" />
+					<Saphyre_Numberbox FieldExpression="@(() => Model.TaxPercentage)" T="decimal" IsPercentage="true"
+									   ValueChanged="((decimal item) => {Model.TaxPercentage = item; ReValidate();})" />
 				</div>
 				<div class="col-md-6 col-12">
 					<Saphyre_Date InputValue="Model.Date" />
 				</div>
 			</div>
 
-		</FormContent>
-	</Saphyre_Form>
+			<div class="saphyre-form d-flex justify-content-end pt-4 gap-3">
+				<button @onclick="HandleCancel" type="button" class="btn btn-secondary modalButton">
+					Cancel
+				</button>
+				<button type="submit" class="btn btn-primary modalButton">
+					Submit Order
+				</button>
+			</div>
+
+		</div>
+
+	</EditForm>
 </div>
 
 @code {
@@ -86,7 +93,6 @@
 	private EditContext editContext { get; set; }
 
 	private CurrencyList currencyList = new();
-
 	private List<DropDownItem> shippingOptions = new()
 	{
 		new DropDownItem()
@@ -118,15 +124,14 @@
 		editContext = new EditContext(Model);
 	}
 
-	private async Task HandleSubmit(OrderDescription item = null)
+	private async Task HandleSubmit()
 	{
-		try
-		{
+		try{
 			// fake API call
 			//var isSuccess = await orderService.UpdateOrderAsync(Model);
 			Callback?.Invoke(true);
 		}
-		catch (Exception ex)
+		catch(Exception ex)
 		{
 			Logger.LogError($"Issue submitting order: {ex}");
 			Callback?.Invoke(false);
@@ -153,15 +158,4 @@
 		Callback?.Invoke(false);
 	}
 
-	public void SetShippingType(string item)
-	{
-		Model.ShippingType = shippingOptions.FirstOrDefault(x => x.Name == item);
-		StateHasChanged();
-	}
-
-	public void SetCurrencyType(string item)
-	{
-		Model.Currency = currencyList.Currencies.FirstOrDefault(x => x.Name == item);
-		StateHasChanged();
-	}
 }

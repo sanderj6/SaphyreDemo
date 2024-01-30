@@ -8,28 +8,11 @@
 <div class="saphyre_datebox position-absolute">
     <MudDatePicker @bind-Date="@InputValue"
                    Class="@CSSClass"
+                   For="@FieldExpression"
                    Disabled="@IsDisabled"
                    ReadOnly="@IsReadOnly"
+                   Required="@IsValidation"
                    DateFormat="dd-MMM-yyyy"
                    Label="@LabelText"
                    Placeholder="" />
-
-    @if (IsValidation && FieldExpression != null)
-    {
-        <ValidationMessage For="@FieldExpression" />
-    }
 </div>
-
-@code {
-    FluentValueValidator<DateTime> dateBoxValidator = new FluentValueValidator<DateTime>(x =>
-        x.Must(date => date > DateTime.MinValue && date <= DateTime.UtcNow).WithMessage("Date is invalid."));
-
-    private async Task OnDateChanged(DateTime? date)
-    {
-        if (date.HasValue)
-        {
-            InputValue = date.Value;
-            await ValueChanged.InvokeAsync(InputValue);
-        }
-    }
-}

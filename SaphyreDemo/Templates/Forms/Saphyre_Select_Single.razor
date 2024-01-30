@@ -9,10 +9,12 @@
 <div class="saphyre_selectbox position-absolute" title="@InputValue">
 	<MudSelect Value="InputValue"
 			   ValueChanged="OnInputValueChanged"
+			   For="@FieldExpression"
 			   T="string"
 			   Class="@CSSClass"
 			   Disabled="@IsDisabled"
 			   ReadOnly="@IsReadOnly"
+			   Required="@IsValidation"
 			   Label="@LabelText"
 			   Placeholder=""
 			   MultiSelection="@IsMultiSelect"
@@ -35,11 +37,6 @@
 
 
 	</MudSelect>
-
-	@if (IsValidation)
-	{
-		<ValidationMessage For="@FieldExpression" />
-	}
 
 </div>
 

@@ -125,6 +125,18 @@
     color: #C16458 !important;
 }
 
+.mud-input-helper-text.mud-input-error {
+    position: absolute !important;
+    top: 50px;
+    left: 20px;
+}
+
+p.mud-input-helper-text.mud-input-error {
+    position: absolute !important;
+    top: 50px;
+    left: 20px;
+}
+
 .mud-input.mud-input-error {
     color: #C16458 !important;
     border: 1px solid #C16458 !important;

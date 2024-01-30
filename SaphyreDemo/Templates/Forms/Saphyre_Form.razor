@@ -1,0 +1,46 @@
+﻿@using MudBlazor
+@typeparam TModel
+@inherits MudComponentBase
+
+<MudForm Model="@Model" @ref="form">
+
+	@FormContent
+
+	<MudButton OnClick="HandleValidSubmit" Color="Color.Primary" Class="float-end">Submit</MudButton>
+	
+	@if (IsCancelButton)
+	{
+		<MudButton OnClick="CloseForm" Color="Color.Error" Class="float-end">Cancel</MudButton>
+	}
+
+</MudForm>
+
+@code {
+	[Parameter] public TModel Model { get; set; }
+	[Parameter] public RenderFragment FormContent { get; set; }
+	[Parameter] public EventCallback<TModel> OnSubmit { get; set; }
+	[Parameter] public EventCallback<bool> OnClose { get; set; }
+	[Parameter] public bool IsCancelButton { get; set; } = true;
+
+	MudForm form;
+
+	private async Task HandleValidSubmit()
+	{
+		form.Validate();
+
+		if (form.IsValid)
+		{
+			await OnSubmit.InvokeAsync(Model);
+		}
+		else
+		{
+
+		}
+
+	}
+
+	private void CloseForm()
+	{
+		OnClose.InvokeAsync(true);
+	}
+}

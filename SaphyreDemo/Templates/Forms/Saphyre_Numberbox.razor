@@ -9,10 +9,12 @@
 <div class="saphyre_numbox position-absolute">
 
 	<MudNumericField Value="@InputValue"
-					 ValueChanged="(async(decimal newValue) => {await OnInputValueChanged(newValue);})"
+					 ValueChanged="@((decimal x) => OnInputValueChanged(x))"
 					 Class="@CSSClass"
 					 Disabled="@IsDisabled"
+					 For="@FieldExpression"
 					 ReadOnly="@IsReadOnly"
+					 Required="@IsValidation"
 					 Immediate="true"
 					 Format="@Format"
 					 Label="@LabelText"
@@ -21,11 +23,6 @@
 					 AdornmentColor="Color.Dark"
 					 AdornmentIcon="@AdornmentIcon"
 					 Placeholder="" />
-
-		@if (IsValidation)
-	{
-	<ValidationMessage For="@FieldExpression" />
-	}
 
 </div>
 
@@ -38,6 +35,6 @@
 	private Adornment Adornment => IsPercentage ? Adornment.End : Adornment.None;
 	private string AdornmentIcon => IsPercentage ? Icons.Material.Filled.Percent : string.Empty;
 
-	FluentValueValidator<decimal> numBoxValidator = new FluentValueValidator<decimal>(x => 
+	FluentValueValidator<decimal> numBoxValidator = new FluentValueValidator<decimal>(x =>
 		x.GreaterThan(0));
 }
