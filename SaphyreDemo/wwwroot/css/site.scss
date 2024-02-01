@@ -113,16 +113,21 @@ $dark-colors-bnp: ( 'btnBackground': #252525,'primary': #027563, 'primary-varian
     .btn-saphyre {
         color: #fff;
         border: none !important;
+        transform: scale(0.75);
     }
+
     .btn-saphyre.inactive {
         background-color: #1671A780 !important;
     }
     .btn-saphyre.active {
         background-color: #1671A7 !important;
     }
+    
     .btn-saphyre.active:hover {
         background-color: #086298 !important; 
         cursor: pointer;
+        transform: scale(0.9);
+        transition: transform 0.3s ease;
     }
     
     .mudTextField-textRight .mud-input-slot .mud-input-control input {

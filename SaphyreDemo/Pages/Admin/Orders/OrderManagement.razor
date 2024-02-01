@@ -29,40 +29,43 @@
 	<div class="form-container-header mt-md-0 mt-5">
 		<div class="row">
 			<div class="col-md-3 col-6">
-				<Saphyre_InfoBlock Title="Pending Orders" Value="17" Type="BlockType.Pending" />
+				<Saphyre_InfoBlock Callback="@((string shippingType) => { ShippingFilter = "Priority"; _saphyreTable.RefreshTableData(); } )" Title="Priority Orders" Value="@PendingOrders" Type="BlockType.Pending" />
 			</div>
 			<div class="col-md-3 col-6">
-				<Saphyre_InfoBlock Title="Shipped Today" Value="34" Type="BlockType.Shipped" />
+				<Saphyre_InfoBlock Callback="@((string shippingType) => { ShippingFilter = string.Empty; _saphyreTable.RefreshTableData(); } )" Title="Shipped Today" Value="@(Orders?.Count ?? 0)" Type="BlockType.Shipped" />
 			</div>
 			<div class="col-md-3 col-6">
-				<Saphyre_InfoBlock Title="New Customers" Value="120" Type="BlockType.Customers" />
+				<Saphyre_InfoBlock Title="New Customers" Value="@NewCustomers" Type="BlockType.Customers" IsDisabled="true"/>
 			</div>
 			<div class="col-md-3 col-6">
-				<Saphyre_InfoBlock Title="Fullfillment Rate" Value="98%" Type="BlockType.Fullfillment" />
+				<Saphyre_InfoBlock Title="Fullfillment Rate" Value="@FullfillmentRate" Type="BlockType.Fullfillment" IsDisabled="true" />
 			</div>
 		</div>
 	</div>
 
 	<div class="form-container saphyreTable">
-		<Saphyre_Table TItem="OrderDescription"
-					   DataService="@GetFilteredData"
+		<Saphyre_Table @ref="_saphyreTable"
+		               TItem="OrderDescription"
+		               DataService="@GetFilteredData"
 					   RowClickCallback="((OrderDescription item) => {SelectedOrder = item; AddUpdateOrder();})">
 
 			<HeaderTemplate>
 				<MudTh>Description</MudTh>
 				<MudTh>Amount</MudTh>
 				<MudTh>TaxPercentage</MudTh>
-				<MudTh Class="hide-on-mobile">ID</MudTh>
+				<MudTh>Products</MudTh>
+				<MudTh>Shipping</MudTh>
 				<MudTh>Date</MudTh>
 			</HeaderTemplate>
 
 			<RowTemplate>
-				<MudTd DataLabel="Description" Style="width:15%;">@context.Description</MudTd>
-					<MudTd DataLabel="Amount" Style="width:15%;">@context.Amount</MudTd>
-					<MudTd DataLabel="TaxPercentage" Style="width:20%;">@context.TaxPercentage</MudTd>
-					<MudTd Class="hide-on-mobile ellipsis" DataLabel="ID" Style="width:35%;">@context.Id</MudTd>
-					<MudTd DataLabel="Date" Style="width:15%;">@context.Date.ToString("MM/dd/yyyy")</MudTd>
-				</RowTemplate>
+			    <MudTd DataLabel="Description" Style="width:15%;">@context.Description</MudTd>
+			    <MudTd DataLabel="Amount" Style="width:15%; text-align:right;">@string.Format("{0:C}", context.Amount)</MudTd>
+			    <MudTd DataLabel="TaxPercentage" Style="width:15%; text-align:right;">@string.Format("{0:P}", context.TaxPercentage / 100.0M)</MudTd>
+			    <MudTd DataLabel="Products" Class="ellipsis"  Style="width:30%;" title="@(string.Join(", ", context.Products.Select(p => p.Name)))">@(string.Join(", ", context.Products.Select(p => p.Name)))</MudTd>
+			    <MudTd DataLabel="Shipping" Class="ellipsis"  Style="width:10%;">@context.ShippingType.Name</MudTd>
+			    <MudTd DataLabel="Date" Style="width:15%;">@context.Date.ToString("MM/dd/yyyy")</MudTd>
+			</RowTemplate>
 
 			</Saphyre_Table>
 		</div>
@@ -73,20 +76,44 @@
 
 	// Dummy list of users
 	public List<OrderDescription> Orders { get; set; }
+	
 	public OrderDescription SelectedOrder { get; set; } = new();
 	public bool IsNewOrder { get; set; }
 
+	private int PendingOrders { get; set; } = default;
+	private int NewCustomers { get; set; } = default;
+	private int FullfillmentRate { get; set; } = default;
+
+	Saphyre_Table<OrderDescription> _saphyreTable;
+	private string ShippingFilter { get; set; }
+	
+	protected override async Task OnInitializedAsync()
+	{
+		Random _random = new Random();
+		NewCustomers =  _random.Next(50, 200);
+		FullfillmentRate =  _random.Next(85, 99);
+	}
+	
 	protected override async Task OnAfterRenderAsync(bool firstRender)
 	{
 		if (firstRender)
 		{
 			Orders = dummyOrderService.GetAllOrders();
+			PendingOrders = Orders.Where(x => x.ShippingType.Name == "Priority").Count();
+			StateHasChanged();
 		}
 	}
 
 	private async Task<IEnumerable<OrderDescription>> GetFilteredData(string searchString)
 	{
-		return await dummyOrderService.GetFilteredOrders(searchString);
+		var orders = await dummyOrderService.GetFilteredOrders(searchString);
+
+		if (!string.IsNullOrEmpty(ShippingFilter))
+		{
+			orders = orders.Where(x => x.ShippingType.Name == ShippingFilter);
+		}
+		
+		return orders;
 	}
 
 	private async Task AddUpdateOrder(bool IsNewOrder = false)

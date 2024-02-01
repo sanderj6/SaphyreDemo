@@ -10,7 +10,8 @@ namespace SaphyreDemo.Services.Order
 
 		public DummyOrderService()
 		{
-			GenerateOrders(50000); // Generate dummy orders
+			var orderNumber = _random.Next(25000, 50000);
+			GenerateOrders(orderNumber); // Generate dummy orders
 		}
 
 		private void GenerateOrders(int numberOfOrders)
@@ -27,7 +28,7 @@ namespace SaphyreDemo.Services.Order
 			{
 				Id = Guid.NewGuid(),
 				Description = $"Order {_random.Next(100, 10000)}",
-				ShippingType = new DropDownItem { Id = Guid.NewGuid(), Name = $"Shipping {_random.Next(1, 5)}" },
+				ShippingType = shippingOptions[_random.Next(shippingOptions.Count)],
 				Amount = _random.Next(100, 10000),
 				Currency = new Currency() { Id = Guid.NewGuid(), ISOCode = $"USD", Name = "US Dollar" },
 				Products = GenerateRandomProducts(),
@@ -38,8 +39,9 @@ namespace SaphyreDemo.Services.Order
 
 		private IEnumerable<DropDownItem> GenerateRandomProducts()
 		{
-			return Enumerable.Range(1, _random.Next(1, 10))
-							 .Select(x => new DropDownItem { Id = Guid.NewGuid(), Name = $"Product {x}" });
+			productTypes = productTypes.OrderBy(x => _random.Next()).ToList();
+			int itemsToTake = _random.Next(1, productTypes.Count + 1);
+			return productTypes.Take(itemsToTake);
 		}
 
 		private DateTime RandomDay()
@@ -59,6 +61,67 @@ namespace SaphyreDemo.Services.Order
 			var filteredOrders = await StringExtensions.SearchModelForValue(_orders, searchText);
 			return filteredOrders;
 		}
+		
+		// Dummy Product Types
+		public List<DropDownItem> productTypes = new()
+		{
+
+			new DropDownItem()
+			{
+				Id = Guid.NewGuid(),
+				Name = "Electronics",
+				SecondaryName = "TVs, Computers, Audio"
+			},
+			new DropDownItem()
+			{
+				Id = Guid.NewGuid(),
+				Name = "Clothing",
+				SecondaryName = "Men's, Women's, Kids'"
+			},
+			new DropDownItem()
+			{
+				Id = Guid.NewGuid(),
+				Name = "Furniture",
+				SecondaryName = "Living Room, Bedroom, Outdoor"
+			},
+			new DropDownItem()
+			{
+				Id = Guid.NewGuid(),
+				Name = "Toys",
+				SecondaryName = "Action Figures, Learning Toys, Puzzles"
+			},
+			new DropDownItem()
+			{
+				Id = Guid.NewGuid(),
+				Name = "Books",
+				SecondaryName = "Fiction, Non-Fiction, Children's"
+			}
+		};
+		
+		// Dummy Shipping Options
+		public List<DropDownItem> shippingOptions = new()
+		{
+			new DropDownItem()
+			{
+				Id = Guid.NewGuid(),
+				Name = "Expedited"
+			},
+			new DropDownItem()
+			{
+				Id = Guid.NewGuid(),
+				Name = "Overnight"
+			},
+			new DropDownItem()
+			{
+				Id = Guid.NewGuid(),
+				Name = "Priority"
+			},
+			new DropDownItem()
+			{
+				Id = Guid.NewGuid(),
+				Name = "Standard"
+			}
+		};
 	}
 
 }

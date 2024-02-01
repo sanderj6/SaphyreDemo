@@ -11,6 +11,7 @@
 @inherits PageBase<OrderDetailsModal>
 @inject IOrderService orderService
 @inject ToastService toastService
+@inject DummyOrderService dummyOrderService
 
 <div class="container">
 	<Saphyre_Form Model="@Model"
@@ -26,7 +27,7 @@
 				<div class="col-md-6 col-sm-6 col-12">
 					<Saphyre_Select_Single @bind-Value="@Model.ShippingType.Name"
 										   FieldExpression="(() => Model.ShippingType.Name)"
-										   Data="shippingOptions"
+										   Data="dummyOrderService.shippingOptions"
 										   LabelText="Shipping Type"
 										   Placeholder="Please select a value..."
 										   Value_Primary="((DropDownItem item) => item.Name)" />
@@ -66,7 +67,7 @@
 
 			<div class="saphyre-form d-flex flex-sm-row flex-column flex-wrap">
 				<div class="col-md-12 col-12">
-					<Saphyre_Select_Grid @bind-Value="Model.ProductType.Name" FieldExpression="(() => Model.ProductType.Name)" Data="productTypes" LabelText="Product Type" Placeholder="Please select a product..." IsGridEditable="true" />
+					<Saphyre_Select_Grid @bind-Value="Model.ProductType.Name" FieldExpression="(() => Model.ProductType.Name)" Data="dummyOrderService.productTypes" LabelText="Product Type" Placeholder="Please select a product..." IsGridEditable="true" />
 				</div>
 			</div>
 
@@ -99,67 +100,7 @@
 	private EditContext editContext { get; set; }
 
 	private CurrencyList currencyList = new();
-
-	// Dummy Shipping Options
-	private List<DropDownItem> shippingOptions = new()
-	{
-		new DropDownItem()
-		{
-			Id = Guid.NewGuid(),
-			Name = "Expedited"
-		},
-		new DropDownItem()
-		{
-			Id = Guid.NewGuid(),
-			Name = "Overnight"
-		},
-		new DropDownItem()
-		{
-			Id = Guid.NewGuid(),
-			Name = "Priority"
-		},
-		new DropDownItem()
-		{
-			Id = Guid.NewGuid(),
-			Name = "Standard"
-		}
-	};
 	
-	// Dummy Product Types
-	private List<DropDownItem> productTypes = new()
-	{
-		new DropDownItem()
-		{
-			Id = Guid.NewGuid(),
-			Name = "Electronics",
-			SecondaryName = "TVs, Computers, Audio"
-		},
-		new DropDownItem()
-		{
-			Id = Guid.NewGuid(),
-			Name = "Clothing",
-			SecondaryName = "Men's, Women's, Kids'"
-		},
-		new DropDownItem()
-		{
-			Id = Guid.NewGuid(),
-			Name = "Furniture",
-			SecondaryName = "Living Room, Bedroom, Outdoor"
-		},
-		new DropDownItem()
-		{
-			Id = Guid.NewGuid(),
-			Name = "Toys",
-			SecondaryName = "Action Figures, Learning Toys, Puzzles"
-		},
-		new DropDownItem()
-		{
-			Id = Guid.NewGuid(),
-			Name = "Books",
-			SecondaryName = "Fiction, Non-Fiction, Children's"
-		}
-	};
-
 	protected override void OnInitialized()
 	{
 		Model ??= new();
@@ -188,7 +129,7 @@
 
 	public void SetShippingType(string item)
 	{
-		Model.ShippingType = shippingOptions.FirstOrDefault(x => x.Name == item);
+		Model.ShippingType = dummyOrderService.shippingOptions.FirstOrDefault(x => x.Name == item);
 		StateHasChanged();
 	}
 

@@ -79,6 +79,7 @@
 .saphyre-light .btn-saphyre {
   color: #fff;
   border: none !important;
+  transform: scale(0.75);
 }
 .saphyre-light .btn-saphyre.inactive {
   background-color: rgba(22, 113, 167, 0.5019607843) !important;
@@ -89,6 +90,8 @@
 .saphyre-light .btn-saphyre.active:hover {
   background-color: #086298 !important;
   cursor: pointer;
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
 }
 .saphyre-light .mudTextField-textRight .mud-input-slot .mud-input-control input {
   text-align: right;
@@ -243,6 +246,7 @@
 .saphyre-dark .btn-saphyre {
   color: #fff;
   border: none !important;
+  transform: scale(0.75);
 }
 .saphyre-dark .btn-saphyre.inactive {
   background-color: rgba(22, 113, 167, 0.5019607843) !important;
@@ -253,6 +257,8 @@
 .saphyre-dark .btn-saphyre.active:hover {
   background-color: #086298 !important;
   cursor: pointer;
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
 }
 .saphyre-dark .mudTextField-textRight .mud-input-slot .mud-input-control input {
   text-align: right;
@@ -407,6 +413,7 @@
 .chase-light .btn-saphyre {
   color: #fff;
   border: none !important;
+  transform: scale(0.75);
 }
 .chase-light .btn-saphyre.inactive {
   background-color: rgba(22, 113, 167, 0.5019607843) !important;
@@ -417,6 +424,8 @@
 .chase-light .btn-saphyre.active:hover {
   background-color: #086298 !important;
   cursor: pointer;
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
 }
 .chase-light .mudTextField-textRight .mud-input-slot .mud-input-control input {
   text-align: right;
@@ -571,6 +580,7 @@
 .chase-dark .btn-saphyre {
   color: #fff;
   border: none !important;
+  transform: scale(0.75);
 }
 .chase-dark .btn-saphyre.inactive {
   background-color: rgba(22, 113, 167, 0.5019607843) !important;
@@ -581,6 +591,8 @@
 .chase-dark .btn-saphyre.active:hover {
   background-color: #086298 !important;
   cursor: pointer;
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
 }
 .chase-dark .mudTextField-textRight .mud-input-slot .mud-input-control input {
   text-align: right;
@@ -735,6 +747,7 @@
 .bnp-light .btn-saphyre {
   color: #fff;
   border: none !important;
+  transform: scale(0.75);
 }
 .bnp-light .btn-saphyre.inactive {
   background-color: rgba(22, 113, 167, 0.5019607843) !important;
@@ -745,6 +758,8 @@
 .bnp-light .btn-saphyre.active:hover {
   background-color: #086298 !important;
   cursor: pointer;
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
 }
 .bnp-light .mudTextField-textRight .mud-input-slot .mud-input-control input {
   text-align: right;
@@ -899,6 +914,7 @@
 .bnp-dark .btn-saphyre {
   color: #fff;
   border: none !important;
+  transform: scale(0.75);
 }
 .bnp-dark .btn-saphyre.inactive {
   background-color: rgba(22, 113, 167, 0.5019607843) !important;
@@ -909,6 +925,8 @@
 .bnp-dark .btn-saphyre.active:hover {
   background-color: #086298 !important;
   cursor: pointer;
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
 }
 .bnp-dark .mudTextField-textRight .mud-input-slot .mud-input-control input {
   text-align: right;

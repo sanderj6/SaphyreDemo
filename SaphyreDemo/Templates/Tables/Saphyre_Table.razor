@@ -44,7 +44,7 @@
 	[Parameter] public RenderFragment HeaderTemplate { get; set; }
 	[Parameter] public RenderFragment<TItem> RowTemplate { get; set; }
 	[Parameter] public Action<TItem> RowClickCallback { get; set; }
-
+	
 	private IEnumerable<TItem> pagedItems;
 	private string searchString = "";
 	private MudTable<TItem> _table;
@@ -91,6 +91,11 @@
 		// _searchTimer = new Timer(_ => InvokeAsync(() => _table.ReloadServerData()), null, 500, Timeout.Infinite);
 	}
 
+	public void RefreshTableData()
+	{
+		_table.ReloadServerData();
+	}
+	
 	private void OnRowClicked(TableRowClickEventArgs<TItem> args)
 	{
 		var item = args.Item;
