@@ -72,8 +72,8 @@
 }
 .saphyre-light .mud-icon-root.mud-svg-icon {
   fill: #C9C9C9 !important;
-  width: 0.72969rem;
-  height: 0.8125rem;
+  width: 1rem;
+  height: 1rem;
   flex-shrink: 0;
 }
 .saphyre-light .saphyreTextClass .mud-svg-icon path {
@@ -95,6 +95,16 @@
 }
 .saphyre-light .mudTextField-textRight .mud-input-slot .mud-input-control input {
   text-align: right;
+}
+.saphyre-light .mud-input-slot.mud-input-root.mud-input-root-text.mud-input-root-adorned-end.mud-select-input::placeholder {
+  color: #989898 !important;
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0px;
+  text-align: left;
 }
 .saphyre-light .saphyre-checked {
   color: #1671A7 !important;
@@ -215,8 +225,8 @@
 }
 .saphyre-dark .mud-icon-root.mud-svg-icon {
   fill: #C9C9C9 !important;
-  width: 0.72969rem;
-  height: 0.8125rem;
+  width: 1rem;
+  height: 1rem;
   flex-shrink: 0;
 }
 .saphyre-dark .saphyreTextClass .mud-svg-icon path {
@@ -238,6 +248,16 @@
 }
 .saphyre-dark .mudTextField-textRight .mud-input-slot .mud-input-control input {
   text-align: right;
+}
+.saphyre-dark .mud-input-slot.mud-input-root.mud-input-root-text.mud-input-root-adorned-end.mud-select-input::placeholder {
+  color: #989898 !important;
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0px;
+  text-align: left;
 }
 .saphyre-dark .saphyre-checked {
   color: #1671A7 !important;
@@ -358,8 +378,8 @@
 }
 .chase-light .mud-icon-root.mud-svg-icon {
   fill: #C9C9C9 !important;
-  width: 0.72969rem;
-  height: 0.8125rem;
+  width: 1rem;
+  height: 1rem;
   flex-shrink: 0;
 }
 .chase-light .saphyreTextClass .mud-svg-icon path {
@@ -381,6 +401,16 @@
 }
 .chase-light .mudTextField-textRight .mud-input-slot .mud-input-control input {
   text-align: right;
+}
+.chase-light .mud-input-slot.mud-input-root.mud-input-root-text.mud-input-root-adorned-end.mud-select-input::placeholder {
+  color: #989898 !important;
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0px;
+  text-align: left;
 }
 .chase-light .saphyre-checked {
   color: #1671A7 !important;
@@ -501,8 +531,8 @@
 }
 .chase-dark .mud-icon-root.mud-svg-icon {
   fill: #C9C9C9 !important;
-  width: 0.72969rem;
-  height: 0.8125rem;
+  width: 1rem;
+  height: 1rem;
   flex-shrink: 0;
 }
 .chase-dark .saphyreTextClass .mud-svg-icon path {
@@ -524,6 +554,16 @@
 }
 .chase-dark .mudTextField-textRight .mud-input-slot .mud-input-control input {
   text-align: right;
+}
+.chase-dark .mud-input-slot.mud-input-root.mud-input-root-text.mud-input-root-adorned-end.mud-select-input::placeholder {
+  color: #989898 !important;
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0px;
+  text-align: left;
 }
 .chase-dark .saphyre-checked {
   color: #1671A7 !important;
@@ -644,8 +684,8 @@
 }
 .bnp-light .mud-icon-root.mud-svg-icon {
   fill: #C9C9C9 !important;
-  width: 0.72969rem;
-  height: 0.8125rem;
+  width: 1rem;
+  height: 1rem;
   flex-shrink: 0;
 }
 .bnp-light .saphyreTextClass .mud-svg-icon path {
@@ -667,6 +707,16 @@
 }
 .bnp-light .mudTextField-textRight .mud-input-slot .mud-input-control input {
   text-align: right;
+}
+.bnp-light .mud-input-slot.mud-input-root.mud-input-root-text.mud-input-root-adorned-end.mud-select-input::placeholder {
+  color: #989898 !important;
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0px;
+  text-align: left;
 }
 .bnp-light .saphyre-checked {
   color: #1671A7 !important;
@@ -787,8 +837,8 @@
 }
 .bnp-dark .mud-icon-root.mud-svg-icon {
   fill: #C9C9C9 !important;
-  width: 0.72969rem;
-  height: 0.8125rem;
+  width: 1rem;
+  height: 1rem;
   flex-shrink: 0;
 }
 .bnp-dark .saphyreTextClass .mud-svg-icon path {
@@ -810,6 +860,16 @@
 }
 .bnp-dark .mudTextField-textRight .mud-input-slot .mud-input-control input {
   text-align: right;
+}
+.bnp-dark .mud-input-slot.mud-input-root.mud-input-root-text.mud-input-root-adorned-end.mud-select-input::placeholder {
+  color: #989898 !important;
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0px;
+  text-align: left;
 }
 .bnp-dark .saphyre-checked {
   color: #1671A7 !important;
@@ -1095,8 +1155,8 @@ main {
 }
 .saphyre-light .mud-icon-root.mud-svg-icon {
   fill: #C9C9C9 !important;
-  width: 0.72969rem;
-  height: 0.8125rem;
+  width: 1rem;
+  height: 1rem;
   flex-shrink: 0;
 }
 .saphyre-light .saphyreTextClass .mud-svg-icon path {
@@ -1118,6 +1178,16 @@ main {
 }
 .saphyre-light .mudTextField-textRight .mud-input-slot .mud-input-control input {
   text-align: right;
+}
+.saphyre-light .mud-input-slot.mud-input-root.mud-input-root-text.mud-input-root-adorned-end.mud-select-input::placeholder {
+  color: #989898 !important;
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0px;
+  text-align: left;
 }
 .saphyre-light .saphyre-checked {
   color: #1671A7 !important;
@@ -1238,8 +1308,8 @@ main {
 }
 .saphyre-dark .mud-icon-root.mud-svg-icon {
   fill: #C9C9C9 !important;
-  width: 0.72969rem;
-  height: 0.8125rem;
+  width: 1rem;
+  height: 1rem;
   flex-shrink: 0;
 }
 .saphyre-dark .saphyreTextClass .mud-svg-icon path {
@@ -1261,6 +1331,16 @@ main {
 }
 .saphyre-dark .mudTextField-textRight .mud-input-slot .mud-input-control input {
   text-align: right;
+}
+.saphyre-dark .mud-input-slot.mud-input-root.mud-input-root-text.mud-input-root-adorned-end.mud-select-input::placeholder {
+  color: #989898 !important;
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0px;
+  text-align: left;
 }
 .saphyre-dark .saphyre-checked {
   color: #1671A7 !important;
@@ -1381,8 +1461,8 @@ main {
 }
 .chase-light .mud-icon-root.mud-svg-icon {
   fill: #C9C9C9 !important;
-  width: 0.72969rem;
-  height: 0.8125rem;
+  width: 1rem;
+  height: 1rem;
   flex-shrink: 0;
 }
 .chase-light .saphyreTextClass .mud-svg-icon path {
@@ -1404,6 +1484,16 @@ main {
 }
 .chase-light .mudTextField-textRight .mud-input-slot .mud-input-control input {
   text-align: right;
+}
+.chase-light .mud-input-slot.mud-input-root.mud-input-root-text.mud-input-root-adorned-end.mud-select-input::placeholder {
+  color: #989898 !important;
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0px;
+  text-align: left;
 }
 .chase-light .saphyre-checked {
   color: #1671A7 !important;
@@ -1524,8 +1614,8 @@ main {
 }
 .chase-dark .mud-icon-root.mud-svg-icon {
   fill: #C9C9C9 !important;
-  width: 0.72969rem;
-  height: 0.8125rem;
+  width: 1rem;
+  height: 1rem;
   flex-shrink: 0;
 }
 .chase-dark .saphyreTextClass .mud-svg-icon path {
@@ -1547,6 +1637,16 @@ main {
 }
 .chase-dark .mudTextField-textRight .mud-input-slot .mud-input-control input {
   text-align: right;
+}
+.chase-dark .mud-input-slot.mud-input-root.mud-input-root-text.mud-input-root-adorned-end.mud-select-input::placeholder {
+  color: #989898 !important;
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0px;
+  text-align: left;
 }
 .chase-dark .saphyre-checked {
   color: #1671A7 !important;
@@ -1667,8 +1767,8 @@ main {
 }
 .bnp-light .mud-icon-root.mud-svg-icon {
   fill: #C9C9C9 !important;
-  width: 0.72969rem;
-  height: 0.8125rem;
+  width: 1rem;
+  height: 1rem;
   flex-shrink: 0;
 }
 .bnp-light .saphyreTextClass .mud-svg-icon path {
@@ -1690,6 +1790,16 @@ main {
 }
 .bnp-light .mudTextField-textRight .mud-input-slot .mud-input-control input {
   text-align: right;
+}
+.bnp-light .mud-input-slot.mud-input-root.mud-input-root-text.mud-input-root-adorned-end.mud-select-input::placeholder {
+  color: #989898 !important;
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0px;
+  text-align: left;
 }
 .bnp-light .saphyre-checked {
   color: #1671A7 !important;
@@ -1810,8 +1920,8 @@ main {
 }
 .bnp-dark .mud-icon-root.mud-svg-icon {
   fill: #C9C9C9 !important;
-  width: 0.72969rem;
-  height: 0.8125rem;
+  width: 1rem;
+  height: 1rem;
   flex-shrink: 0;
 }
 .bnp-dark .saphyreTextClass .mud-svg-icon path {
@@ -1833,6 +1943,16 @@ main {
 }
 .bnp-dark .mudTextField-textRight .mud-input-slot .mud-input-control input {
   text-align: right;
+}
+.bnp-dark .mud-input-slot.mud-input-root.mud-input-root-text.mud-input-root-adorned-end.mud-select-input::placeholder {
+  color: #989898 !important;
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0px;
+  text-align: left;
 }
 .bnp-dark .saphyre-checked {
   color: #1671A7 !important;
@@ -2118,8 +2238,8 @@ main {
 }
 .saphyre-light .mud-icon-root.mud-svg-icon {
   fill: #C9C9C9 !important;
-  width: 0.72969rem;
-  height: 0.8125rem;
+  width: 1rem;
+  height: 1rem;
   flex-shrink: 0;
 }
 .saphyre-light .saphyreTextClass .mud-svg-icon path {
@@ -2141,6 +2261,16 @@ main {
 }
 .saphyre-light .mudTextField-textRight .mud-input-slot .mud-input-control input {
   text-align: right;
+}
+.saphyre-light .mud-input-slot.mud-input-root.mud-input-root-text.mud-input-root-adorned-end.mud-select-input::placeholder {
+  color: #989898 !important;
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0px;
+  text-align: left;
 }
 .saphyre-light .saphyre-checked {
   color: #1671A7 !important;
@@ -2261,8 +2391,8 @@ main {
 }
 .saphyre-dark .mud-icon-root.mud-svg-icon {
   fill: #C9C9C9 !important;
-  width: 0.72969rem;
-  height: 0.8125rem;
+  width: 1rem;
+  height: 1rem;
   flex-shrink: 0;
 }
 .saphyre-dark .saphyreTextClass .mud-svg-icon path {
@@ -2284,6 +2414,16 @@ main {
 }
 .saphyre-dark .mudTextField-textRight .mud-input-slot .mud-input-control input {
   text-align: right;
+}
+.saphyre-dark .mud-input-slot.mud-input-root.mud-input-root-text.mud-input-root-adorned-end.mud-select-input::placeholder {
+  color: #989898 !important;
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0px;
+  text-align: left;
 }
 .saphyre-dark .saphyre-checked {
   color: #1671A7 !important;
@@ -2404,8 +2544,8 @@ main {
 }
 .chase-light .mud-icon-root.mud-svg-icon {
   fill: #C9C9C9 !important;
-  width: 0.72969rem;
-  height: 0.8125rem;
+  width: 1rem;
+  height: 1rem;
   flex-shrink: 0;
 }
 .chase-light .saphyreTextClass .mud-svg-icon path {
@@ -2427,6 +2567,16 @@ main {
 }
 .chase-light .mudTextField-textRight .mud-input-slot .mud-input-control input {
   text-align: right;
+}
+.chase-light .mud-input-slot.mud-input-root.mud-input-root-text.mud-input-root-adorned-end.mud-select-input::placeholder {
+  color: #989898 !important;
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0px;
+  text-align: left;
 }
 .chase-light .saphyre-checked {
   color: #1671A7 !important;
@@ -2547,8 +2697,8 @@ main {
 }
 .chase-dark .mud-icon-root.mud-svg-icon {
   fill: #C9C9C9 !important;
-  width: 0.72969rem;
-  height: 0.8125rem;
+  width: 1rem;
+  height: 1rem;
   flex-shrink: 0;
 }
 .chase-dark .saphyreTextClass .mud-svg-icon path {
@@ -2570,6 +2720,16 @@ main {
 }
 .chase-dark .mudTextField-textRight .mud-input-slot .mud-input-control input {
   text-align: right;
+}
+.chase-dark .mud-input-slot.mud-input-root.mud-input-root-text.mud-input-root-adorned-end.mud-select-input::placeholder {
+  color: #989898 !important;
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0px;
+  text-align: left;
 }
 .chase-dark .saphyre-checked {
   color: #1671A7 !important;
@@ -2690,8 +2850,8 @@ main {
 }
 .bnp-light .mud-icon-root.mud-svg-icon {
   fill: #C9C9C9 !important;
-  width: 0.72969rem;
-  height: 0.8125rem;
+  width: 1rem;
+  height: 1rem;
   flex-shrink: 0;
 }
 .bnp-light .saphyreTextClass .mud-svg-icon path {
@@ -2713,6 +2873,16 @@ main {
 }
 .bnp-light .mudTextField-textRight .mud-input-slot .mud-input-control input {
   text-align: right;
+}
+.bnp-light .mud-input-slot.mud-input-root.mud-input-root-text.mud-input-root-adorned-end.mud-select-input::placeholder {
+  color: #989898 !important;
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0px;
+  text-align: left;
 }
 .bnp-light .saphyre-checked {
   color: #1671A7 !important;
@@ -2833,8 +3003,8 @@ main {
 }
 .bnp-dark .mud-icon-root.mud-svg-icon {
   fill: #C9C9C9 !important;
-  width: 0.72969rem;
-  height: 0.8125rem;
+  width: 1rem;
+  height: 1rem;
   flex-shrink: 0;
 }
 .bnp-dark .saphyreTextClass .mud-svg-icon path {
@@ -2856,6 +3026,16 @@ main {
 }
 .bnp-dark .mudTextField-textRight .mud-input-slot .mud-input-control input {
   text-align: right;
+}
+.bnp-dark .mud-input-slot.mud-input-root.mud-input-root-text.mud-input-root-adorned-end.mud-select-input::placeholder {
+  color: #989898 !important;
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0px;
+  text-align: left;
 }
 .bnp-dark .saphyre-checked {
   color: #1671A7 !important;
@@ -3444,8 +3624,8 @@ a:hover {
 }
 .saphyre-light .mud-icon-root.mud-svg-icon {
   fill: #C9C9C9 !important;
-  width: 0.72969rem;
-  height: 0.8125rem;
+  width: 1rem;
+  height: 1rem;
   flex-shrink: 0;
 }
 .saphyre-light .saphyreTextClass .mud-svg-icon path {
@@ -3467,6 +3647,16 @@ a:hover {
 }
 .saphyre-light .mudTextField-textRight .mud-input-slot .mud-input-control input {
   text-align: right;
+}
+.saphyre-light .mud-input-slot.mud-input-root.mud-input-root-text.mud-input-root-adorned-end.mud-select-input::placeholder {
+  color: #989898 !important;
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0px;
+  text-align: left;
 }
 .saphyre-light .saphyre-checked {
   color: #1671A7 !important;
@@ -3587,8 +3777,8 @@ a:hover {
 }
 .saphyre-dark .mud-icon-root.mud-svg-icon {
   fill: #C9C9C9 !important;
-  width: 0.72969rem;
-  height: 0.8125rem;
+  width: 1rem;
+  height: 1rem;
   flex-shrink: 0;
 }
 .saphyre-dark .saphyreTextClass .mud-svg-icon path {
@@ -3610,6 +3800,16 @@ a:hover {
 }
 .saphyre-dark .mudTextField-textRight .mud-input-slot .mud-input-control input {
   text-align: right;
+}
+.saphyre-dark .mud-input-slot.mud-input-root.mud-input-root-text.mud-input-root-adorned-end.mud-select-input::placeholder {
+  color: #989898 !important;
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0px;
+  text-align: left;
 }
 .saphyre-dark .saphyre-checked {
   color: #1671A7 !important;
@@ -3730,8 +3930,8 @@ a:hover {
 }
 .chase-light .mud-icon-root.mud-svg-icon {
   fill: #C9C9C9 !important;
-  width: 0.72969rem;
-  height: 0.8125rem;
+  width: 1rem;
+  height: 1rem;
   flex-shrink: 0;
 }
 .chase-light .saphyreTextClass .mud-svg-icon path {
@@ -3753,6 +3953,16 @@ a:hover {
 }
 .chase-light .mudTextField-textRight .mud-input-slot .mud-input-control input {
   text-align: right;
+}
+.chase-light .mud-input-slot.mud-input-root.mud-input-root-text.mud-input-root-adorned-end.mud-select-input::placeholder {
+  color: #989898 !important;
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0px;
+  text-align: left;
 }
 .chase-light .saphyre-checked {
   color: #1671A7 !important;
@@ -3873,8 +4083,8 @@ a:hover {
 }
 .chase-dark .mud-icon-root.mud-svg-icon {
   fill: #C9C9C9 !important;
-  width: 0.72969rem;
-  height: 0.8125rem;
+  width: 1rem;
+  height: 1rem;
   flex-shrink: 0;
 }
 .chase-dark .saphyreTextClass .mud-svg-icon path {
@@ -3896,6 +4106,16 @@ a:hover {
 }
 .chase-dark .mudTextField-textRight .mud-input-slot .mud-input-control input {
   text-align: right;
+}
+.chase-dark .mud-input-slot.mud-input-root.mud-input-root-text.mud-input-root-adorned-end.mud-select-input::placeholder {
+  color: #989898 !important;
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0px;
+  text-align: left;
 }
 .chase-dark .saphyre-checked {
   color: #1671A7 !important;
@@ -4016,8 +4236,8 @@ a:hover {
 }
 .bnp-light .mud-icon-root.mud-svg-icon {
   fill: #C9C9C9 !important;
-  width: 0.72969rem;
-  height: 0.8125rem;
+  width: 1rem;
+  height: 1rem;
   flex-shrink: 0;
 }
 .bnp-light .saphyreTextClass .mud-svg-icon path {
@@ -4039,6 +4259,16 @@ a:hover {
 }
 .bnp-light .mudTextField-textRight .mud-input-slot .mud-input-control input {
   text-align: right;
+}
+.bnp-light .mud-input-slot.mud-input-root.mud-input-root-text.mud-input-root-adorned-end.mud-select-input::placeholder {
+  color: #989898 !important;
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0px;
+  text-align: left;
 }
 .bnp-light .saphyre-checked {
   color: #1671A7 !important;
@@ -4159,8 +4389,8 @@ a:hover {
 }
 .bnp-dark .mud-icon-root.mud-svg-icon {
   fill: #C9C9C9 !important;
-  width: 0.72969rem;
-  height: 0.8125rem;
+  width: 1rem;
+  height: 1rem;
   flex-shrink: 0;
 }
 .bnp-dark .saphyreTextClass .mud-svg-icon path {
@@ -4182,6 +4412,16 @@ a:hover {
 }
 .bnp-dark .mudTextField-textRight .mud-input-slot .mud-input-control input {
   text-align: right;
+}
+.bnp-dark .mud-input-slot.mud-input-root.mud-input-root-text.mud-input-root-adorned-end.mud-select-input::placeholder {
+  color: #989898 !important;
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0px;
+  text-align: left;
 }
 .bnp-dark .saphyre-checked {
   color: #1671A7 !important;
