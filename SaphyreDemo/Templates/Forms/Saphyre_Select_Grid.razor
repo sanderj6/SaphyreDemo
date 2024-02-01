@@ -178,6 +178,7 @@
 	private void RemoveItem(DropDownItem item)
 	{
 		selectedItems.Remove(item);
+		OnSelectboxChanged.InvokeAsync(selectedItems);
 	}
 
 	private void OnAllItemsChecked()
