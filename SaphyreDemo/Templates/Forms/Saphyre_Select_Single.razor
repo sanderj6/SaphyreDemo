@@ -17,7 +17,7 @@
 			   ReadOnly="@IsReadOnly"
 			   Required="@IsValidation"
 			   Label="@LabelText"
-			   Placeholder="Please select a value..."
+			   Placeholder="@Placeholder"
 			   MultiSelection="@IsMultiSelect"
 			   Format="@Format"
 			   Adornment="Adornment.End"
@@ -59,7 +59,7 @@
 
 	[Parameter]
 	public bool IsMultiSelect { get; set; }
-
+	
 	private bool IsClearable => IsMultiSelect;
 	
 	public MudSelect<string> field { get; set; }

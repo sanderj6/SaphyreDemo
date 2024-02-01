@@ -18,7 +18,7 @@
 			}
 			<div class="additional-items">(+@(selectedItems.Count - 2))</div>
 		}
-		else
+		else if(selectedItems.Any())
 		{
 			@foreach (var item in selectedItems)
 			{
@@ -27,6 +27,11 @@
 				</div>
 			}
 		}
+		else
+		{
+			<div class="placeholderText">@Placeholder</div>
+		}
+		
 		<button type="button" class="button-dropdown" @onclick:stopPropagation="true"  @onclick="ToggleDropdown">
 			<i class="fas fa-chevron-down"></i>
 		</button>

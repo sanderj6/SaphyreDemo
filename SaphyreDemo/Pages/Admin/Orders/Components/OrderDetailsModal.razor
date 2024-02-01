@@ -18,21 +18,22 @@
 				  OnClose="HandleCancel">
 		<FormContent>
 
-			<div class="saphyre-form d-flex flex-md-row flex-column">
-				<div class="col-md-6 col-12">
+			<div class="saphyre-form d-flex flex-sm-row flex-column flex-wrap">
+				<div class="col-md-6 col-sm-6 col-12">
 					<Saphyre_Textbox @bind-Value="@Model.Description" FieldExpression="(() => Model.Description)"/>
 				</div>
 
-				<div class="col-md-6 col-12">
+				<div class="col-md-6 col-sm-6 col-12">
 					<Saphyre_Select_Single @bind-Value="@Model.ShippingType.Name"
 										   FieldExpression="(() => Model.ShippingType.Name)"
 										   Data="shippingOptions"
 										   LabelText="Shipping Type"
+										   Placeholder="Please select a value..."
 										   Value_Primary="((DropDownItem item) => item.Name)" />
 				</div>
 			</div>
 
-			<div class="saphyre-form d-flex flex-md-row flex-column align-items-center">
+			<div class="saphyre-form d-flex flex-sm-row flex-column align-items-center flex-wrap">
 
 				<div class="col-md-6 col-12">
 					<Saphyre_Select_Single Value="@Model.Currency.Name"
@@ -40,6 +41,7 @@
 										   ValueChanged="((string newVal) => SetCurrencyType(newVal))"
 										   Data="currencyList.Currencies"
 										   LabelText="Currency"
+										   Placeholder="Please select a currency..."
 										   Value_Primary="((Currency item) => item.Name)" />
 				</div>
 
@@ -50,30 +52,30 @@
 									   T="decimal" />
 				</div>
 
-				<div class="col-md-3 col-12">
+				<div class="col-md-3 col-sm-6 col-12">
 					<Saphyre_Select_Single @bind-Value="@Model.Currency.ISOCode"
 					                       FieldExpression="(() => Model.Currency.ISOCode)"
 					                       LabelText="ISO Code"
 										   Data="currencyList.Currencies"
 										   IsDisabled="true"
-										   IsValidation="false"
+					                       IsValidation="false"
 										   Value_Primary="((Currency item) => item.ISOCode)" />
 				</div>
 
 			</div>
 
-			<div class="saphyre-form d-flex flex-md-row flex-column">
+			<div class="saphyre-form d-flex flex-sm-row flex-column flex-wrap">
 				<div class="col-md-12 col-12">
-					<Saphyre_Select_Grid @bind-Value="Model.ProductType.Name" FieldExpression="(() => Model.ProductType.Name)" Data="productTypes" LabelText="Product Type" IsGridEditable="true" />
+					<Saphyre_Select_Grid @bind-Value="Model.ProductType.Name" FieldExpression="(() => Model.ProductType.Name)" Data="productTypes" LabelText="Product Type" Placeholder="Please select a product..." IsGridEditable="true" />
 				</div>
 			</div>
 
-			<div class="saphyre-form d-flex flex-md-row flex-column">
-				<div class="col-md-4 col-12">
+			<div class="saphyre-form d-flex flex-sm-row flex-column flex-wrap mb-4">
+				<div class="col-md-4 col-sm-6 col-12">
 					<Saphyre_Numberbox Value="@Model.TaxPercentage" FieldExpression="@(() => Model.TaxPercentage)"
 									   ValueChanged="((decimal newVal) => Model.TaxPercentage = newVal)" T="decimal" IsPercentage="true" />
 				</div>
-				<div class="col-md-4 col-12">
+				<div class="col-md-4 col-sm-6 col-12">
 					<Saphyre_Date Value="Model.Date" LabelText="Date" />
 				</div>
 				
