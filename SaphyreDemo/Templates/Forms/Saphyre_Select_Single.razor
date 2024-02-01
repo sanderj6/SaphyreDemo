@@ -7,7 +7,6 @@
 @using SaphyreDemo.Helpers
 
 <div class="saphyre_selectbox position-absolute" title="@Value">
-	<div class="input-group">
 		<MudSelect @ref="@field"
 		           T="string"
 		           Value="Value"
@@ -51,19 +50,7 @@
 			}
 		}
 		
-	</div>
-
 </div>
-
-<style>
-	.input-group{
-	position:relative !important;
-	display: flex;
-	flex-wrap: wrap;
-	align-items: stretch;
-	width: 100%;
-	}
-</style>
 
 @code {
 	[Parameter]
