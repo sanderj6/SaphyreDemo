@@ -7,40 +7,67 @@
 @using SaphyreDemo.Helpers
 
 <div class="saphyre_selectbox position-absolute" title="@Value">
-	<MudSelect @ref="@field"
-			   T="string"
-	           Value="Value"
-			   ValueChanged="OnInputValueChanged"
-			   For="@FieldExpression"
-			   Class="@DisabledCSS()"
-			   Disabled="@IsDisabled"
-			   ReadOnly="@IsReadOnly"
-			   Required="@IsValidation"
-			   Label="@LabelText"
-			   Placeholder="@Placeholder"
-			   MultiSelection="@IsMultiSelect"
-			   Format="@Format"
-			   Adornment="Adornment.End"
-			   AdornmentIcon="@Icons.Material.Filled.ExpandMore">
+	<div class="input-group">
+		<MudSelect @ref="@field"
+		           T="string"
+		           Value="Value"
+		           ValueChanged="OnSelectInputValueChanged"
+		           For="@FieldExpression"
+		           Class="@DisabledCSS()"
+		           Disabled="@IsDisabled"
+		           ReadOnly="@IsReadOnly"
+		           Required="@IsValidation"
+		           Label="@LabelText"
+		           Placeholder="@Placeholder"
+		           MultiSelection="@IsMultiSelect"
+		           Format="@Format"
+		           Adornment="Adornment.End"
+		           AdornmentIcon="@Icons.Material.Filled.ExpandMore">
 
-		@foreach (var item in Data)
+			@foreach (var item in Data)
+			{
+				<MudSelectItem Value="@Value_Primary(item)">
+					@if (ItemTemplate == null)
+					{
+						@Value_Primary(item)
+					}
+					else
+					{
+						@ItemTemplate(item)
+					}
+				</MudSelectItem>
+			}
+
+
+		</MudSelect>
+		
+		@if (field is not null)
 		{
-			<MudSelectItem Value="@Value_Primary(item)">
-				@if (ItemTemplate == null)
-				{
-					@Value_Primary(item)
-				}
-				else
-				{
-					@ItemTemplate(item)
-				}
-			</MudSelectItem>
+			if (field.Error)
+			{
+				<span style="position: absolute; right: 15px; top: 45%; transform: translateY(-50%); margin-right: 2rem;">
+					<MudIcon Icon="@Icons.Filled.Error" Style="fill: #C16458 !important;" />
+				</span>		
+			}
 		}
-
-
-	</MudSelect>
+		
+	</div>
 
 </div>
+
+<style>
+	.input-group{
+	position:relative !important;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: stretch;
+	width: 100%;
+	}
+	.dropdownButton{
+	background: transparent !important;
+	border:none !important;
+	}
+</style>
 
 @code {
 	[Parameter]
@@ -66,5 +93,13 @@
 	public Adornment GetAdornment() => field?.Error == true ? Adornment.End : Adornment.None;
 	public string GetAdornmentIcon() => field?.Error == true ? @Icons.Material.Filled.ExpandMore : @Icons.Material.Rounded.Error;
 	public string DisabledCSS() => field?.Disabled == true ? $"{CSSClass} DisabledClass" : @CSSClass;
+	
+	private async Task OnSelectInputValueChanged(string newValue)
+	{
+		await base.OnInputValueChanged(newValue);
+
+		// Validate the field
+		await field.Validate();
+	}
 }
 
