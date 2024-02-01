@@ -8,6 +8,7 @@
 @using SaphyreDemo.Templates.Tables
 @using SaphyreDemo.Templates.Misc
 @using Data.Enums
+@using System.Reflection.Metadata
 @inherits PageBase<OrderManagement>
 @inject ModalService modalService
 @inject ToastService toastService
@@ -35,10 +36,10 @@
 				<Saphyre_InfoBlock Callback="@((string shippingType) => { ShippingFilter = string.Empty; _saphyreTable.RefreshTableData(); } )" Title="Shipped Today" Value="@(Orders?.Count ?? 0)" Type="BlockType.Shipped" />
 			</div>
 			<div class="col-md-3 col-6">
-				<Saphyre_InfoBlock Title="New Customers" Value="@NewCustomers" Type="BlockType.Customers" IsDisabled="true"/>
+				<Saphyre_InfoBlock Callback="((string newVal) => HandleTestBtnClick())" Title="New Customers" Value="@NewCustomers" Type="BlockType.Customers" IsDisabled="true"/>
 			</div>
 			<div class="col-md-3 col-6">
-				<Saphyre_InfoBlock Title="Fullfillment Rate" Value="@FullfillmentRate" Type="BlockType.Fullfillment" IsDisabled="true" />
+				<Saphyre_InfoBlock Callback="((string newVal) => HandleTestBtnClick())" Title="Fullfillment Rate" Value="@FullfillmentRate" Type="BlockType.Fullfillment" IsDisabled="true" />
 			</div>
 		</div>
 	</div>
@@ -99,7 +100,7 @@
 		if (firstRender)
 		{
 			Orders = dummyOrderService.GetAllOrders();
-			PendingOrders = Orders.Where(x => x.ShippingType.Name == "Priority").Count();
+			UpdatePendingOrders();
 			StateHasChanged();
 		}
 	}
@@ -151,9 +152,11 @@
 					if (index != -1)
 					{
 						Orders[index] = updatedModal;
-						StateHasChanged();
 					}
 				}
+				
+				UpdatePendingOrders();
+				StateHasChanged();
 				
 				toastService.ShowMessage("Order has been successfully submitted!");
 			}
@@ -161,4 +164,17 @@
 		});
 	}
 
+	private void UpdatePendingOrders()
+	{
+		if (Orders.Any())
+		{
+			PendingOrders = Orders.Where(x => x.ShippingType.Name == "Priority").Count();
+		}
+	}
+	
+	private void HandleTestBtnClick()
+	{
+		toastService.ShowMessage($"Stop clicking that.");
+	}
+	
 }

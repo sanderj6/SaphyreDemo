@@ -2,7 +2,6 @@
 @using SaphyreDemo.Pages.Admin.Orders.Components
 @using SaphyreDemo.Services.Modal
 @using SaphyreDemo.Services.Order
-@using SaphyreDemo.Services.Toast
 @using SaphyreDemo.Templates.Forms
 @using SaphyreDemo.Templates.Tables
 @using SaphyreDemo.Templates.Misc
@@ -10,7 +9,6 @@
 @using FluentValidation
 @inherits PageBase<OrderDetailsModal>
 @inject IOrderService orderService
-@inject ToastService toastService
 @inject DummyOrderService dummyOrderService
 
 <div class="container">
@@ -25,12 +23,13 @@
 				</div>
 
 				<div class="col-md-6 col-sm-6 col-12">
-					<Saphyre_Select_Single @bind-Value="@Model.ShippingType.Name"
-										   FieldExpression="(() => Model.ShippingType.Name)"
-										   Data="dummyOrderService.shippingOptions"
-										   LabelText="Shipping Type"
-										   Placeholder="Please select a value..."
-										   Value_Primary="((DropDownItem item) => item.Name)" />
+					<Saphyre_Select_Single Value="@Model.ShippingType.Name"
+					                       ValueChanged="((string newVal) => SetShippingType(newVal))"
+					                       FieldExpression="(() => Model.ShippingType.Name)"
+					                       Data="dummyOrderService.shippingOptions"
+					                       LabelText="Shipping Type"
+					                       Placeholder="Please select a value..."
+					                       Value_Primary="((DropDownItem item) => item.Name)"/>
 				</div>
 			</div>
 
@@ -38,36 +37,36 @@
 
 				<div class="col-md-6 col-12">
 					<Saphyre_Select_Single Value="@Model.Currency.Name"
-										   FieldExpression="(() => Model.Currency.Name)"
-										   ValueChanged="((string newVal) => SetCurrencyType(newVal))"
-										   Data="currencyList.Currencies"
-										   LabelText="Currency"
-										   Placeholder="Please select a currency..."
-										   Value_Primary="((Currency item) => item.Name)" />
+					                       FieldExpression="(() => Model.Currency.Name)"
+					                       ValueChanged="((string newVal) => SetCurrencyType(newVal))"
+					                       Data="currencyList.Currencies"
+					                       LabelText="Currency"
+					                       Placeholder="Please select a currency..."
+					                       Value_Primary="((Currency item) => item.Name)"/>
 				</div>
 
 
 				<div class="col-md-3 col-12">
 					<Saphyre_Numberbox @bind-Value="Model.Amount"
-									   FieldExpression="@(() => Model.Amount)"
-									   T="decimal" />
+					                   FieldExpression="@(() => Model.Amount)"
+					                   T="decimal"/>
 				</div>
 
 				<div class="col-md-3 col-sm-6 col-12">
 					<Saphyre_Select_Single @bind-Value="@Model.Currency.ISOCode"
 					                       FieldExpression="(() => Model.Currency.ISOCode)"
 					                       LabelText="ISO Code"
-										   Data="currencyList.Currencies"
-										   IsDisabled="true"
+					                       Data="currencyList.Currencies"
+					                       IsDisabled="true"
 					                       IsValidation="false"
-										   Value_Primary="((Currency item) => item.ISOCode)" />
+					                       Value_Primary="((Currency item) => item.ISOCode)"/>
 				</div>
 
 			</div>
 
 			<div class="saphyre-form d-flex flex-sm-row flex-column flex-wrap">
 				<div class="col-md-12 col-12">
-					<Saphyre_Select_Grid @bind-Value="Model.ProductType.Name" FieldExpression="(() => Model.ProductType.Name)" Data="dummyOrderService.productTypes" LabelText="Product Type" Placeholder="Please select a product..." IsGridEditable="true" />
+					<Saphyre_Select_Grid OrderProducts="Model.Products" OnSelectboxChanged="((List<DropDownItem> items) => {Model.Products = new List<DropDownItem>(items); })" Data="dummyOrderService.productTypes" LabelText="Product Type" Placeholder="Please select a product..." IsGridEditable="true" />
 				</div>
 			</div>
 
@@ -77,13 +76,8 @@
 									   ValueChanged="((decimal newVal) => Model.TaxPercentage = newVal)" T="decimal" IsPercentage="true" />
 				</div>
 				<div class="col-md-4 col-sm-6 col-12">
-					<Saphyre_Date Value="Model.Date" LabelText="Date" />
+					<Saphyre_Date Value="Model.Date" ValueChanged="SetDateValue" LabelText="Date" />
 				</div>
-				
-				<div class="col-md-4 col-12 align-self-center text-end">
-					<button type="button" class="btn btn-saphyre inactive"><i class="fas fa-arrow-right"></i></button>
-					<button type="button" @onclick="HandleTestBtnClick" class="btn btn-saphyre active"><i class="fas fa-arrow-right"></i></button>
-                </div>
 			</div>
 
 		</FormContent>
@@ -139,8 +133,12 @@
 		StateHasChanged();
 	}
 
-	private void HandleTestBtnClick()
+	public async Task SetDateValue(DateTime? newDate)
 	{
-		toastService.ShowMessage($"Stop clicking that.");
+		if (newDate.HasValue)
+		{
+			Model.Date = newDate.Value;
+		}
 	}
+
 }

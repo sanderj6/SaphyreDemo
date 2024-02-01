@@ -95,8 +95,13 @@
 </div>
 
 @code {
+	[Parameter] public IEnumerable<DropDownItem> OrderProducts { get; set; }
+	
 	[Parameter]
 	public List<DropDownItem> Data { get; set; } = new();
+	
+	[Parameter]
+    public EventCallback<List<DropDownItem>> OnSelectboxChanged { get; set; }
 	
 	[Parameter]
 	public bool IsGridEditable { get; set; }
@@ -125,6 +130,11 @@
 	private bool IsSubmitDisabled => string.IsNullOrEmpty(Title) || string.IsNullOrEmpty(SubTitle);
 	private string EditBtnValidCSS => IsSubmitDisabled ? "" : "valid";
 
+	protected override void OnInitialized()
+	{
+		selectedItems = OrderProducts.ToList();
+	}
+	
 	private void ToggleDropdown()
 	{
 		IsDropdownOpen = !IsDropdownOpen;
@@ -147,6 +157,8 @@
 		{
 			selectedItems.Add(item);
 		}
+
+		OnSelectboxChanged.InvokeAsync(selectedItems);
 	}
 
 	private void AddItem()
@@ -178,6 +190,8 @@
 		{
 			selectedItems = new();
 		}
+		
+		OnSelectboxChanged.InvokeAsync(selectedItems);
 	}
 
 }
