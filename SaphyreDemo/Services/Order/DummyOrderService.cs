@@ -49,7 +49,7 @@ namespace SaphyreDemo.Services.Order
 			return start.AddDays(_random.Next(range));
 		}
 
-		public IEnumerable<OrderDescription> GetAllOrders()
+		public List<OrderDescription> GetAllOrders()
 		{
 			return _orders;
 		}

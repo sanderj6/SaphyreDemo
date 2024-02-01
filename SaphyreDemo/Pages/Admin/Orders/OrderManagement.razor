@@ -72,7 +72,7 @@
 	@code {
 
 	// Dummy list of users
-	public IEnumerable<OrderDescription> Orders { get; set; }
+	public List<OrderDescription> Orders { get; set; }
 	public OrderDescription SelectedOrder { get; set; } = new();
 	public bool IsNewOrder { get; set; }
 
@@ -92,15 +92,44 @@
 	private async Task AddUpdateOrder(bool IsNewOrder = false)
 	{
 		var OrderText = IsNewOrder ? "Create Order" : "Manage Order"; // Set Title text
-		SelectedOrder = IsNewOrder ? new() : SelectedOrder;           // Clear SelectedOrder when submitting new
+		SelectedOrder = IsNewOrder ? new() : SelectedOrder;
 
-		modalService.Show<OrderDescription, bool>(OrderText, "modal-md", typeof(OrderDetailsModal), SelectedOrder, result =>
+		OrderDescription model = new()
 		{
-			if (result)
+			Id = IsNewOrder ? Guid.NewGuid() : SelectedOrder.Id,
+			Description = IsNewOrder ? string.Empty : SelectedOrder.Description,
+			ShippingType = IsNewOrder ? new DropDownItem() : SelectedOrder.ShippingType,
+			Amount = IsNewOrder ? default : SelectedOrder.Amount,
+			Currency = IsNewOrder ? new Currency() : SelectedOrder.Currency,
+			ProductType = IsNewOrder ? new DropDownItem() : SelectedOrder.ProductType,
+			Products = IsNewOrder ? Enumerable.Empty<DropDownItem>() : SelectedOrder.Products,
+			TaxPercentage = IsNewOrder ? 0 : SelectedOrder.TaxPercentage,
+			Date = IsNewOrder ? DateTime.Today : SelectedOrder.Date,
+		};
+		
+		// Clear SelectedOrder when submitting new
+		modalService.Show<OrderDescription, OrderDescription, bool>(OrderText, "modal-md", typeof(OrderDetailsModal), model, (updatedModal,isSuccess) =>
+		{
+			if (isSuccess)
 			{
+				if (IsNewOrder)
+				{
+					Orders ??= new List<OrderDescription>();
+
+					Orders.Add(updatedModal);
+				}
+				else
+				{
+					var index = Orders.FindIndex(x => x.Id == updatedModal.Id);
+					if (index != -1)
+					{
+						Orders[index] = updatedModal;
+						StateHasChanged();
+					}
+				}
+				
 				toastService.ShowMessage("Order has been successfully submitted!");
 			}
-
 			modalService.Close();
 		});
 	}

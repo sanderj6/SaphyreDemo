@@ -92,6 +92,40 @@ namespace SaphyreDemo.Services.Modal
         /// <param name="classSize">Modal size.</param>
         /// <param name="contentType">Type of Modal to launch.</param>
         /// <param name="model">Model to pass to the modal.</param>
+        /// <param name="callback">Action using <paramref name="model"/> in the response.</param>
+        public void Show<T, U, V>(string title, string classSize, Type contentType, T model, Action<U,V> callback)
+        {
+            try
+            {
+                if (contentType == null || !typeof(ComponentBase).IsAssignableFrom(contentType))
+                {
+                    throw new ArgumentException("Content type must be a Blazor component.");
+                }
+
+                var content = new RenderFragment(x =>
+                {
+                    x.OpenComponent(0, contentType);
+                    x.AddAttribute(1, "Model", model);
+                    x.AddAttribute(2, "Callback", callback);
+                    x.CloseComponent();
+                });
+
+                OnShow?.Invoke(title, content, classSize);
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
+        
+        /// <summary>
+        /// Shows a Modal including a <paramref name="model"/> and a <paramref name="callback"/>.
+        /// </summary>
+        /// <typeparam name="T">Generic Type for Model and Callback.</typeparam>
+        /// <param name="title">Title of the Modal.</param>
+        /// <param name="classSize">Modal size.</param>
+        /// <param name="contentType">Type of Modal to launch.</param>
+        /// <param name="model">Model to pass to the modal.</param>
         /// <param name="operation">CRUD Operation of performed action.</param>
         /// <param name="callback">Action using <paramref name="model"/> in the response.</param>
         public void Show<T, U>(string title, string classSize, Type contentType, T model, ModalOperation operation, Action<U> callback)
