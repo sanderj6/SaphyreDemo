@@ -8,9 +8,9 @@
 
 <div class="saphyre_numbox position-absolute">
 
-	<MudNumericField Value="@InputValue"
+	<MudNumericField Value="@Value"
 					 ValueChanged="@((decimal x) => OnInputValueChanged(x))"
-					 Class="@CSSClass"
+					 Class="@NumFieldClass"
 					 Disabled="@IsDisabled"
 					 For="@FieldExpression"
 					 ReadOnly="@IsReadOnly"
@@ -26,11 +26,17 @@
 
 </div>
 
+<style>
+    .align-right input{
+        text-align: right;
+    }
+</style>
 
 @code {
 	[Parameter]
 	public bool IsPercentage { get; set; }
 
+	private string NumFieldClass => $"{CSSClass} align-right";
 	private string Format => IsPercentage ? "N2" : "N2";
 	private Adornment Adornment => IsPercentage ? Adornment.End : Adornment.None;
 	private string AdornmentIcon => IsPercentage ? Icons.Material.Filled.Percent : string.Empty;

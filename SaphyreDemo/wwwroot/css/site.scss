@@ -106,6 +106,44 @@ $dark-colors-bnp: ( 'btnBackground': #252525,'primary': #027563, 'primary-varian
         flex-shrink: 0;
     }
 
+    .saphyreTextClass .mud-svg-icon path {
+        fill: #C16458 !important;
+    }
+
+    .btn-saphyre {
+        color: #fff;
+        border: none !important;
+    }
+    .btn-saphyre.inactive {
+        background-color: #1671A780 !important;
+    }
+    .btn-saphyre.active {
+        background-color: #1671A7 !important;
+    }
+    .btn-saphyre.active:hover {
+        background-color: #086298 !important; 
+        cursor: pointer;
+    }
+    
+    .mudTextField-textRight .mud-input-slot .mud-input-control input {
+        text-align: right;
+    }
+    
+    .saphyre-checked{
+        color: #1671A7 !important;
+        font-family: Roboto;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 16px;
+        letter-spacing: 0px;
+        text-align: left;
+    }
+    
+    .DisabledClass .mud-input{
+        background-color: #DDDDDD !important;
+        color: #2D2D2D !important;
+    }
+
     .saphyre-form {
         background-color: $background-light !important;
     }
@@ -143,6 +181,10 @@ $dark-colors-bnp: ( 'btnBackground': #252525,'primary': #027563, 'primary-varian
         font-style: normal;
         font-weight: 400;
         line-height: normal;
+    }
+    
+    .mud-table-cell{
+        cursor:pointer !important;
     }
 }
 

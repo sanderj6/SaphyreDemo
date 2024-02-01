@@ -3,17 +3,17 @@
 <div class="multiselect-dropdown">
 	<label class="multiselect-label">@LabelText</label>
 
-	<div class="selected-items">
-		@if (selectedItems.Count == items.Count)
+	<div class="selected-items" @onclick="ToggleDropdown">
+		@if (selectedItems.Count == Data.Count)
 		{
-			<div class="all-selected">All Selected (@items.Count/@items.Count)</div>
+			<div class="all-selected">All Selected (@Data.Count/@Data.Count)</div>
 		}
 		else if (selectedItems.Count > 3)
 		{
 			@for (int i = 0; i < 2; i++)
 			{
 				<div class="selected-tag">
-					@selectedItems[i] <span class="remove-tag" @onclick="() => RemoveItem(selectedItems[i])">&times;</span>
+					@selectedItems[i].Name <span class="remove-tag" @onclick:stopPropagation="true" @onclick="() => RemoveItem(selectedItems[i])">&times;</span>
 				</div>
 			}
 			<div class="additional-items">(+@(selectedItems.Count - 2))</div>
@@ -23,11 +23,11 @@
 			@foreach (var item in selectedItems)
 			{
 				<div class="selected-tag">
-					@item <span class="remove-tag" @onclick="() => RemoveItem(item)">&times;</span>
+					@item.Name <span class="remove-tag" @onclick:stopPropagation="true" @onclick="() => RemoveItem(item)">&times;</span>
 				</div>
 			}
 		}
-		<button type="button" class="button-dropdown" @onclick="ToggleDropdown">
+		<button type="button" class="button-dropdown" @onclick:stopPropagation="true"  @onclick="ToggleDropdown">
 			<i class="fas fa-chevron-down"></i>
 		</button>
 	</div>
@@ -41,12 +41,15 @@
 				<div class="header-title">Sub-item</div>
 			</div>
 			<div class="dropdown-grid">
-				@foreach (var item in items)
+				@foreach (var item in Data)
 				{
+					var isChecked = @selectedItems.Contains(item);
+					var CheckedCSS = isChecked ? "saphyre-checked" : "";
+						
 					<div class="dropdown-row">
-						<input type="checkbox" id="@item" checked="@selectedItems.Contains(item)" @onchange="() => CheckboxChanged(item)">
-						<label for="@item">@item</label>
-						<label class="sub-item">Sub-@item</label>
+						<input type="checkbox" id="@item.Name" checked="@selectedItems.Contains(item)" @onchange="() => CheckboxChanged(item)">
+						<label class="@CheckedCSS" for="@item.Name">@item.Name</label>
+						<label class="sub-item">@item.SecondaryName</label>
 					</div>
 				}
 				@if (IsGridEditable)
@@ -73,7 +76,7 @@
 					{
 						<div class="dropdown-row">
 							<div></div>
-							@if (!items.Any())
+							@if (!Data.Any())
 							{
 								<div class="dropdownNoResults">No results found</div>
 							}
@@ -88,13 +91,15 @@
 
 @code {
 	[Parameter]
+	public List<DropDownItem> Data { get; set; } = new();
+	
+	[Parameter]
 	public bool IsGridEditable { get; set; }
 
 	public bool IsEditMode { get; set; }
 	public bool IsDropdownOpen = false;
 
-	List<string> items = new List<string> { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7" };
-	List<string> selectedItems = new List<string>();
+	List<DropDownItem> selectedItems = new();
 
 	private bool _isAllItemsChecked;
 	private bool IsAllItemsChecked
@@ -127,7 +132,7 @@
 		StateHasChanged();
 	}
 
-	private void CheckboxChanged(string item)
+	private void CheckboxChanged(DropDownItem item)
 	{
 		if (selectedItems.Contains(item))
 		{
@@ -141,7 +146,11 @@
 
 	private void AddItem()
 	{
-		items.Add(Title);
+		Data.Add(new DropDownItem()
+		{
+			Name = Title,
+			SecondaryName = SubTitle
+		});
 
 		Title = string.Empty;
 		SubTitle = string.Empty;
@@ -149,7 +158,7 @@
 		ToggleEditMode();
 	}
 
-	private void RemoveItem(string item)
+	private void RemoveItem(DropDownItem item)
 	{
 		selectedItems.Remove(item);
 	}
@@ -158,7 +167,7 @@
 	{
 		if (IsAllItemsChecked)
 		{
-			selectedItems = new List<string>(items);
+			selectedItems = new List<DropDownItem>(Data);
 		}
 		else
 		{

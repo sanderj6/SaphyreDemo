@@ -7,16 +7,24 @@
 
 <div class="saphyre_textbox position-absolute">
 
-	<MudTextField Value="@InputValue"
-				  ValueChanged="@((string x) => OnInputValueChanged(x))"
-				  For="@FieldExpression"
-				  Class="@CSSClass"
-				  Disabled="@IsDisabled"
-				  ReadOnly="@IsReadOnly"
-				  Required="@IsValidation"
-				  Label="@LabelText"
-				  Placeholder="" />
+	<MudTextField @ref="@field"
+				  Value="@Value"
+	              ValueChanged="(string newValue) => OnInputValueChanged(newValue)" 
+	              For="@FieldExpression"
+	              Class="saphyreTextClass"
+	              Disabled="@IsDisabled"
+	              ReadOnly="@IsReadOnly"
+	              Required="@IsValidation"
+	              Label="@LabelText"
+	              Placeholder="@Placeholder"
+	              Adornment="@GetAdornment()"
+	              AdornmentIcon="@Icons.Material.Rounded.Error"
+	              Variant="Variant.Text"/>
 
 </div>
 
+@code{
+	public MudTextField<string> field { get; set; }
 
+	public Adornment GetAdornment() => field?.Error == true ? Adornment.End : Adornment.None;
+}

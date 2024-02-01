@@ -6,13 +6,17 @@
 @using SaphyreDemo.Helpers
 
 <div class="saphyre_datebox position-absolute">
-    <MudDatePicker @bind-Date="@InputValue"
+    <MudDatePicker Date="@Value"
+                   DateChanged="@((DateTime? date) => OnInputValueChanged(date))"
                    Class="@CSSClass"
                    For="@FieldExpression"
                    Disabled="@IsDisabled"
                    ReadOnly="@IsReadOnly"
                    Required="@IsValidation"
                    DateFormat="dd-MMM-yyyy"
-                   Label="@LabelText"
-                   Placeholder="" />
+                   Label="@LabelText" />
 </div>
+
+@code{
+
+}

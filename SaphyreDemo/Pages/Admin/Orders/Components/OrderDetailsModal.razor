@@ -10,23 +10,24 @@
 @using FluentValidation
 @inherits PageBase<OrderDetailsModal>
 @inject IOrderService orderService
+@inject ToastService toastService
 
 <div class="container">
-	<Saphyre_Form Model="Model"
-				  OnSubmit="((OrderDescription order) => HandleSubmit(order))"
+	<Saphyre_Form Model="@Model"
+				  OnSubmit="((OrderDescription item) => { HandleSubmit(item); })"
 				  OnClose="HandleCancel">
 		<FormContent>
 
 			<div class="saphyre-form d-flex flex-md-row flex-column">
 				<div class="col-md-6 col-12">
-					<Saphyre_Textbox InputValue="@Model.Description" FieldExpression="@(() => Model.Description)" ValueChanged="((string newVal) => {Model.Description = newVal;})" />
+					<Saphyre_Textbox @bind-Value="@Model.Description" FieldExpression="(() => Model.Description)"/>
 				</div>
 
 				<div class="col-md-6 col-12">
-					<Saphyre_Select_Single InputValue="@Model.ShippingType.Name"
+					<Saphyre_Select_Single @bind-Value="@Model.ShippingType.Name"
 										   FieldExpression="(() => Model.ShippingType.Name)"
-										   ValueChanged="((string newVal) => SetShippingType(newVal))"
 										   Data="shippingOptions"
+										   LabelText="Shipping Type"
 										   Value_Primary="((DropDownItem item) => item.Name)" />
 				</div>
 			</div>
@@ -34,23 +35,25 @@
 			<div class="saphyre-form d-flex flex-md-row flex-column align-items-center">
 
 				<div class="col-md-6 col-12">
-					<Saphyre_Select_Single InputValue="@Model.Currency.Name"
+					<Saphyre_Select_Single Value="@Model.Currency.Name"
 										   FieldExpression="(() => Model.Currency.Name)"
 										   ValueChanged="((string newVal) => SetCurrencyType(newVal))"
 										   Data="currencyList.Currencies"
+										   LabelText="Currency"
 										   Value_Primary="((Currency item) => item.Name)" />
 				</div>
 
 
 				<div class="col-md-3 col-12">
-					<Saphyre_Numberbox InputValue="@Model.Amount"
+					<Saphyre_Numberbox @bind-Value="Model.Amount"
 									   FieldExpression="@(() => Model.Amount)"
-									   ValueChanged="((decimal newVal) => Model.Amount = newVal)" T="decimal" />
+									   T="decimal" />
 				</div>
 
 				<div class="col-md-3 col-12">
-					<Saphyre_Select_Single InputValue="@Model.Currency.ISOCode"
-										   FieldExpression="(() => Model.Currency.ISOCode)"
+					<Saphyre_Select_Single @bind-Value="@Model.Currency.ISOCode"
+					                       FieldExpression="(() => Model.Currency.ISOCode)"
+					                       LabelText="ISO Code"
 										   Data="currencyList.Currencies"
 										   IsDisabled="true"
 										   IsValidation="false"
@@ -61,18 +64,23 @@
 
 			<div class="saphyre-form d-flex flex-md-row flex-column">
 				<div class="col-md-12 col-12">
-					<Saphyre_Select_Grid FieldExpression="(() => Model.ShippingType.Name)" IsGridEditable="true" />
+					<Saphyre_Select_Grid @bind-Value="Model.ProductType.Name" FieldExpression="(() => Model.ProductType.Name)" Data="productTypes" LabelText="Product Type" IsGridEditable="true" />
 				</div>
 			</div>
 
 			<div class="saphyre-form d-flex flex-md-row flex-column">
-				<div class="col-md-6 col-12">
-					<Saphyre_Numberbox InputValue="@Model.TaxPercentage" FieldExpression="@(() => Model.TaxPercentage)"
+				<div class="col-md-4 col-12">
+					<Saphyre_Numberbox Value="@Model.TaxPercentage" FieldExpression="@(() => Model.TaxPercentage)"
 									   ValueChanged="((decimal newVal) => Model.TaxPercentage = newVal)" T="decimal" IsPercentage="true" />
 				</div>
-				<div class="col-md-6 col-12">
-					<Saphyre_Date InputValue="Model.Date" />
+				<div class="col-md-4 col-12">
+					<Saphyre_Date Value="Model.Date" LabelText="Date" />
 				</div>
+				
+				<div class="col-md-4 col-12 align-self-center text-end">
+					<button type="button" class="btn btn-saphyre inactive"><i class="fas fa-arrow-right"></i></button>
+					<button type="button" @onclick="HandleTestBtnClick" class="btn btn-saphyre active"><i class="fas fa-arrow-right"></i></button>
+                </div>
 			</div>
 
 		</FormContent>
@@ -84,12 +92,13 @@
 	public OrderDescription Model { get; set; }
 
 	[Parameter]
-	public Action<bool> Callback { get; set; }
+	public Action<OrderDescription, bool> Callback { get; set; }
 
 	private EditContext editContext { get; set; }
 
 	private CurrencyList currencyList = new();
 
+	// Dummy Shipping Options
 	private List<DropDownItem> shippingOptions = new()
 	{
 		new DropDownItem()
@@ -113,6 +122,41 @@
 			Name = "Standard"
 		}
 	};
+	
+	// Dummy Product Types
+	private List<DropDownItem> productTypes = new()
+	{
+		new DropDownItem()
+		{
+			Id = Guid.NewGuid(),
+			Name = "Electronics",
+			SecondaryName = "TVs, Computers, Audio"
+		},
+		new DropDownItem()
+		{
+			Id = Guid.NewGuid(),
+			Name = "Clothing",
+			SecondaryName = "Men's, Women's, Kids'"
+		},
+		new DropDownItem()
+		{
+			Id = Guid.NewGuid(),
+			Name = "Furniture",
+			SecondaryName = "Living Room, Bedroom, Outdoor"
+		},
+		new DropDownItem()
+		{
+			Id = Guid.NewGuid(),
+			Name = "Toys",
+			SecondaryName = "Action Figures, Learning Toys, Puzzles"
+		},
+		new DropDownItem()
+		{
+			Id = Guid.NewGuid(),
+			Name = "Books",
+			SecondaryName = "Fiction, Non-Fiction, Children's"
+		}
+	};
 
 	protected override void OnInitialized()
 	{
@@ -120,39 +164,24 @@
 		editContext = new EditContext(Model);
 	}
 
-	private async Task HandleSubmit(OrderDescription item = null)
+	private void HandleSubmit(OrderDescription item)
 	{
 		try
 		{
 			// fake API call
 			//var isSuccess = await orderService.UpdateOrderAsync(Model);
-			Callback?.Invoke(true);
+			Callback?.Invoke(Model, true);
 		}
 		catch (Exception ex)
 		{
 			Logger.LogError($"Issue submitting order: {ex}");
-			Callback?.Invoke(false);
+			Callback?.Invoke(Model,false);
 		}
-	}
-
-	// Validation refresh
-	// TODO: temporary until a workaround is found
-	private async Task ReValidate()
-	{
-		editContext.Validate();
-	}
-
-	public async Task HandleInvalidSubmit()
-	{
-		// TODO: testing, delete
-		var isValid = editContext.Validate();
-		var test = editContext.GetValidationMessages();
-		editContext.NotifyValidationStateChanged();
 	}
 
 	public async Task HandleCancel()
 	{
-		Callback?.Invoke(false);
+		Callback?.Invoke(Model,false);
 	}
 
 	public void SetShippingType(string item)
@@ -165,5 +194,10 @@
 	{
 		Model.Currency = currencyList.Currencies.FirstOrDefault(x => x.Name == item);
 		StateHasChanged();
+	}
+
+	private void HandleTestBtnClick()
+	{
+		toastService.ShowMessage($"Stop clicking that.");
 	}
 }

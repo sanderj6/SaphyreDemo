@@ -1,4 +1,4 @@
-﻿@import url("open-iconic/font/css/open-iconic-bootstrap.min.css");
+@import url("open-iconic/font/css/open-iconic-bootstrap.min.css");
 .saphyre-light {
   background: fixed linear-gradient(220deg, #0caedd 10%, #183a6b 90%) !important;
   color: #FFFFFF !important;
@@ -73,6 +73,39 @@
   height: 0.8125rem;
   flex-shrink: 0;
 }
+.saphyre-light .saphyreTextClass .mud-svg-icon path {
+  fill: #C16458 !important;
+}
+.saphyre-light .btn-saphyre {
+  color: #fff;
+  border: none !important;
+}
+.saphyre-light .btn-saphyre.inactive {
+  background-color: rgba(22, 113, 167, 0.5019607843) !important;
+}
+.saphyre-light .btn-saphyre.active {
+  background-color: #1671A7 !important;
+}
+.saphyre-light .btn-saphyre.active:hover {
+  background-color: #086298 !important;
+  cursor: pointer;
+}
+.saphyre-light .mudTextField-textRight .mud-input-slot .mud-input-control input {
+  text-align: right;
+}
+.saphyre-light .saphyre-checked {
+  color: #1671A7 !important;
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: 0px;
+  text-align: left;
+}
+.saphyre-light .DisabledClass .mud-input {
+  background-color: #DDDDDD !important;
+  color: #2D2D2D !important;
+}
 .saphyre-light .saphyre-form {
   background-color: #f9f9f9 !important;
 }
@@ -104,6 +137,9 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+}
+.saphyre-light .mud-table-cell {
+  cursor: pointer !important;
 }
 
 .saphyre-dark {
@@ -180,6 +216,39 @@
   height: 0.8125rem;
   flex-shrink: 0;
 }
+.saphyre-dark .saphyreTextClass .mud-svg-icon path {
+  fill: #C16458 !important;
+}
+.saphyre-dark .btn-saphyre {
+  color: #fff;
+  border: none !important;
+}
+.saphyre-dark .btn-saphyre.inactive {
+  background-color: rgba(22, 113, 167, 0.5019607843) !important;
+}
+.saphyre-dark .btn-saphyre.active {
+  background-color: #1671A7 !important;
+}
+.saphyre-dark .btn-saphyre.active:hover {
+  background-color: #086298 !important;
+  cursor: pointer;
+}
+.saphyre-dark .mudTextField-textRight .mud-input-slot .mud-input-control input {
+  text-align: right;
+}
+.saphyre-dark .saphyre-checked {
+  color: #1671A7 !important;
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: 0px;
+  text-align: left;
+}
+.saphyre-dark .DisabledClass .mud-input {
+  background-color: #DDDDDD !important;
+  color: #2D2D2D !important;
+}
 .saphyre-dark .saphyre-form {
   background-color: #0C4564 !important;
 }
@@ -211,6 +280,9 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+}
+.saphyre-dark .mud-table-cell {
+  cursor: pointer !important;
 }
 
 .chase-light {
@@ -287,6 +359,39 @@
   height: 0.8125rem;
   flex-shrink: 0;
 }
+.chase-light .saphyreTextClass .mud-svg-icon path {
+  fill: #C16458 !important;
+}
+.chase-light .btn-saphyre {
+  color: #fff;
+  border: none !important;
+}
+.chase-light .btn-saphyre.inactive {
+  background-color: rgba(22, 113, 167, 0.5019607843) !important;
+}
+.chase-light .btn-saphyre.active {
+  background-color: #1671A7 !important;
+}
+.chase-light .btn-saphyre.active:hover {
+  background-color: #086298 !important;
+  cursor: pointer;
+}
+.chase-light .mudTextField-textRight .mud-input-slot .mud-input-control input {
+  text-align: right;
+}
+.chase-light .saphyre-checked {
+  color: #1671A7 !important;
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: 0px;
+  text-align: left;
+}
+.chase-light .DisabledClass .mud-input {
+  background-color: #DDDDDD !important;
+  color: #2D2D2D !important;
+}
 .chase-light .saphyre-form {
   background-color: #F4F4F4 !important;
 }
@@ -318,6 +423,9 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+}
+.chase-light .mud-table-cell {
+  cursor: pointer !important;
 }
 
 .chase-dark {
@@ -394,6 +502,39 @@
   height: 0.8125rem;
   flex-shrink: 0;
 }
+.chase-dark .saphyreTextClass .mud-svg-icon path {
+  fill: #C16458 !important;
+}
+.chase-dark .btn-saphyre {
+  color: #fff;
+  border: none !important;
+}
+.chase-dark .btn-saphyre.inactive {
+  background-color: rgba(22, 113, 167, 0.5019607843) !important;
+}
+.chase-dark .btn-saphyre.active {
+  background-color: #1671A7 !important;
+}
+.chase-dark .btn-saphyre.active:hover {
+  background-color: #086298 !important;
+  cursor: pointer;
+}
+.chase-dark .mudTextField-textRight .mud-input-slot .mud-input-control input {
+  text-align: right;
+}
+.chase-dark .saphyre-checked {
+  color: #1671A7 !important;
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: 0px;
+  text-align: left;
+}
+.chase-dark .DisabledClass .mud-input {
+  background-color: #DDDDDD !important;
+  color: #2D2D2D !important;
+}
 .chase-dark .saphyre-form {
   background-color: #4D4D4D !important;
 }
@@ -425,6 +566,9 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+}
+.chase-dark .mud-table-cell {
+  cursor: pointer !important;
 }
 
 .bnp-light {
@@ -501,6 +645,39 @@
   height: 0.8125rem;
   flex-shrink: 0;
 }
+.bnp-light .saphyreTextClass .mud-svg-icon path {
+  fill: #C16458 !important;
+}
+.bnp-light .btn-saphyre {
+  color: #fff;
+  border: none !important;
+}
+.bnp-light .btn-saphyre.inactive {
+  background-color: rgba(22, 113, 167, 0.5019607843) !important;
+}
+.bnp-light .btn-saphyre.active {
+  background-color: #1671A7 !important;
+}
+.bnp-light .btn-saphyre.active:hover {
+  background-color: #086298 !important;
+  cursor: pointer;
+}
+.bnp-light .mudTextField-textRight .mud-input-slot .mud-input-control input {
+  text-align: right;
+}
+.bnp-light .saphyre-checked {
+  color: #1671A7 !important;
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: 0px;
+  text-align: left;
+}
+.bnp-light .DisabledClass .mud-input {
+  background-color: #DDDDDD !important;
+  color: #2D2D2D !important;
+}
 .bnp-light .saphyre-form {
   background-color: #F4F4F4 !important;
 }
@@ -532,6 +709,9 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+}
+.bnp-light .mud-table-cell {
+  cursor: pointer !important;
 }
 
 .bnp-dark {
@@ -608,6 +788,39 @@
   height: 0.8125rem;
   flex-shrink: 0;
 }
+.bnp-dark .saphyreTextClass .mud-svg-icon path {
+  fill: #C16458 !important;
+}
+.bnp-dark .btn-saphyre {
+  color: #fff;
+  border: none !important;
+}
+.bnp-dark .btn-saphyre.inactive {
+  background-color: rgba(22, 113, 167, 0.5019607843) !important;
+}
+.bnp-dark .btn-saphyre.active {
+  background-color: #1671A7 !important;
+}
+.bnp-dark .btn-saphyre.active:hover {
+  background-color: #086298 !important;
+  cursor: pointer;
+}
+.bnp-dark .mudTextField-textRight .mud-input-slot .mud-input-control input {
+  text-align: right;
+}
+.bnp-dark .saphyre-checked {
+  color: #1671A7 !important;
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: 0px;
+  text-align: left;
+}
+.bnp-dark .DisabledClass .mud-input {
+  background-color: #DDDDDD !important;
+  color: #2D2D2D !important;
+}
 .bnp-dark .saphyre-form {
   background-color: #4D4D4D !important;
 }
@@ -639,6 +852,9 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+}
+.bnp-dark .mud-table-cell {
+  cursor: pointer !important;
 }
 
 :root {
@@ -812,15 +1028,14 @@ main {
   left: 0;
   right: 0;
   bottom: 0;
-  display: none; /* modal hidden by default */
+  display: none;
   justify-content: center;
   align-items: center;
   backdrop-filter: blur(2px);
-  z-index: 1000; /* Ensure modal is on top of other content */
+  z-index: 1000;
 }
-
 .saphyre-modal-container.active {
-  display: flex; /* Display modal when active */
+  display: flex;
 }
 
 .saphyre-modal-dialog {
@@ -854,13 +1069,8 @@ main {
   border: none;
   background: none;
 }
-
 .saphyre-modal-close:hover {
   opacity: 0.7;
-}
-
-.saphyre-modal-container.active .saphyre-modal-dialog {
-  animation: slideUpFadeIn 0.25s ease-out;
 }
 
 @keyframes slideUpFadeIn {
@@ -871,17 +1081,6 @@ main {
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-@media (max-width: 768px) {
-  .saphyre-modal-dialog {
-    width: 80%;
-  }
-}
-@media (max-width: 480px) {
-  .saphyre-modal-dialog {
-    width: 95%;
-    padding: 10px;
   }
 }
 @media (min-width: 476px) {
@@ -904,3 +1103,22 @@ main {
     max-width: 1140px !important;
   }
 }
+@media (max-width: 768px) {
+  .mud-input {
+    width: 100% !important;
+  }
+  .saphyreTable {
+    display: none;
+  }
+  .saphyre-modal-dialog {
+    width: 80%;
+  }
+}
+@media (max-width: 480px) {
+  .saphyre-modal-dialog {
+    width: 95%;
+    padding: 10px;
+  }
+}
+
+/*# sourceMappingURL=Modals.css.map */

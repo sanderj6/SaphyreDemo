@@ -3,7 +3,6 @@ using System.Collections;
 using System.ComponentModel.DataAnnotations;
 using FluentValidation;
 using SaphyreDemo.Data.Models;
-using static SaphyreDemo.Pages.Demo.StylesDemo;
 
 namespace SaphyreDemo.Helpers
 {

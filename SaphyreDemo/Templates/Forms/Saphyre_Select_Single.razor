@@ -6,19 +6,21 @@
 @using FluentValidation
 @using SaphyreDemo.Helpers
 
-<div class="saphyre_selectbox position-absolute" title="@InputValue">
-	<MudSelect Value="InputValue"
+<div class="saphyre_selectbox position-absolute" title="@Value">
+	<MudSelect @ref="@field"
+			   T="string"
+	           Value="Value"
 			   ValueChanged="OnInputValueChanged"
 			   For="@FieldExpression"
-			   T="string"
-			   Class="@CSSClass"
+			   Class="@DisabledCSS()"
 			   Disabled="@IsDisabled"
 			   ReadOnly="@IsReadOnly"
 			   Required="@IsValidation"
 			   Label="@LabelText"
-			   Placeholder=""
+			   Placeholder="@Placeholder"
 			   MultiSelection="@IsMultiSelect"
 			   Format="@Format"
+			   Adornment="Adornment.End"
 			   AdornmentIcon="@Icons.Material.Filled.ExpandMore">
 
 		@foreach (var item in Data)
@@ -43,7 +45,7 @@
 @code {
 	[Parameter]
 	public List<TItem> Data { get; set; } = new();
-
+	
 	private IEnumerable<string> SelectedItems { get; set; } = Enumerable.Empty<string>();
 
 	[Parameter]
@@ -56,81 +58,13 @@
 	public Func<TItem, string> Value_Secondary { get; set; }
 
 	[Parameter]
-	public bool IsComboBox { get; set; } = false;
-
-	[Parameter]
 	public bool IsMultiSelect { get; set; }
 
-	[Parameter]
-	public bool IsGridMode { get; set; }
-
-	[Parameter]
-	public string Header_Primary { get; set; } = "Title";
-
-	[Parameter]
-	public string Header_Secondary { get; set; } = "Sub-title";
-
 	private bool IsClearable => IsMultiSelect;
-	private bool IsAllSelected { get; set; }
-	private bool IsDisplayItems { get; set; }
-	private bool IsFirstOpen { get; set; } = true;
-
-	FluentValueValidator<List<string>> selectBoxValidator = new FluentValueValidator<List<string>>(x =>
-	x.Must(list => list != null && list.Count() > 0).WithMessage("The list must contain at least one object."));
-
-	private void OnValueSelected(IEnumerable<string> newItems)
-	{
-		// Check if any item is an empty string or null and filter them out
-		if (newItems.Any(x => string.IsNullOrEmpty(x)))
-		{
-			CheckAllValues();
-		}
-		else
-		{
-			SelectedItems = newItems;
-		}
-		StateHasChanged();
-	}
-
-	private void CheckAllValues()
-	{
-		if (IsAllSelected)
-		{
-			SelectedItems = Enumerable.Empty<string>();
-		}
-		else
-		{
-			// Set Selected Items to ALL
-			// Exclude faux header
-			var selected = Data.Select(item => Value_Primary(item));
-			// SelectedItems = Data.Select(item => Value_Primary(item))
-			// 									.Where(value => !string.IsNullOrEmpty(value));
-
-			SelectedItems = selected.Concat(new[] { string.Empty });
-		}
-	}
-
-	private void HandleDropdownOpened()
-	{
-		IsDisplayItems = true;
-		StateHasChanged();
-	}
-
-	private void HandleDropdownClosed(bool isCleared)
-	{
-		if (isCleared)
-		{
-			SelectedItems = Enumerable.Empty<string>();
-		}
-		else
-		{
-			SelectedItems = Data.Select(item => Value_Primary(item))
-													.Where(value => !string.IsNullOrEmpty(value));
-		}
-
-		IsDisplayItems = !isCleared && SelectedItems.Any();
-
-		StateHasChanged();
-	}
+	
+	public MudSelect<string> field { get; set; }
+	public Adornment GetAdornment() => field?.Error == true ? Adornment.End : Adornment.None;
+	public string GetAdornmentIcon() => field?.Error == true ? @Icons.Material.Filled.ExpandMore : @Icons.Material.Rounded.Error;
+	public string DisabledCSS() => field?.Disabled == true ? $"{CSSClass} DisabledClass" : @CSSClass;
 }
 

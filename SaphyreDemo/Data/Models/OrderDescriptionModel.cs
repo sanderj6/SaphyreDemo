@@ -15,6 +15,7 @@ namespace SaphyreDemo.Data.Models
 		public decimal Amount { get; set; } = 0.0m;
 		[Required]
 		public Currency? Currency { get; set; } = new();
+		public DropDownItem ProductType { get; set; } = new();
 		public IEnumerable<DropDownItem> Products { get; set; } = Enumerable.Empty<DropDownItem>();
 		[Required]
 		[Range(0.01, double.MaxValue, ErrorMessage = "Percentage must be greater than 0")]

@@ -4,18 +4,22 @@
 @using System.Reflection
 
 @code {
-    [Parameter] public TItem InputValue { get; set; }
+    
+    [Parameter] public TItem Value { get; set; }
+    
     [Parameter] public string CSSClass { get; set; }
-    [Parameter] public string ControlCSSClass { get; set; } = "saphyre-textbox";
     [Parameter] public string Format { get; set; }
+    [Parameter] public string Placeholder { get; set; }
+    
     [Parameter] public bool IsValidation { get; set; } = true;
     [Parameter] public bool IsDisabled { get; set; } = false;
     [Parameter] public bool IsReadOnly { get; set; } = false;
+    
     [Parameter] public Expression<Func<TItem>> FieldExpression { get; set; }
     [Parameter] public EventCallback<TItem> ValueChanged { get; set; }
-
+    
     private string labelText;
-
+    
     [Parameter]
     public string LabelText
     {
@@ -29,7 +33,7 @@
                     var propName = memberExpression?.Member.Name;
                     labelText = StringExtensions.FromCamelCase(propName);
                 }
-
+    
                 return labelText;
             }
             else
@@ -39,26 +43,25 @@
         }
         set => labelText = value;
     }
-
+    
     public async Task OnInputValueChanged(TItem newValue)
     {
-        InputValue = newValue;
+        Value = newValue;
         await ValueChanged.InvokeAsync(newValue);
-
     }
-
+    
     public int TextLength
     {
         get
         {
-            if (InputValue == null) return 0;
-
-            if (InputValue is string strVal)
+            if (Value == null) return 0;
+    
+            if (Value is string strVal)
             {
                 return strVal.Length;
             }
-
-            return InputValue.ToString().Length;
+    
+            return Value.ToString().Length;
         }
     }
 }
